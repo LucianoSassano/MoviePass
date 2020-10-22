@@ -9,7 +9,7 @@ require_once(VIEWS_PATH . "header.php");
     <div class="show">
         <div class="container">
 
-            <form action="<?php echo FRONT_ROOT . "" ?>" method="POST">
+            <form action="<?php echo FRONT_ROOT . "room/createView" ?>" method="POST">
                 <div class="form-row">
                     <div class="card mb-3">
                         <img src="<?php echo "https://image.tmdb.org/t/p/w500/" . $movie->getPoster_path(); ?>" class="card-img-top" alt="...">
@@ -22,7 +22,7 @@ require_once(VIEWS_PATH . "header.php");
                 </div>
                 <div class="form-group">
                     <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Pick a theater</label>
-                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                    <select name="theater_id" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
                         <option selected>Choose a theater...</option>
 
                         <?php foreach ($theaterList as $theater) { ?>
@@ -31,7 +31,7 @@ require_once(VIEWS_PATH . "header.php");
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit Show</button>
+                <button type="submit" class="btn btn-primary">Continue</button>
             </form>
         </div>
     </div>

@@ -30,9 +30,11 @@ class ShowController
     }
 
     function createShow($movie_id , $theater_id){
+        
         $movie = $this->movieDAO->get($movie_id);
         $theater = $this->theaterDAO->get($theater_id);
-
+        //falta el room 
+        
     }
 
 

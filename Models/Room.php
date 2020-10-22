@@ -5,8 +5,18 @@
     class Room{
 
         private $id;
+        private $name;
         private $capacity;
         private $shows;
+
+     
+        function __construct($name="", $capacity="")
+        {
+           
+            $this->name = $name;
+            $this->capacity = $capacity;
+        
+        }
 
 
         /**
@@ -53,6 +63,26 @@
         public function setShows($shows)
         {
                 $this->shows = $shows;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of name
+         */ 
+        public function getName()
+        {
+                return $this->name;
+        }
+
+        /**
+         * Set the value of name
+         *
+         * @return  self
+         */ 
+        public function setName($name)
+        {
+                $this->name = $name;
 
                 return $this;
         }

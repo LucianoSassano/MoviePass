@@ -34,7 +34,11 @@
                 </p>
                 <button type="submit" class="btn btn-primary">Submit Change</button>
             </form>
-
+            <br>
+            <form action="<?php echo FRONT_ROOT . "room/createView" ?>" method="POST">
+                <input type="number" name="theater_id" value=<?php echo $theater->getId() ?> hidden>
+                <button type="submit" class="btn btn-primary">Add a room</button>
+            </form>
         </div>
     </div>
 

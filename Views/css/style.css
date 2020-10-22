@@ -158,10 +158,24 @@
     margin-top: 5vh;
 }
 
+
+
 .show div .form-row{
     display: flex;
     justify-content: center;
 }
+.show div .form-group{
+    width: 25vw;
+    margin-left: 16.6vw;
+    
+}
+
+.show button{
+    margin-left: 16.6vw;
+    
+}
+
+
 .show img{
     width: 25vw;
    
@@ -188,4 +202,18 @@
 }
 
 /*--------------End of Theaters View---------------- */
+
+
+
+/*--------------TheaterMod View---------------- */
+.theaterMod{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+/*--------------End of TheaterMod View---------------- */
 

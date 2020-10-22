@@ -16,6 +16,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT . "admin/activeShows" ?>">Shows</a>
                 </li>
+                
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT . 'movie/updateAll' ?>">Update Movies</a>
                 </li>
