@@ -7,6 +7,8 @@
         <h2>Confirm new show</h2><hr>
             <form action="<?php echo FRONT_ROOT . "show/add" ?>" method="POST">
 
+            <!-- AGERGAR FICHA DE LA PELICULA POSIBLEMENTE, SE TIENE TODA LA DATA -->
+
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">

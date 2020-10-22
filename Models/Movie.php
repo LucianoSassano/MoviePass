@@ -12,7 +12,7 @@
         private $vote_average;
         private $genres = [];
 
-        function __construct($id="", $title="", $overview="", $poster_path="", $language="", $adult="", $vote_average="", $genres="") {
+        function __construct($id="", $title="", $overview="", $poster_path="", $language="", $adult="", $vote_average="", $genres=array()) {
                 $this->id = $id;
                 $this->title = $title;
                 $this->overview = $overview;

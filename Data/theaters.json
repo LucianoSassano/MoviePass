@@ -4,7 +4,9 @@
         "name": "Ambassador",
         "address": "Roque Saenz Pe\u00f1a 133",
         "rooms": [
-            25
+            25,
+            26,
+            27
         ]
     },
     {
@@ -20,5 +22,11 @@
             20,
             21
         ]
+    },
+    {
+        "id": 3,
+        "name": "Ambassador",
+        "address": "Roque Saenz Pe\u00f1a 133",
+        "rooms": []
     }
 ]

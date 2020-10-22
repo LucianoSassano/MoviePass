@@ -60,7 +60,6 @@ class TheaterController
      */
     function modifyView($id)
     {
-
         $theater = $this->theaterDAO->get($id);
 
         require_once(VIEWS_PATH . "theaterMod.php");

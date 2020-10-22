@@ -1,23 +1,142 @@
 [
     {
         "id": 1,
-        "movie": [],
-        "date": "2020-10-30",
-        "time": "09:32",
-        "price": "321"
+        "movie": {
+            "id": 528085,
+            "title": "2067",
+            "overview": "A lowly utility worker is called to the future by a mysterious radio signal, he must leave his dying wife to embark on a journey that will force him to face his deepest fears in an attempt to change the fabric of reality and save humankind from its greatest environmental crisis yet.",
+            "poster_path": "\/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg",
+            "language": "en",
+            "adult": false,
+            "vote_average": 151,
+            "genres": [
+                18,
+                878,
+                53
+            ]
+        },
+        "date": "2020-10-15",
+        "time": "20:12",
+        "price": "123"
     },
     {
         "id": 2,
-        "movie": [],
-        "date": "2020-10-30",
-        "time": "09:32",
-        "price": "321"
+        "movie": {
+            "id": 528085,
+            "title": "2067",
+            "overview": "A lowly utility worker is called to the future by a mysterious radio signal, he must leave his dying wife to embark on a journey that will force him to face his deepest fears in an attempt to change the fabric of reality and save humankind from its greatest environmental crisis yet.",
+            "poster_path": "\/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg",
+            "language": "en",
+            "adult": false,
+            "vote_average": 151,
+            "genres": [
+                18,
+                878,
+                53
+            ]
+        },
+        "date": "2020-10-15",
+        "time": "20:12",
+        "price": "123"
     },
     {
         "id": 3,
-        "movie": {},
-        "date": "2020-10-29",
-        "time": "15:30",
-        "price": "200"
+        "movie": {
+            "id": 528085,
+            "title": "2067",
+            "overview": "A lowly utility worker is called to the future by a mysterious radio signal, he must leave his dying wife to embark on a journey that will force him to face his deepest fears in an attempt to change the fabric of reality and save humankind from its greatest environmental crisis yet.",
+            "poster_path": "\/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg",
+            "language": "en",
+            "adult": false,
+            "vote_average": 151,
+            "genres": [
+                18,
+                878,
+                53
+            ]
+        },
+        "date": "2020-10-15",
+        "time": "20:12",
+        "price": "123"
+    },
+    {
+        "id": 4,
+        "movie": {
+            "id": 528085,
+            "title": "2067",
+            "overview": "A lowly utility worker is called to the future by a mysterious radio signal, he must leave his dying wife to embark on a journey that will force him to face his deepest fears in an attempt to change the fabric of reality and save humankind from its greatest environmental crisis yet.",
+            "poster_path": "\/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg",
+            "language": "en",
+            "adult": false,
+            "vote_average": 151,
+            "genres": [
+                18,
+                878,
+                53
+            ]
+        },
+        "date": "2020-10-15",
+        "time": "20:12",
+        "price": "123"
+    },
+    {
+        "id": 5,
+        "movie": {
+            "id": 528085,
+            "title": "2067",
+            "overview": "A lowly utility worker is called to the future by a mysterious radio signal, he must leave his dying wife to embark on a journey that will force him to face his deepest fears in an attempt to change the fabric of reality and save humankind from its greatest environmental crisis yet.",
+            "poster_path": "\/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg",
+            "language": "en",
+            "adult": false,
+            "vote_average": 151,
+            "genres": [
+                18,
+                878,
+                53
+            ]
+        },
+        "date": "2020-10-15",
+        "time": "20:12",
+        "price": "123"
+    },
+    {
+        "id": 6,
+        "movie": {
+            "id": 528085,
+            "title": "2067",
+            "overview": "A lowly utility worker is called to the future by a mysterious radio signal, he must leave his dying wife to embark on a journey that will force him to face his deepest fears in an attempt to change the fabric of reality and save humankind from its greatest environmental crisis yet.",
+            "poster_path": "\/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg",
+            "language": "en",
+            "adult": false,
+            "vote_average": 151,
+            "genres": [
+                18,
+                878,
+                53
+            ]
+        },
+        "date": "2020-10-15",
+        "time": "20:12",
+        "price": "123"
+    },
+    {
+        "id": 7,
+        "movie": {
+            "id": 528085,
+            "title": "2067",
+            "overview": "A lowly utility worker is called to the future by a mysterious radio signal, he must leave his dying wife to embark on a journey that will force him to face his deepest fears in an attempt to change the fabric of reality and save humankind from its greatest environmental crisis yet.",
+            "poster_path": "\/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg",
+            "language": "en",
+            "adult": false,
+            "vote_average": 151,
+            "genres": [
+                18,
+                878,
+                53
+            ]
+        },
+        "date": "2020-10-15",
+        "time": "20:12",
+        "price": "123"
     }
 ]

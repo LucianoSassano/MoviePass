@@ -43,7 +43,7 @@ class ShowController
         $movie = $this->movieDAO->get($movie_id);
         $room = $this->roomDAO->get($room_id);
 
-        // En la siguiente vista podria mostrar la data de la movie ya q voy a tener el objeto 
+        // En la siguiente vista podria mostrar la data de la movie ya q voy a tener el objeto guiño guiño
         require_once(VIEWS_PATH . "show-creation.php");
     }
 
@@ -53,16 +53,16 @@ class ShowController
             $show = new Show($date, $time, $price);
             $movie = $this->movieDAO->get($movie_id);
             $show->setMovie($movie);
-            print_r($show);
+            // var_dump($show->getMovie());     la pelicula esta creada bien
             $this->showDAO->add($show);
+
+            $this->getActive();
         }else { echo "ERROR";}
-        
     }
 
     function getActive() {
         $shows = $this->showDAO->getAll();
         require_once(VIEWS_PATH . "shows-active.php");
-
     }
 
 

@@ -145,8 +145,20 @@
     },
     {
         "id": 25,
-        "name": "cristal",
-        "capacity": "50",
+        "name": "Paseo Aldrey",
+        "capacity": "120",
+        "shows": []
+    },
+    {
+        "id": 26,
+        "name": "Hielo",
+        "capacity": "123",
+        "shows": []
+    },
+    {
+        "id": 27,
+        "name": "Paseo Aldrey",
+        "capacity": "123",
         "shows": []
     }
 ]

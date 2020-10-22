@@ -18,7 +18,7 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo FRONT_ROOT . 'movie/updateAll' ?>">Update Movies</a>
+                    <a class="nav-link" href="<?php echo FRONT_ROOT . 'movie/getAll' ?>">Movies</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">

@@ -3,14 +3,19 @@
     namespace DAO;
 
     use Models\Show;
+    use Models\Movie;
+
+    use DAO\MovieJSON as MovieDAO;
 
     class ShowJSON {
 
         private $showList = array();
         private $fileName;
+        private $movieDAO;
 
         public function __construct() {
             $this->fileName = ROOT . "Data/shows.json";
+            $this->movieDAO = new MovieDAO();
         }
 
         /**
@@ -88,7 +93,7 @@
         /**
          * Add a new show
          */
-        public function add(show $show) {
+        public function add(Show $show) {
 
             $this->RetrieveData();
 
@@ -125,7 +130,17 @@
             foreach($this->showList as $show)
             {            
                 $valuesArray["id"] = $show->getId();
-                $valuesArray["movie"] = $show->getMovie();
+
+                $valuesArray["movie"]["id"] = $show->getMovie()->getId();
+                $valuesArray["movie"]["title"] = $show->getMovie()->getTitle();
+                $valuesArray["movie"]["overview"] = $show->getMovie()->getOverview();
+                $valuesArray["movie"]["poster_path"] = $show->getMovie()->getPoster_path();
+                $valuesArray["movie"]["language"] = $show->getMovie()->getLanguage();
+                $valuesArray["movie"]["adult"] = $show->getMovie()->getAdult();
+                $valuesArray["movie"]["vote_average"] = $show->getMovie()->getVote_average();
+
+                $valuesArray["movie"]["genres"] = $this->movieDAO->getGenreIdList($show->getMovie()->getGenres());                
+
                 $valuesArray["date"] = $show->getDate();
                 $valuesArray["time"] = $show->getTime();
                 $valuesArray["price"] = $show->getPrice();
@@ -150,10 +165,26 @@
 
                 foreach($arrayToDecode as $valuesArray)
                 {
-                    $show = new show();
+                    $show = new Show();
 
                     $show->setId($valuesArray["id"]);
-                    $show->setMovie($valuesArray["movie"]);
+
+                    $movie = new Movie();
+
+                    $movie->setId($valuesArray["movie"]["id"]);
+                    $movie->setTitle($valuesArray["movie"]["title"]);
+                    $movie->setOverview($valuesArray["movie"]["overview"]);
+                    $movie->setPoster_path($valuesArray["movie"]["poster_path"]);
+                    $movie->setLanguage($valuesArray["movie"]["language"]);
+                    $movie->setAdult($valuesArray["movie"]["adult"]);
+                    $movie->setVote_average($valuesArray["movie"]["vote_average"]);
+
+                    $genres = $this->movieDAO->getGenreList($valuesArray["movie"]["genres"]);
+                    
+                    $movie->setGenres($genres);
+
+                    $show->setMovie($movie); // TIENE Q DEVOLVER OBJ
+
                     $show->setDate($valuesArray["date"]);
                     $show->setTime($valuesArray["time"]);
                     $show->setPrice($valuesArray["price"]);

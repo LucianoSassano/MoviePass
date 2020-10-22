@@ -6,7 +6,7 @@ require_once(VIEWS_PATH . "header.php");
 <body style="background-color:#3E5CB2">
     <?php require_once(VIEWS_PATH . "admin-navbar.php") ?>
 
-    <div class="creation">
+    <div class="theater-creation">
         <div class="container">
             <h2>Theater Creation</h2>
             <form action="<?php echo FRONT_ROOT . "theater/create" ?>" method="POST">

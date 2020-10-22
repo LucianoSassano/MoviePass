@@ -190,7 +190,8 @@
             $this->roomDAO = new RoomDAO(); // instancio el dao de rooms
 
             $roomObjs = $this->roomDAO->getRoomList($rooms);   // $rooms es un array con las id de los room que le corresponden al cine
-
+            
+            // retrona el arreglo cargado con los obj room
             return $roomObjs;
         }
 

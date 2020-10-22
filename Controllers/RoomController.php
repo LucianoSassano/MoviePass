@@ -33,6 +33,8 @@ class RoomController
         $this->roomDAO->add($room);
 
         $theater = $this->theaterDAO->addRoom($theater_id, $room);
-        //print_r($theater);
+        
+        $theaters = $this->theaterDAO->getAll();
+        require_once(VIEWS_PATH . "theaters.php");
     }
 }

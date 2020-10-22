@@ -2,12 +2,15 @@
 
     namespace DAO;
 
+    use DAO\GenreJSON as GenreDAO;
+
     use Models\Movie;
 
     class MovieJSON {
 
         private $moviesList = array();
         private $fileName;
+        private $genreDAO;
 
         public function __construct() {
             $this->fileName = ROOT . "Data/movies.json";
@@ -34,6 +37,7 @@
         public function updateAll($moviesArray) {
             $this->moviesList = $moviesArray;
             $this->SaveData();
+            
 
             return $this->moviesList;
         }
@@ -51,7 +55,7 @@
                 $valuesArray["language"] = $movie->getLanguage();
                 $valuesArray["adult"] = $movie->getAdult();
                 $valuesArray["vote_average"] = $movie->getVote_average();
-                $valuesArray["genres"] = $movie->getGenres();
+                $valuesArray["genres"] = $this->getGenreIdList($movie->getGenres());
 
                 array_push($arrayToEncode,$valuesArray);
             }
@@ -82,12 +86,43 @@
                     $movie->setLanguage($valuesArray["language"]);
                     $movie->setAdult($valuesArray["adult"]);
                     $movie->setVote_average($valuesArray["vote_average"]);
-                    $movie->setGenres($valuesArray["genres"]);
+
+                    $genres = $this->getGenreList($valuesArray["genres"]);
+
+                    $movie->setGenres($genres);
                     
                     array_push($this->moviesList, $movie);
                 }
             }
         }
+
+
+        /**
+         * Get genres from movie
+         */
+        public function getGenreList($genres = array()) {
+
+            $this->genreDAO = new GenreDAO(); // instancio el dao de genres
+
+            $genreObjs = $this->genreDAO->getGenreList($genres);   // $genres es un array con las id de los generos que le corresponden a la movie
+            
+            // retrona el arreglo cargado con los obj genre
+            return $genreObjs;
+        }
+
+        /**
+         * Get an array of id's from an array of Genres
+         */
+        public function getGenreIdList($genres = array()) {
+
+            $genresIdsList = array();
+            foreach($genres as $genre) {
+                array_push($genresIdsList, $genre->getId());
+            }
+
+            return $genresIdsList;
+        }
     }
+    
 
 ?>
