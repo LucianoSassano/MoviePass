@@ -6,6 +6,8 @@ use DAO\ShowJSON as ShowDAO;
 use DAO\MovieJSON as MovieDAO;
 use DAO\TheaterJSON as TheaterDAO;
 use DAO\RoomJSON as RoomDAO;
+use DAO\GenreJSON as GenreDAO;
+
 use Models\Show;
 
 class ShowController
@@ -14,6 +16,7 @@ class ShowController
     private $movieDAO;
     private $theaterDAO;
     private $roomDAO;
+    private $genreDAO;
 
     function __construct()
     {
@@ -21,6 +24,7 @@ class ShowController
         $this->movieDAO = new MovieDAO();
         $this->theaterDAO = new TheaterDAO();
         $this->roomDAO = new RoomDAO();
+        $this->genreDAO = new GenreDAO();
     }
 
     // createView -> metodo seleccionar una pelicula para el armado de un show 
@@ -62,6 +66,14 @@ class ShowController
 
     function getActive() {
         $shows = $this->showDAO->getAll();
+        $genres = $this->genreDAO->getAll();
+        require_once(VIEWS_PATH . "shows-active.php");
+    }
+
+    function filter($genre_id) {
+
+        $shows = $this->showDAO->getByGenre($genre_id);
+        $genres = $this->genreDAO->getAll();
         require_once(VIEWS_PATH . "shows-active.php");
     }
 

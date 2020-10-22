@@ -50,6 +50,25 @@
         }
 
         /**
+         * Get shows by genre_id
+         */
+        public function getByGenre($genre_id) {
+            $this->RetrieveData();
+            $showsFiltered = array();
+
+            foreach($this->showList as $show) {
+                $genres = $show->getMovie()->getGenres();
+                foreach($genres as $genre) {
+                    if($genre->getId() == $genre_id) {
+                        array_push($showsFiltered, $show);
+                    }
+                }
+            }
+
+            return $showsFiltered;
+        }
+        
+        /**
          * Get all shows
          */
         public function getAll() {

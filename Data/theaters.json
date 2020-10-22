@@ -27,6 +27,8 @@
         "id": 3,
         "name": "Ambassador",
         "address": "Roque Saenz Pe\u00f1a 133",
-        "rooms": []
+        "rooms": [
+            28
+        ]
     }
 ]

@@ -160,5 +160,11 @@
         "name": "Paseo Aldrey",
         "capacity": "123",
         "shows": []
+    },
+    {
+        "id": 28,
+        "name": "Aldrey",
+        "capacity": "44",
+        "shows": []
     }
 ]
