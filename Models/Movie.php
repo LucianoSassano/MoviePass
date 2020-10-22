@@ -3,6 +3,7 @@
 
     class Movie{
         
+        private $id;
         private $title;
         private $overview;
         private $poster_path;
@@ -10,6 +11,29 @@
         private $adult;
         private $vote_average;
         private $genres = [];
+
+
+
+        /**
+         * Get the value of id
+         */ 
+        public function getId()
+        {
+                return $this->id;
+        }
+
+        /**
+         * Set the value of id
+         *
+         * @return  self
+         */ 
+        public function setId($id)
+        {
+                $this->id = $id;
+
+                return $this;
+        }
+
         
 
         /**
@@ -151,6 +175,8 @@
 
                 return $this;
         }
+
+        
     }
 
 

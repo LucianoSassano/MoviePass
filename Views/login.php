@@ -2,7 +2,7 @@
 require_once(VIEWS_PATH . "header.php");
 ?>
 
-<body>
+<body class="base-login">
   <?php require_once(VIEWS_PATH . "navbar.php") ?>
 
   <div class="login">

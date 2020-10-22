@@ -13,6 +13,19 @@
             $this->fileName = ROOT . "Data/movies.json";
         }
 
+        public function get($id) {
+
+            $this->RetrieveData();
+            $founded = null;
+
+            foreach($this->moviesList as $movie) {
+                if($movie->getId() == $id) {
+                    $founded = $movie;
+                }
+            }
+            return $founded;
+        }
+
         public function getAll() {
             $this->RetrieveData();
             return $this->moviesList;
@@ -30,7 +43,8 @@
             $arrayToEncode = array();
 
             foreach($this->moviesList as $movie)
-            {            
+            {   
+                $valuesArray["id"] = $movie->getId();         
                 $valuesArray["title"] = $movie->getTitle();
                 $valuesArray["overview"] = $movie->getOverview();
                 $valuesArray["poster_path"] = $movie->getPoster_path();
@@ -61,6 +75,7 @@
                 {
                     $movie = new Movie();
 
+                    $movie->setId($valuesArray["id"]);
                     $movie->setTitle($valuesArray["title"]);
                     $movie->setOverview($valuesArray["overview"]);
                     $movie->setPoster_path($valuesArray["poster_path"]);

@@ -9,7 +9,16 @@
             private $date;
             private $price;
 
-               /**
+
+            /**
+             * Get the value of id
+             */ 
+            public function getId()
+            {
+                        return $this->id;
+            }
+
+            /**
              * Set the value of id
              *
              * @return  self
@@ -19,15 +28,6 @@
                         $this->id = $id;
 
                         return $this;
-            }
-
-
-            /**
-             * Get the value of id
-             */ 
-            public function getId()
-            {
-                        return $this->id;
             }
 
             /**
@@ -70,6 +70,7 @@
                         return $this;
             }
 
+            
 
             /**
              * Get the value of price
@@ -91,3 +92,7 @@
                         return $this;
             }
         }
+
+
+
+?>

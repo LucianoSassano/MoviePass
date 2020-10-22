@@ -26,28 +26,27 @@ class TheaterController
 
     function createView()
     {
-        require_once(VIEWS_PATH . "creation.php");
+        require_once(VIEWS_PATH . "theater-creation.php");
     }
 
     function create($name, $address)
     {
         if ($name && $address) {
             //valido la existencia del cine por la direccion si existe no grava el nuevo cine
-            if($this->validate($address)){
+            if ($this->validate($address)) {
                 $newTheater = new Theater($name, $address);
                 $this->theaterDAO->add($newTheater);
 
-                echo '<script>alert("Theater Creation Successfull")</script>'; 
+                echo '<script>alert("Theater Creation Successfull")</script>';
                 $successMsg = "Theater created successfully !";  // Esto se envia al creation.php y se muestra 
-                require_once(VIEWS_PATH . "creation.php");
-            }
-            else {
+                require_once(VIEWS_PATH . "theater-creation.php");
+            } else {
                 $errorMsg = "Theater already exists";  // Esto se envia al creation.php y se muestra 
-                require_once(VIEWS_PATH . "creation.php");
+                require_once(VIEWS_PATH . "theater-creation.php");
             }
-        }else {
+        } else {
             $errorMsg = "Complete all the fields";  // Esto se envia al creation.php y se muestra 
-            require_once(VIEWS_PATH . "creation.php");
+            require_once(VIEWS_PATH . "theater-creation.php");
         }
     }
 
@@ -59,27 +58,29 @@ class TheaterController
     /**
      * Modify methods
      */
-    function modifyView($id){
-        
+    function modifyView($id)
+    {
+
         $theater = $this->theaterDAO->get($id);
 
-        require_once(VIEWS_PATH ."theaterMod.php");
+        require_once(VIEWS_PATH . "theaterMod.php");
     }
 
-    function modify($id, $name, $address) {
+    function modify($id, $name, $address)
+    {
 
-        if($name && $address) { // Valido la data que viene
+        if ($name && $address) { // Valido la data que viene
 
             $edited = new Theater($name, $address); // Instancio el theater
             $edited->setId($id);    // seteo el id con el que voy a buscar en el edit del dao
 
             $this->theaterDAO->edit($edited);   // edito en el dao
 
-            $this->showTheaters();  // redirecciono a la lista de theaters
+            $this->showAll();  // redirecciono a la lista de theaters
         } else {
             $errorMsg = "Complete all the fields";
             $theater = $this->theaterDAO->get($id);     // si la data viene vacia 
-            require_once(VIEWS_PATH ."theaterMod.php"); // redirecciona al mismo formulario
+            require_once(VIEWS_PATH . "theaterMod.php"); // redirecciona al mismo formulario
         }
     }
 }

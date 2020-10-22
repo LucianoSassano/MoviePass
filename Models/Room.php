@@ -37,9 +37,8 @@
                 return $this;
         }
 
-
         /**
-         * Get the value of shows
+         * Get the value of theather
          */ 
         public function getShows()
         {
@@ -47,7 +46,7 @@
         }
 
         /**
-         * Set the value of shows
+         * Set the value of theather
          *
          * @return  self
          */ 
@@ -58,3 +57,6 @@
                 return $this;
         }
     }
+
+
+?>

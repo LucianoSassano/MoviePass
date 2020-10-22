@@ -38,6 +38,7 @@
 
             foreach($resultJSON['results'] as $movie) {
                 $newMovie = new Movie();
+                $newMovie->setId($movie['id']);
                 $newMovie->setTitle($movie['original_title']);
                 $newMovie->setOverview($movie['overview']);
                 $newMovie->setPoster_path($movie['poster_path']);
