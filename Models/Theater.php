@@ -8,6 +8,13 @@
         private $name;
         private $address;
 
+
+        function __construct($name="", $address="")
+        {
+            $this->name = $name;
+            $this->address = $address;
+        }
+
         
         /**
          * Set the value of id
@@ -72,7 +79,3 @@
                 return $this;
         }
     }
-
-
-
-?>

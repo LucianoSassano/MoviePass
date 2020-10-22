@@ -3,5 +3,25 @@
         "id": 1,
         "name": "CineLoco",
         "address": null
+    },
+    {
+        "id": 2,
+        "name": "diagonal",
+        "address": "calle 123"
+    },
+    {
+        "id": 1,
+        "name": "CineLoco",
+        "address": null
+    },
+    {
+        "id": 2,
+        "name": "diagonal",
+        "address": "calle 123"
+    },
+    {
+        "id": 3,
+        "name": "Centro",
+        "address": "cordoba 123"
     }
 ]

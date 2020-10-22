@@ -20,6 +20,11 @@ require_once(VIEWS_PATH . "header.php");
                     <label for="inputAddress">Address</label>
                     <input type="text" class="form-control" id="inputAddress" name="address" placeholder="Theater Address">
                 </div>
+                  <p class="text-danger">
+                    <?php if (isset($errorMsg)) {
+                        echo $errorMsg;
+                    } ?>
+                </p>
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
         </div>

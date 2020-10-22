@@ -32,16 +32,16 @@
 
         public function getByAddress($address){
             $this->RetrieveData();
-            $theaterFounded = null;
+            $theaterFound = null;
             
             if(!empty($this->theaterList)){
                 foreach($this->theaterList as $theater){
                     if($theater->getAddress() == $address){
-                        $theaterFounded = $theater; 
+                        $theaterFound = $theater; 
                     }
                 }
             }
-            return $theaterFounded;
+            return $theaterFound;
         }
 
         public function edit(Theater $theater) {

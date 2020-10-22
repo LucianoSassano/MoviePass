@@ -4,6 +4,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT . "home/index" ?>">Logout</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT . "admin/dashboard" ?>">Home</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Theaters
@@ -12,6 +15,9 @@
                         <a class="dropdown-item" href="<?php echo FRONT_ROOT . "admin/showTheaters" ?>">Show Theathers</a>
                         <a class="dropdown-item" href="<?php echo FRONT_ROOT . "admin/createTheaterForm" ?>">Create a Theather</a>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT . "admin/activeShows" ?>">Shows</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT . 'movie/updateAll' ?>">Update Movies</a>
