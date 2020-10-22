@@ -3,14 +3,18 @@
     namespace Controllers;
 
     use DAO\UserJSON as UserDAO;
+    use DAO\MovieJSON as MovieDAO;
+    use Models\User;
 
     class LoginController{
 
         private $userDAO;
+        private $movieDAO;
 
         function __construct()
         {
             $this->userDAO = new UserDAO();
+            $this->movieDAO = new MovieDAO();
         }
 
         public function index(){
@@ -27,26 +31,35 @@
             if($email && $password) {
 
                 $user = $this->userDAO->getByEmail($email);
-               
 
-                // Verificar password
-                if($user->getPassword() == $password) {
-                    $_SESSION['loggedUser'] = $user;
-                    var_dump($_SESSION['loggedUser']->getRole());
-                    if($_SESSION['loggedUser']->getRole() == 2){
-                        require_once(VIEWS_PATH . "admin.php"); // Deberia redireccionar al sistema logueado
-                    }
-                    if($_SESSION['loggedUser']->getRole() == 1){
-                        {
-                            require_once(VIEWS_PATH . "index.php"); // Deberia redireccionar al sistema logueado
+                if($user){  // Si el usuario existe
+                    // Verificar password
+                    if($user->getPassword() == $password) {
+
+                        $_SESSION['loggedUser'] = $user;    // almacena el usuario en la session
+
+                        if($user->getRole() == User::ADMIN_ROLE){
+                            $movies = $this->movieDAO->getAll();
+                            require_once(VIEWS_PATH . "admin.php"); // Redirecciona al sistema logueado como admin
+                        } else {
+                            require_once(VIEWS_PATH . "index.php"); // Redirecciona al sistema logueado como user
                         }
                     }
+                }else {
+                    $errorMsg = "Usuario no encontrado";  // Esto se envia al login.php y se muestra 
+                    require_once(VIEWS_PATH . "login.php");
                 }
-                
-            } else {
+               
+            }else {
                 $errorMsg = "Datos invalidos";  // Esto se envia al login.php y se muestra 
                 require_once(VIEWS_PATH . "login.php");
             }            
+        }
+
+        function logout() {
+            session_destroy();
+            session_start();
+            require_once(VIEWS_PATH . "index.php");
         }
     }
 

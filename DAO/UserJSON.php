@@ -67,6 +67,7 @@
 
                     $user->setEmail($valuesArray["email"]);
                     $user->setPassword($valuesArray["password"]);
+                    $user->setRole($valuesArray["role"]);
 
                     array_push($this->userList, $user);
                 }

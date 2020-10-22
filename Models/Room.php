@@ -6,7 +6,7 @@
 
         private $id;
         private $capacity;
-        private $theather;
+        private $shows;
 
 
         /**
@@ -37,26 +37,24 @@
                 return $this;
         }
 
+
         /**
-         * Get the value of theather
+         * Get the value of shows
          */ 
-        public function getTheather()
+        public function getShows()
         {
-                return $this->theather;
+                return $this->shows;
         }
 
         /**
-         * Set the value of theather
+         * Set the value of shows
          *
          * @return  self
          */ 
-        public function setTheather($theather)
+        public function setShows($shows)
         {
-                $this->theather = $theather;
+                $this->shows = $shows;
 
                 return $this;
         }
     }
-
-
-?>

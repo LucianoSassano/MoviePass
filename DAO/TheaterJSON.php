@@ -46,10 +46,10 @@
 
         public function edit(Theater $theater) {
             $this->RetrieveData();
-
             foreach($this->theatersList as $t) {
                 if($t->getId() == $theater->getId()) {
-                    $t = $theater;
+                    $t->setName($theater->getName());
+                    $t->setAddress($theater->getAddress());
                 }
             }
             $this->SaveData();
@@ -112,7 +112,7 @@
 
         private function RetrieveData()
         {
-            $this->userList = array();
+            $this->theatersList = array();
 
             if(file_exists('Data/theaters.json'))
             {
@@ -133,3 +133,5 @@
             }
         }
     }
+
+?>

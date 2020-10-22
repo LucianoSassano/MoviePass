@@ -5,26 +5,27 @@
     <div class="theaterMod">
         <div class="container">
             <h2>Theater Modification</h2>
-            <form action="<?php echo FRONT_ROOT . "admin/createTheater" ?>" method="POST">
+            <form action="<?php echo FRONT_ROOT . "theater/modify" ?>" method="POST">
+            <input type="number" name="id" value="<?php echo $theater->getId(); ?>" hidden>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="previousTheaterName">Current Theater Name</label>
-                        <input type="text" class="form-control" id="previousTheaterName" name="previousName" placeholder="Current Theater Name" readonly>
+                        <input type="text" class="form-control" id="previousTheaterName" value="<?php echo $theater->getName(); ?>"  readonly>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="theaterName">New Theater Name</label>
-                        <input type="text" class="form-control" id="theaterName" name="name" placeholder="Enter a new theater name">
+                        <input type="text" class="form-control" id="theaterName"  name="name" placeholder="Enter a new theater name">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="previousAddress">Current Address</label>
-                    <input type="text" class="form-control" id="previousAddress" name="previousAddress" placeholder="Current Theater Address" readonly>
+                    <input type="text" class="form-control" id="previousAddress" value="<?php echo $theater->getAddress(); ?>" readonly>
                 </div>
                 <div class="form-group">
                     <label for="inputAddress">New Address</label>
-                    <input type="text" class="form-control" id="inputAddress" name="address" placeholder="Enter a new theater address" >
+                    <input type="text" class="form-control" id="inputAddress"  name="address" placeholder="Enter a new theater address" >
                 </div>
                 <p class="text-danger">
                     <?php if (isset($errorMsg)) {

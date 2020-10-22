@@ -9,7 +9,7 @@ require_once(VIEWS_PATH . "header.php");
     <div class="show">
         <div class="container">
             <h2>Show Creation</h2>
-            <form action="<?php echo FRONT_ROOT . "admin/createTheater" ?>" method="POST">
+            <form action="<?php echo FRONT_ROOT . "theater/create" ?>" method="POST">
                 <div class="form-row">
                     <div class="card mb-3">
                         <img src="" class="card-img-top" alt="...">

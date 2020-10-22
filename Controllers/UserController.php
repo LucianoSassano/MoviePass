@@ -13,6 +13,10 @@
             $this->userDAO = new UserDAO();
         }
 
+        /**
+         * Create methods
+         */
+
         public function create($email, $password) {
             // Valido la data
             if($email && $password) {

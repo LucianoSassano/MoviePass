@@ -1,18 +1,8 @@
 [
     {
         "id": 1,
-        "name": "CineLoco",
-        "address": null
-    },
-    {
-        "id": 2,
-        "name": "diagonal",
-        "address": "calle 123"
-    },
-    {
-        "id": 1,
-        "name": "CineLoco",
-        "address": null
+        "name": "Cine Loco",
+        "address": "Calle Falsa 1234"
     },
     {
         "id": 2,
@@ -21,7 +11,47 @@
     },
     {
         "id": 3,
-        "name": "Centro",
-        "address": "cordoba 123"
+        "name": "qweqwe12e",
+        "address": "1d312d"
+    },
+    {
+        "id": 4,
+        "name": "Ambassador",
+        "address": "123123"
+    },
+    {
+        "id": 5,
+        "name": "asdasd",
+        "address": "123123123"
+    },
+    {
+        "id": 6,
+        "name": "Ambassador",
+        "address": "123123"
+    },
+    {
+        "id": 7,
+        "name": "qweqwe",
+        "address": "123123"
+    },
+    {
+        "id": 8,
+        "name": "Ambassador",
+        "address": "1231233123"
+    },
+    {
+        "id": 9,
+        "name": "qweqwe",
+        "address": "qweqwe"
+    },
+    {
+        "id": 10,
+        "name": "qweqwe",
+        "address": "123123"
+    },
+    {
+        "id": 11,
+        "name": "CineLoco",
+        "address": "CineRELoco"
     }
 ]

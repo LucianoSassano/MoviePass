@@ -5,9 +5,21 @@
         class Show{
 
             private $id;
-            private $room;
             private $movie;
             private $date;
+            private $price;
+
+               /**
+             * Set the value of id
+             *
+             * @return  self
+             */ 
+            public function setId($id)
+            {
+                        $this->id = $id;
+
+                        return $this;
+            }
 
 
             /**
@@ -16,26 +28,6 @@
             public function getId()
             {
                         return $this->id;
-            }
-
-            /**
-             * Get the value of room
-             */ 
-            public function getRoom()
-            {
-                        return $this->room;
-            }
-
-            /**
-             * Set the value of room
-             *
-             * @return  self
-             */ 
-            public function setRoom($room)
-            {
-                        $this->room = $room;
-
-                        return $this;
             }
 
             /**
@@ -77,8 +69,25 @@
 
                         return $this;
             }
+
+
+            /**
+             * Get the value of price
+             */ 
+            public function getPrice()
+            {
+                        return $this->price;
+            }
+
+            /**
+             * Set the value of price
+             *
+             * @return  self
+             */ 
+            public function setPrice($price)
+            {
+                        $this->price = $price;
+
+                        return $this;
+            }
         }
-
-
-
-?>

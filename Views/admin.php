@@ -15,7 +15,7 @@
                             <h5 class="card-title"><?php echo $movie->getTitle(); ?></h5>
                             <p class="card-text"><?php echo $movie->getOverview(); ?></p>
                             <p> <?php echo $movie->getAdult() ? "Adult only" : "Family friendly" ?> </p>
-                            <a href="<?php echo FRONT_ROOT . "admin/createShow" ?>" class="btn btn-primary">Create Show</a>
+                            <a href="<?php echo FRONT_ROOT . "show/createView" ?>" class="btn btn-primary">Create Show</a>
                         </div>
                     </div>
 
