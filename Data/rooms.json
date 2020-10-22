@@ -1,0 +1,152 @@
+[
+    {
+        "id": 1,
+        "name": "Sala Locura",
+        "capacity": 100,
+        "shows": []
+    },
+    {
+        "id": 2,
+        "name": "Sala Drama",
+        "capacity": 200,
+        "shows": []
+    },
+    {
+        "id": 3,
+        "name": "Sala Piripitiflautica",
+        "capacity": 300,
+        "shows": []
+    },
+    {
+        "id": 4,
+        "name": "Sala prueba",
+        "capacity": "130",
+        "shows": []
+    },
+    {
+        "id": 5,
+        "name": "Paseo Aldrey",
+        "capacity": "12",
+        "shows": []
+    },
+    {
+        "id": 6,
+        "name": "Paseo Aldrey",
+        "capacity": "12",
+        "shows": []
+    },
+    {
+        "id": 7,
+        "name": "Paseo Aldrey",
+        "capacity": "12",
+        "shows": []
+    },
+    {
+        "id": 8,
+        "name": "Paseo Aldrey",
+        "capacity": "12",
+        "shows": []
+    },
+    {
+        "id": 9,
+        "name": "Paseo Aldrey",
+        "capacity": "12",
+        "shows": []
+    },
+    {
+        "id": 10,
+        "name": "Paseo Aldrey",
+        "capacity": "12",
+        "shows": []
+    },
+    {
+        "id": 11,
+        "name": "Paseo Aldrey",
+        "capacity": "12",
+        "shows": []
+    },
+    {
+        "id": 12,
+        "name": "Paseo Aldrey",
+        "capacity": "123",
+        "shows": []
+    },
+    {
+        "id": 13,
+        "name": "Paseo Aldrey",
+        "capacity": "123",
+        "shows": []
+    },
+    {
+        "id": 14,
+        "name": "CineLoco",
+        "capacity": "123",
+        "shows": []
+    },
+    {
+        "id": 15,
+        "name": "CineLoco",
+        "capacity": "123",
+        "shows": []
+    },
+    {
+        "id": 16,
+        "name": "CineLoco",
+        "capacity": "123",
+        "shows": []
+    },
+    {
+        "id": 17,
+        "name": "CineLoco",
+        "capacity": "123",
+        "shows": []
+    },
+    {
+        "id": 18,
+        "name": "CineLoco",
+        "capacity": "123",
+        "shows": []
+    },
+    {
+        "id": 19,
+        "name": "CineLoco",
+        "capacity": "123",
+        "shows": []
+    },
+    {
+        "id": 20,
+        "name": "CineLoco",
+        "capacity": "123",
+        "shows": []
+    },
+    {
+        "id": 21,
+        "name": "CineLoco",
+        "capacity": "123",
+        "shows": []
+    },
+    {
+        "id": 22,
+        "name": "",
+        "capacity": "08:24",
+        "shows": []
+    },
+    {
+        "id": 23,
+        "name": "",
+        "capacity": "08:24",
+        "shows": []
+    },
+    {
+        "id": 24,
+        "name": "",
+        "capacity": "08:24",
+        "shows": []
+    },
+    {
+        "id": 25,
+        "name": "cristal",
+        "capacity": "50",
+        "shows": []
+    }
+]

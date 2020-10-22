@@ -7,12 +7,14 @@
         private $id;
         private $name;
         private $address;
+        private $rooms;
 
 
         function __construct($name="", $address="")
         {
             $this->name = $name;
             $this->address = $address;
+            $this->rooms = array();
         }
 
         
@@ -75,6 +77,26 @@
         public function setAddress($address)
         {
                 $this->address = $address;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of rooms
+         */ 
+        public function getRooms()
+        {
+                return $this->rooms;
+        }
+
+        /**
+         * Set the value of rooms
+         *
+         * @return  self
+         */ 
+        public function setRooms($rooms)
+        {
+                $this->rooms = $rooms;
 
                 return $this;
         }

@@ -3,8 +3,9 @@
 <body style="background-color:#3E5CB2">
     <?php require_once(VIEWS_PATH . "admin-navbar.php") ?>
     <div class="theaterMod">
-        <div class="container">
+        <div class="container mt-3">
             <h2>Theater Modification</h2>
+            <hr>
             <form action="<?php echo FRONT_ROOT . "theater/modify" ?>" method="POST">
             <input type="number" name="id" value="<?php echo $theater->getId(); ?>" hidden>
                 <div class="form-row">
@@ -35,9 +36,22 @@
                 <button type="submit" class="btn btn-primary">Submit Change</button>
             </form>
             <br>
+            <h2>Rooms</h2>
+            <hr>
+            <?php 
+            if(!empty($theater->getRooms())){
+                foreach($theater->getRooms() as $room){ ?>
+                    <div class="lead">
+                        <p>Name: <strong class="text-bold"> <?php echo $room->getName(); ?> </strong></p>
+                        <p>Capacity:  <strong><?php echo $room->getCapacity(); ?> </strong></p>
+                        <hr>
+                    </div>
+                <?php }?>
+            <?php }else {echo "No rooms here ...";} ?>
+            
             <form action="<?php echo FRONT_ROOT . "room/createView" ?>" method="POST">
                 <input type="number" name="theater_id" value=<?php echo $theater->getId() ?> hidden>
-                <button type="submit" class="btn btn-primary">Add a room</button>
+                <button type="submit" class="btn btn-primary mt-2 mb-3">Add a room</button>
             </form>
         </div>
     </div>

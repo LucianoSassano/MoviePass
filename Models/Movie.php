@@ -12,7 +12,16 @@
         private $vote_average;
         private $genres = [];
 
-
+        function __construct($id="", $title="", $overview="", $poster_path="", $language="", $adult="", $vote_average="", $genres="") {
+                $this->id = $id;
+                $this->title = $title;
+                $this->overview = $overview;
+                $this->poster_path = $poster_path;
+                $this->language = $language;
+                $this->adult = $adult;
+                $this->vote_average = $vote_average;
+                $this->genres = $genres;
+        }
 
         /**
          * Get the value of id

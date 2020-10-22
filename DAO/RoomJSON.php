@@ -3,11 +3,13 @@
     namespace DAO;
 
     use Models\Room;
+    use DAO\ShowJSON as ShowDAO;
 
     class RoomJSON {
 
         private $roomsList = array();
         private $fileName;
+        private $showDAO;
 
         public function __construct() {
             $this->fileName = ROOT . "Data/rooms.json";
@@ -35,6 +37,21 @@
         public function getAll() {
             $this->RetrieveData();
             return $this->roomsList;
+        }
+
+        /**
+         * Get by array of id's
+         */
+        public function getRoomList($rooms = array()) {
+
+            $roomList = array();
+
+            if(!empty($rooms)) {
+                foreach($rooms as $id) {
+                    array_push($roomList, $this->get($id));
+                }
+            }
+            return $roomList;
         }
 
         /**
@@ -108,6 +125,7 @@
             foreach($this->roomsList as $room)
             {            
                 $valuesArray["id"] = $room->getId();
+                $valuesArray["name"] = $room->getName();
                 $valuesArray["capacity"] = $room->getCapacity();
                 $valuesArray["shows"] = $room->getShows();
 
@@ -134,12 +152,41 @@
                     $room = new Room();
 
                     $room->setId($valuesArray["id"]);
+                    $room->setName($valuesArray["name"]);
                     $room->setCapacity($valuesArray["capacity"]);
-                    $room->setShows($valuesArray["shows"]);
+
+                    $shows = $this->getShowList($valuesArray["shows"]);
+
+                    $room->setShows($shows);
                     
                     array_push($this->roomsList, $room);
                 }
             }
+        }
+
+        /**
+         * Get shows from theater
+         */
+        private function getShowList($shows = array()) {
+
+            $this->showDAO = new ShowDAO(); // instancio el dao de rooms
+
+            $showObjs = $this->showDAO->getShowList($shows);   // $rooms es un array con las id de los room que le corresponden al cine
+
+            return $showObjs;
+        }
+
+        /**
+         * Get an array of id's from an array of Shows
+         */
+        public function getShowIdList($shows = array()) {
+
+            $showsIdsList = array();
+            foreach($shows as $show) {
+                array_push($showsIdsList, $show->getId());
+            }
+
+            return $showsIdsList;
         }
     }
 

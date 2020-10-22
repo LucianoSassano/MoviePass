@@ -9,7 +9,7 @@ require_once(VIEWS_PATH . "header.php");
     <div class="show">
         <div class="container">
 
-            <form action="<?php echo FRONT_ROOT . "room/createView" ?>" method="POST">
+            <form action="<?php echo FRONT_ROOT . "show/chooseRoom" ?>" method="POST">
                 <div class="form-row">
                     <div class="card mb-3">
                         <img src="<?php echo "https://image.tmdb.org/t/p/w500/" . $movie->getPoster_path(); ?>" class="card-img-top" alt="...">
@@ -30,7 +30,7 @@ require_once(VIEWS_PATH . "header.php");
                         <?php } ?>
                     </select>
                 </div>
-
+                <input type="number" name="movie_id" value="<?php echo $movie->getId(); ?>" hidden>
                 <button type="submit" class="btn btn-primary">Continue</button>
             </form>
         </div>

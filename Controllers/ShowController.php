@@ -5,6 +5,7 @@ namespace Controllers;
 use DAO\ShowJSON as ShowDAO;
 use DAO\MovieJSON as MovieDAO;
 use DAO\TheaterJSON as TheaterDAO;
+use DAO\RoomJSON as RoomDAO;
 use Models\Show;
 
 class ShowController
@@ -12,12 +13,14 @@ class ShowController
     private $showDAO;
     private $movieDAO;
     private $theaterDAO;
+    private $roomDAO;
 
     function __construct()
     {
         $this->showDAO = new ShowDAO();
         $this->movieDAO = new MovieDAO();
         $this->theaterDAO = new TheaterDAO();
+        $this->roomDAO = new RoomDAO();
     }
 
     // createView -> metodo seleccionar una pelicula para el armado de un show 
@@ -29,12 +32,37 @@ class ShowController
         require_once(VIEWS_PATH . "show.php");
     }
 
-    function createShow($movie_id , $theater_id){
-        
-        $movie = $this->movieDAO->get($movie_id);
+    function chooseRoom($theater_id, $movie_id) {
         $theater = $this->theaterDAO->get($theater_id);
-        //falta el room 
+        $movie_id = $movie_id;
+        require_once(VIEWS_PATH . "chooseRoom.php");
+    }
+
+    function create($movie_id , $room_id){
+
+        $movie = $this->movieDAO->get($movie_id);
+        $room = $this->roomDAO->get($room_id);
+
+        // En la siguiente vista podria mostrar la data de la movie ya q voy a tener el objeto 
+        require_once(VIEWS_PATH . "show-creation.php");
+    }
+
+    function add($date, $time, $price, $room_id, $movie_id) {
+
+        if($date && $time && $price) {
+            $show = new Show($date, $time, $price);
+            $movie = $this->movieDAO->get($movie_id);
+            $show->setMovie($movie);
+            print_r($show);
+            $this->showDAO->add($show);
+        }else { echo "ERROR";}
         
+    }
+
+    function getActive() {
+        $shows = $this->showDAO->getAll();
+        require_once(VIEWS_PATH . "shows-active.php");
+
     }
 
 

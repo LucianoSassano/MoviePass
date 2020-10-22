@@ -26,10 +26,13 @@ class RoomController
     }
 
 
-    function create($room_name, $room_capacity)
+    function create($name, $capacity, $theater_id)
     {
 
-        $room = new Room($room_name, $room_capacity);
+        $room = new Room($name, $capacity);
         $this->roomDAO->add($room);
+
+        $theater = $this->theaterDAO->addRoom($theater_id, $room);
+        //print_r($theater);
     }
 }

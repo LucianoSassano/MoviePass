@@ -7,8 +7,16 @@
             private $id;
             private $movie;
             private $date;
+            private $time;
             private $price;
 
+            function __construct($date="", $time="", $price="")
+        {
+            $this->date = $date;
+            $this->time = $time;
+            $this->price = $price;
+            $this->movie = "";
+        }
 
             /**
              * Get the value of id
@@ -88,6 +96,26 @@
             public function setPrice($price)
             {
                         $this->price = $price;
+
+                        return $this;
+            }
+
+            /**
+             * Get the value of time
+             */ 
+            public function getTime()
+            {
+                        return $this->time;
+            }
+
+            /**
+             * Set the value of time
+             *
+             * @return  self
+             */ 
+            public function setTime($time)
+            {
+                        $this->time = $time;
 
                         return $this;
             }

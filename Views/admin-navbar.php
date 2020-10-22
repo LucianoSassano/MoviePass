@@ -14,7 +14,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo FRONT_ROOT . "admin/activeShows" ?>">Shows</a>
+                    <a class="nav-link" href="<?php echo FRONT_ROOT . "show/getActive" ?>">Shows</a>
                 </li>
                 
                 <li class="nav-item">

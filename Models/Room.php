@@ -9,15 +9,13 @@
         private $capacity;
         private $shows;
 
-     
+
         function __construct($name="", $capacity="")
         {
-           
             $this->name = $name;
             $this->capacity = $capacity;
-        
+            $this->shows = array();
         }
-
 
         /**
          * Get the value of id
@@ -63,6 +61,18 @@
         public function setShows($shows)
         {
                 $this->shows = $shows;
+
+                return $this;
+        }
+
+        /**
+         * Set the value of id
+         *
+         * @return  self
+         */ 
+        public function setId($id)
+        {
+                $this->id = $id;
 
                 return $this;
         }

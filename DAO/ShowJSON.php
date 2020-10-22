@@ -30,6 +30,21 @@
         }
 
         /**
+         * Get by array of id's
+         */
+        public function getShowList($shows = array()) {
+
+            $showList = array();
+
+            if(!empty($shows)) {
+                foreach($shows as $id) {
+                    array_push($showList, $this->get($id));
+                }
+            }
+            return $showList;
+        }
+
+        /**
          * Get all shows
          */
         public function getAll() {
@@ -112,6 +127,7 @@
                 $valuesArray["id"] = $show->getId();
                 $valuesArray["movie"] = $show->getMovie();
                 $valuesArray["date"] = $show->getDate();
+                $valuesArray["time"] = $show->getTime();
                 $valuesArray["price"] = $show->getPrice();
 
                 array_push($arrayToEncode,$valuesArray);
@@ -139,6 +155,7 @@
                     $show->setId($valuesArray["id"]);
                     $show->setMovie($valuesArray["movie"]);
                     $show->setDate($valuesArray["date"]);
+                    $show->setTime($valuesArray["time"]);
                     $show->setPrice($valuesArray["price"]);
                     
                     array_push($this->showList, $show);
