@@ -5,10 +5,18 @@
         class Show{
 
             private $id;
-            private $room;
             private $movie;
             private $date;
+            private $time;
+            private $price;
 
+            function __construct($date="", $time="", $price="")
+        {
+            $this->date = $date;
+            $this->time = $time;
+            $this->price = $price;
+            $this->movie = "";
+        }
 
             /**
              * Get the value of id
@@ -19,21 +27,13 @@
             }
 
             /**
-             * Get the value of room
-             */ 
-            public function getRoom()
-            {
-                        return $this->room;
-            }
-
-            /**
-             * Set the value of room
+             * Set the value of id
              *
              * @return  self
              */ 
-            public function setRoom($room)
+            public function setId($id)
             {
-                        $this->room = $room;
+                        $this->id = $id;
 
                         return $this;
             }
@@ -74,6 +74,48 @@
             public function setDate($date)
             {
                         $this->date = $date;
+
+                        return $this;
+            }
+
+            
+
+            /**
+             * Get the value of price
+             */ 
+            public function getPrice()
+            {
+                        return $this->price;
+            }
+
+            /**
+             * Set the value of price
+             *
+             * @return  self
+             */ 
+            public function setPrice($price)
+            {
+                        $this->price = $price;
+
+                        return $this;
+            }
+
+            /**
+             * Get the value of time
+             */ 
+            public function getTime()
+            {
+                        return $this->time;
+            }
+
+            /**
+             * Set the value of time
+             *
+             * @return  self
+             */ 
+            public function setTime($time)
+            {
+                        $this->time = $time;
 
                         return $this;
             }

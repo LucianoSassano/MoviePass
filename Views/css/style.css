@@ -1,9 +1,8 @@
 *{
     box-sizing: border-box;
     margin:0;
+    font-family: "Roboto";
 }
-
-
 
 
 
@@ -80,8 +79,9 @@
 
 /*--------------Login View---------------- */
 
-.login{
-    height: 100vh;
+.base-login{
+
+    
     background-image:url('https://images.unsplash.com/photo-1512113569142-8a60fccc7caa?ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80');
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
@@ -89,16 +89,15 @@
 }
 
 .login-form{
-    margin-top: 20vh;
+    margin-top: 25vh;
+    margin-left: 12vh;
     display:flex;
     align-items: center;
     justify-content: center;
     width: 40vw;
     height: 40vh;
     flex-direction: column;
-    align-items: center;
     background-color: rgba(60,46,62,0.7) ;
-
 }
 
 .login-form label{
@@ -150,4 +149,114 @@
 
 
 /*--------------End of Admin View---------------- */
+
+/*--------------Shows View---------------- */
+
+.show .card{
+    width: 25vw;
+    margin-top: 5vh;
+}
+
+
+
+.show div .form-row{
+    display: flex;
+    justify-content: center;
+}
+.show div .form-group{
+    width: 25vw;
+    margin-left: 16.6vw;
+    
+}
+
+.show button{
+    margin-left: 16.6vw;
+    
+}
+
+
+.show img{
+    width: 25vw;
+   
+
+}
+
+
+
+
+/*--------------End of Shows View---------------- */
+
+/*--------------Theaters View---------------- */
+.theaters{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.theaters .card{
+    margin: 3vh;
+    align-items: center;
+    justify-content: center;
+}
+
+/*--------------End of Theaters View---------------- */
+
+
+
+/*--------------TheaterMod View---------------- */
+.theaterMod{
+    color: #EEF0F5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+/*--------------End of TheaterMod View---------------- */
+
+/*--------------End of Show Creation View---------------- */
+
+.show-creation .container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.show-creation .card{
+    width: 25vh;
+}
+
+/*--------------End of Show Creation View---------------- */
+
+
+
+/*--------------Theater Creation View---------------- */
+
+.theater-creation{
+    color: #EEF0F5;
+}
+
+
+
+
+/*--------------End of Theater Creation View---------------- */
+
+
+/*--------------Shows Active View---------------- */
+
+.shows-active .container {
+    color: #EEF0F5;
+ 
+}
+
+.shows-active img{
+    width: 25vw;
+    height: 55vh;
+}
+/*--------------End of Shows Active View---------------- */
 

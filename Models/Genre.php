@@ -5,8 +5,9 @@
     class Genre{
 
         private $id;
-        private $description;
+        private $name;
 
+        
         /**
          * Get the value of id
          */ 
@@ -16,21 +17,33 @@
         }
 
         /**
-         * Get the value of description
-         */ 
-        public function getDescription()
-        {
-                return $this->description;
-        }
-
-        /**
-         * Set the value of description
+         * Set the value of id
          *
          * @return  self
          */ 
-        public function setDescription($description)
+        public function setId($id)
         {
-                $this->description = $description;
+                $this->id = $id;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of name
+         */ 
+        public function getName()
+        {
+                return $this->name;
+        }
+
+        /**
+         * Set the value of name
+         *
+         * @return  self
+         */ 
+        public function setName($name)
+        {
+                $this->name = $name;
 
                 return $this;
         }

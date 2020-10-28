@@ -5,9 +5,17 @@
     class Room{
 
         private $id;
+        private $name;
         private $capacity;
-        private $theather;
+        private $shows;
 
+
+        function __construct($name="", $capacity="")
+        {
+            $this->name = $name;
+            $this->capacity = $capacity;
+            $this->shows = array();
+        }
 
         /**
          * Get the value of id
@@ -40,9 +48,9 @@
         /**
          * Get the value of theather
          */ 
-        public function getTheather()
+        public function getShows()
         {
-                return $this->theather;
+                return $this->shows;
         }
 
         /**
@@ -50,9 +58,41 @@
          *
          * @return  self
          */ 
-        public function setTheather($theather)
+        public function setShows($shows)
         {
-                $this->theather = $theather;
+                $this->shows = $shows;
+
+                return $this;
+        }
+
+        /**
+         * Set the value of id
+         *
+         * @return  self
+         */ 
+        public function setId($id)
+        {
+                $this->id = $id;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of name
+         */ 
+        public function getName()
+        {
+                return $this->name;
+        }
+
+        /**
+         * Set the value of name
+         *
+         * @return  self
+         */ 
+        public function setName($name)
+        {
+                $this->name = $name;
 
                 return $this;
         }

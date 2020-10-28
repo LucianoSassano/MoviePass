@@ -3,6 +3,7 @@
 
     class Movie{
         
+        private $id;
         private $title;
         private $overview;
         private $poster_path;
@@ -10,6 +11,38 @@
         private $adult;
         private $vote_average;
         private $genres = [];
+
+        function __construct($id="", $title="", $overview="", $poster_path="", $language="", $adult="", $vote_average="", $genres=array()) {
+                $this->id = $id;
+                $this->title = $title;
+                $this->overview = $overview;
+                $this->poster_path = $poster_path;
+                $this->language = $language;
+                $this->adult = $adult;
+                $this->vote_average = $vote_average;
+                $this->genres = $genres;
+        }
+
+        /**
+         * Get the value of id
+         */ 
+        public function getId()
+        {
+                return $this->id;
+        }
+
+        /**
+         * Set the value of id
+         *
+         * @return  self
+         */ 
+        public function setId($id)
+        {
+                $this->id = $id;
+
+                return $this;
+        }
+
         
 
         /**
@@ -151,6 +184,8 @@
 
                 return $this;
         }
+
+        
     }
 
 

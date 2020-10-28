@@ -1,7 +1,34 @@
 [
     {
         "id": 1,
-        "name": "CineLoco",
-        "address": null
+        "name": "Ambassador",
+        "address": "Roque Saenz Pe\u00f1a 133",
+        "rooms": [
+            25,
+            26,
+            27
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Cine loco",
+        "address": "Calle Falsa 1234",
+        "rooms": [
+            1,
+            2,
+            3,
+            18,
+            19,
+            20,
+            21
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Ambassador",
+        "address": "Roque Saenz Pe\u00f1a 133",
+        "rooms": [
+            28
+        ]
     }
 ]

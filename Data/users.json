@@ -1,14 +1,26 @@
 [
     {
+        "id": 1,
         "email": "admin@admin",
         "password": "admin",
         "role": 2
     },
     {
+        "id": 2,
         "email": "mostric1@mostric",
         "password": "1234",
         "role": 1
+    },
+    {
+        "id": 3,
+        "email": "admin@black.com",
+        "password": "123",
+        "role": 2
+    },
+    {
+        "id": 4,
+        "email": "marti1@marti1",
+        "password": "marti",
+        "role": 1
     }
-
-
 ]
