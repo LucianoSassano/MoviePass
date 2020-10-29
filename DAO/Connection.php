@@ -3,6 +3,12 @@
     use \PDO as PDO;
     use \Exception as Exception;
     use DAO\QueryType as QueryType;
+
+    define("DB_HOST", "localhost");
+    define("DB_NAME", "moviepass");
+    define("DB_USER", "root");
+    define("DB_PASS", "");
+
     class Connection
     {
         private $pdo = null;

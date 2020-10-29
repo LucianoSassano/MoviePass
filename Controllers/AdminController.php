@@ -2,8 +2,8 @@
 
 namespace Controllers;
 
-use DAO\MovieJSON as MovieDAO;
-use DAO\TheaterJSON as TheaterDao;
+use DAO\JSON\MovieJSON as MovieDAO;
+use DAO\JSON\TheaterJSON as TheaterDao;
 use Models\Theater;
 
 class AdminController

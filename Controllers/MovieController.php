@@ -4,8 +4,8 @@
     use Models\Movie as Movie;
     use Models\Genre as Genre;
 
-    use DAO\MovieJSON as MovieDAO;
-    use DAO\GenreJSON as GenreDAO;
+    use DAO\JSON\MovieJSON as MovieDAO;
+    use DAO\JSON\GenreJSON as GenreDAO;
 
     define("API_KEY","5c5b380ac89e5a3c6c206ccd2adda7f3");
     

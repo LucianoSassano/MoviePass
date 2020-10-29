@@ -24,7 +24,7 @@
             <form class="form-inline my-2 my-lg-0">
                 <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <span class="nav-link"> <?php echo "Hola " . $_SESSION["loggedUser"]->getEmail(); ?> </span>
+                    <span class="nav-link"> <?php if(isset($_SESSION["loggedUser"])){ echo "Hola " . $_SESSION["loggedUser"]->getEmail(); }?> </span>
                 </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo FRONT_ROOT . "login/logout" ?>">Logout</a>

@@ -1,10 +1,10 @@
 <?php 
 
-    namespace DAO;
+    namespace DAO\JSON;
 
     use Models\Theater;
     use Models\Room;
-    use DAO\RoomJSON as RoomDAO;
+    use DAO\JSON\RoomJSON as RoomDAO;
 
     class TheaterJSON {
 

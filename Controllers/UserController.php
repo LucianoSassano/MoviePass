@@ -3,7 +3,7 @@
     namespace Controllers;
 
     use Models\User;
-    use DAO\UserJSON as UserDAO;
+    use DAO\JSON\UserJSON as UserDAO;
 
     class UserController {
 

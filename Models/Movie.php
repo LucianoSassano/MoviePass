@@ -11,6 +11,7 @@
         private $adult;
         private $vote_average;
         private $genres = [];
+        private $duration;
 
         function __construct($id="", $title="", $overview="", $poster_path="", $language="", $adult="", $vote_average="", $genres=array()) {
                 $this->id = $id;
@@ -186,6 +187,26 @@
         }
 
         
+
+        /**
+         * Get the value of duration
+         */ 
+        public function getDuration()
+        {
+                return $this->duration;
+        }
+
+        /**
+         * Set the value of duration
+         *
+         * @return  self
+         */ 
+        public function setDuration($duration)
+        {
+                $this->duration = $duration;
+
+                return $this;
+        }
     }
 
 

@@ -1,11 +1,11 @@
 <?php 
 
-    namespace DAO;
+    namespace DAO\JSON;
 
     use Models\Show;
     use Models\Movie;
 
-    use DAO\MovieJSON as MovieDAO;
+    use DAO\JSON\MovieJSON as MovieDAO;
 
     class ShowJSON {
 

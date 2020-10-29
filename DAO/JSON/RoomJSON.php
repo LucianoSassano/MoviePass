@@ -1,9 +1,9 @@
 <?php 
 
-    namespace DAO;
+    namespace DAO\JSON;
 
     use Models\Room;
-    use DAO\ShowJSON as ShowDAO;
+    use DAO\JSON\ShowJSON as ShowDAO;
 
     class RoomJSON {
 

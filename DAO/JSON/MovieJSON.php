@@ -1,8 +1,8 @@
 <?php 
 
-    namespace DAO;
+    namespace DAO\JSON;
 
-    use DAO\GenreJSON as GenreDAO;
+    use DAO\JSON\GenreJSON as GenreDAO;
 
     use Models\Movie;
 

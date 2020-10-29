@@ -2,11 +2,11 @@
 
 namespace Controllers;
 
-use DAO\ShowJSON as ShowDAO;
-use DAO\MovieJSON as MovieDAO;
-use DAO\TheaterJSON as TheaterDAO;
-use DAO\RoomJSON as RoomDAO;
-use DAO\GenreJSON as GenreDAO;
+use DAO\JSON\ShowJSON as ShowDAO;
+use DAO\JSON\MovieJSON as MovieDAO;
+use DAO\JSON\TheaterJSON as TheaterDAO;
+use DAO\JSON\RoomJSON as RoomDAO;
+use DAO\JSON\GenreJSON as GenreDAO;
 
 use Models\Show;
 
@@ -72,10 +72,26 @@ class ShowController
 
     function filter($genre_id) {
 
-        $shows = $this->showDAO->getByGenre($genre_id);
+        if($genre_id){
+            $shows = $this->showDAO->getByGenre($genre_id);
+        }else {
+            $shows = $this->showDAO->getAll();
+        }
+        
         $genres = $this->genreDAO->getAll();
         require_once(VIEWS_PATH . "shows-active.php");
     }
 
+    function filterClientSide($genre_id) {
+
+        if($genre_id){
+            $shows = $this->showDAO->getByGenre($genre_id);
+        }else{
+            $shows = $this->showDAO->getAll();
+        }
+        
+        $genres = $this->genreDAO->getAll();
+        require_once(VIEWS_PATH . "index.php");
+    }
 
 }

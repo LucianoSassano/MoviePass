@@ -2,8 +2,8 @@
 
     namespace Controllers;
 
-    use DAO\UserJSON as UserDAO;
-    use DAO\MovieJSON as MovieDAO;
+    use DAO\PDO\UserPDO as UserDAO;
+    use DAO\JSON\MovieJSON as MovieDAO;
     use Models\User;
 
     class LoginController{
@@ -38,7 +38,7 @@
 
                         $_SESSION['loggedUser'] = $user;    // almacena el usuario en la session
 
-                        if($user->getRole() == User::ADMIN_ROLE){
+                        if($user->getRole()->getId() == User::ADMIN_ROLE){
                             $movies = $this->movieDAO->getAll();
                             require_once(VIEWS_PATH . "admin.php"); // Redirecciona al sistema logueado como admin
                         } else {

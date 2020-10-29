@@ -7,6 +7,7 @@
         private $email;
         private $password;
         private $role;          // 1 = Client | 2 = Admin
+        private $profile;
 
         const CLIENT_ROLE = 1;
         const ADMIN_ROLE = 2;
@@ -95,6 +96,26 @@
         public function setId($id)
         {
                 $this->id = $id;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of profile
+         */ 
+        public function getProfile()
+        {
+                return $this->profile;
+        }
+
+        /**
+         * Set the value of profile
+         *
+         * @return  self
+         */ 
+        public function setProfile($profile)
+        {
+                $this->profile = $profile;
 
                 return $this;
         }

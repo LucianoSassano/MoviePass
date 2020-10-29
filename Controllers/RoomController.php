@@ -2,8 +2,8 @@
 
 namespace Controllers;
 
-use DAO\RoomJSON as RoomDAO;
-use DAO\TheaterJSON as TheaterDAO;
+use DAO\JSON\RoomJSON as RoomDAO;
+use DAO\JSON\TheaterJSON as TheaterDAO;
 use Models\Room;
 
 class RoomController

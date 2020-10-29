@@ -251,12 +251,12 @@
 
 .shows-active .container {
     color: #EEF0F5;
- 
+    
 }
 
-.shows-active img{
+.shows-active .container img{
     width: 25vw;
-    height: 55vh;
+    
 }
 /*--------------End of Shows Active View---------------- */
 

@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use DAO\TheaterJSON as TheaterDAO;
+use DAO\JSON\TheaterJSON as TheaterDAO;
 use Models\Theater;
 
 class TheaterController

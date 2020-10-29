@@ -8,10 +8,7 @@
             private $last_name;
             private $email;
             private $dni;
-            private $user;
-
-
-
+            
 
             /**
              * Get the value of id
