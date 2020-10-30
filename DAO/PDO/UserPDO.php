@@ -84,6 +84,31 @@
 
         }
 
+          /**
+         * Add new user
+         */
+        public function add(User $user) {
+            
+            $query = "
+            INSERT INTO user (role_id, email , password) VALUES (:role_id , :email, :password) ";
+
+            $parameters['role_id'] = $user->getRole();
+            $parameters['email'] = $user->getEmail();
+            $parameters['password'] = $user->getPassword();
+            
+
+            try {
+
+                $this->connection = Connection::GetInstance();
+                
+                return $this->connection->ExecuteNonQuery($query, $parameters);
+            }catch(Exception $ex) {
+                throw $ex;
+            }
+          
+            
+        }
+
         /**
          * Map model
          */

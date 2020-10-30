@@ -6,15 +6,15 @@
         {
 
             private $id;
-            private $role;
+            private $name;
 
             const CLIENT_ROLE = 1;
             const ADMIN_ROLE = 2;
 
-            public function __construct($id = "", $role = "")
+            public function __construct($id = "", $name = "")
             {
                 $this->id = $id;
-                $this->role = $role;
+                $this->name = $name;
             }
 
             /**
@@ -38,21 +38,21 @@
             }
 
             /**
-             * Get the value of role
+             * Get the value of name
              */ 
-            public function getRole()
+            public function getName()
             {
-                        return $this->role;
+                        return $this->name;
             }
 
             /**
-             * Set the value of role
+             * Set the value of name
              *
              * @return  self
              */ 
-            public function setRole($role)
+            public function setName($name)
             {
-                        $this->role = $role;
+                        $this->name = $name;
 
                         return $this;
             }

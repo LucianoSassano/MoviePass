@@ -3,9 +3,10 @@
     namespace Controllers;
 
     use Models\User;
-    use DAO\JSON\UserJSON as UserDAO;
+    use DAO\PDO\UserPDO as UserDAO;
+    use Models\Role;
 
-    class UserController {
+class UserController {
 
         private $userDAO;
 
@@ -22,7 +23,7 @@
             if($email && $password) {
                 if($this->validate($email)){
                     $user = new User($email, $password);
-                    $user->setRole(User::CLIENT_ROLE); // Seteo como cliente de manera predeterminada
+                    $user->setRole(2); // Seteo como cliente de manera predeterminada
 
                     $this->userDAO->add($user);
 
