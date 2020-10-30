@@ -27,18 +27,24 @@
 
         function login($email, $password)
         {
+        
             // Valido que venga data
             if($email && $password) {
-
+                
                 $user = $this->userDAO->getByEmail($email);
-
+               
                 if($user){  // Si el usuario existe
+                    
                     // Verificar password
                     if($user->getPassword() == $password) {
+                        $pass = "entro en pass";
+                     
 
                         $_SESSION['loggedUser'] = $user;    // almacena el usuario en la session
 
                         if($user->getRole()->getId() == User::ADMIN_ROLE){
+                            $prole = "role de admin entro";
+                            
                             $movies = $this->movieDAO->getAll();
                             require_once(VIEWS_PATH . "admin.php"); // Redirecciona al sistema logueado como admin
                         } else {

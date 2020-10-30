@@ -6,11 +6,11 @@
         private $id;    
         private $email;
         private $password;
-        private $role;          // 1 = Client | 2 = Admin
+        private $role;          // 1 = Admin | 2 = Client
         private $profile;
 
-        const CLIENT_ROLE = 1;
-        const ADMIN_ROLE = 2;
+        const ADMIN_ROLE = 1;
+        const CLIENT_ROLE = 2;
 
         function __construct($email="", $password="")
         {

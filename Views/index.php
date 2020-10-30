@@ -37,6 +37,8 @@
             <?php } else {
                 echo "No shows here ...";
             } ?>
+
+
             </form>
         </div>
     </div>

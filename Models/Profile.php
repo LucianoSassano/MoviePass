@@ -6,9 +6,15 @@
             private $id;
             private $first_name;
             private $last_name;
-            private $email;
             private $dni;
             
+
+            function __construct($first_name, $last_name="", $dni="")
+            {
+                $this->first_name = $first_name;
+                $this->last_name = $last_name;
+                $this->dni = $dni;
+            }
 
             /**
              * Get the value of id
@@ -58,25 +64,6 @@
                         return $this;
             }
 
-            /**
-             * Get the value of email
-             */ 
-            public function getEmail()
-            {
-                        return $this->email;
-            }
-
-            /**
-             * Set the value of email
-             *
-             * @return  self
-             */ 
-            public function setEmail($email)
-            {
-                        $this->email = $email;
-
-                        return $this;
-            }
 
             /**
              * Get the value of dni

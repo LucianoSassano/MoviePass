@@ -53,6 +53,37 @@
         }
 
         /**
+         * Get by email without profile
+         */
+        public function getByEmailNoProfile($email)
+        {
+            $query = "
+            SELECT * FROM user as u
+            INNER JOIN role as r
+            ON r.role_id = u.role_id
+            WHERE u.email = :email";
+
+            $parameters['email'] = $email;
+
+            try {
+                
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query, $parameters);
+                
+
+            }catch(Exception $ex) {
+                throw $ex;
+            }
+
+            if(!empty($resultSet)){
+                return $this->map($resultSet);
+            }else {
+                return false;
+            }
+
+        }
+
+        /**
          * Get by email
          */
         public function getByEmail($email)
@@ -71,6 +102,7 @@
                 
                 $this->connection = Connection::GetInstance();
                 $resultSet = $this->connection->Execute($query, $parameters);
+                
 
             }catch(Exception $ex) {
                 throw $ex;
@@ -92,7 +124,7 @@
             $query = "
             INSERT INTO user (role_id, email , password) VALUES (:role_id , :email, :password) ";
 
-            $parameters['role_id'] = $user->getRole();
+            $parameters['role_id'] = $user->getRole()->getId();
             $parameters['email'] = $user->getEmail();
             $parameters['password'] = $user->getPassword();
             
