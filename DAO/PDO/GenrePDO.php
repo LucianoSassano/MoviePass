@@ -17,9 +17,6 @@
         }
 
         public function get($id) {
-
-           //le paso el id de un genero y lo busca en la db
-           // si lo encuentra lo retorna mapeado en obj
            $this->RetrieveData();
            $founded = null;
 
@@ -35,12 +32,6 @@
          * Get by array of id's
          */
         public function getGenreList($genres = array()) {
-
-          //recibo un array de ids correspondientes a los generos
-          // loopeo sobre el array utilizando la funcion get para
-          // traerme todos los generos correspondientes a los id 
-          // devuelvo un listado de obj genero en un array list
-
           $genreList = array();
 
           if(!empty($genres)) {
@@ -52,8 +43,6 @@
         }
 
         public function getAll() {
-            // retorno todos los generos que tengo en mi db
-            // en forma de array list
             $this->RetrieveData();
             return $this->genresList;
         }
@@ -67,11 +56,7 @@
 
         private function SaveData()
         {
-          //guarda en la db todos los generos que me traigo de la api
-          // genero consta de un name y un id
 
-          $query = "
-            INSERT INTO genre (genre_id, name) VALUES (:genre_id , :name) ";
 
           foreach($this->genresList as $genre)
           {   
@@ -101,8 +86,6 @@
 
         private function RetrieveData()
         {
-           //le pega a la db y me trae los generos
-           //los mapeo
 
            $query = "
            SELECT * FROM genre ";
@@ -120,7 +103,8 @@
             }
 
             if(!empty($resultSet)){
-            return $genreList = $this->map($resultSet);
+             $this->genreList = $this->map($resultSet);
+             return $this->genresList;
             // deberia hacer un foreach y mapear uno a uno ?
           }else {
             return false;
@@ -137,7 +121,7 @@
 
             $values = array_map(function($row){
                 $genre = new Genre($row['name']);
-                $genre->setId($row['user_id']);
+                $genre->setId($row['genre_id']);
                 
 
                 return $genre;

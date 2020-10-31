@@ -4,7 +4,7 @@
     use Models\Movie as Movie;
     use Models\Genre as Genre;
 
-    use DAO\JSON\MovieJSON as MovieDAO;
+    use DAO\PDO\MoviePDO as MovieDAO;
     use DAO\PDO\GenrePDO as GenreDAO;
 
     define("API_KEY","5c5b380ac89e5a3c6c206ccd2adda7f3");
@@ -52,6 +52,8 @@
             $resultJSON = json_decode($results, true);
             $movieList = array();
 
+          
+
             foreach($resultJSON['results'] as $movie) {
                 $newMovie = new Movie();
                 $newMovie->setId($movie['id']);
@@ -61,6 +63,13 @@
                 $newMovie->setLanguage($movie['original_language']);
                 $newMovie->setAdult($movie['adult']);
                 $newMovie->setVote_average($movie['vote_count']);
+
+                $urlDetails = "https://api.themoviedb.org/3/movie/". $movie['id'] ."?api_key=" . API_KEY;
+                $resultsDetails = file_get_contents($urlDetails);
+                $resultJSONDetails = json_decode($resultsDetails, true);
+                $movieDetails = array();
+                
+                $newMovie->setDuration($resultJSONDetails['runtime']);
 
                 // Convierte el array de ids de generos en array de obj genero
                 $genres = $this->movieDAO->getGenreList($movie["genre_ids"]);

@@ -45,8 +45,9 @@ CREATE TABLE IF NOT EXISTS `genre`(
 );
 
 CREATE TABLE IF NOT EXISTS `movie`(
-    movie_id SMALLINT(5) UNSIGNED AUTO_INCREMENT,
-    duration FLOAT UNSIGNED,
+    id SMALLINT(5) UNSIGNED AUTO_INCREMENT,
+    movie_id INTEGER(50) UNSIGNED,
+    duration INTEGER UNSIGNED,
     title VARCHAR (250),
     language VARCHAR(30),
     poster_path VARCHAR(60),
@@ -54,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `movie`(
     overview VARCHAR(300),
     vote_average INTEGER,
 
-    CONSTRAINT pk_movie_id PRIMARY KEY (movie_id)
+    CONSTRAINT pk_movie_id PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS `genre_x_movie`(
@@ -64,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `genre_x_movie`(
 
     CONSTRAINT pk_genre_x_movie PRIMARY KEY (genre_movie_id),
     CONSTRAINT fk_genre_id FOREIGN KEY (genre_id) REFERENCES `genre`(id),
-    CONSTRAINT fk_movie_id FOREIGN KEY (movie_id) REFERENCES `movie`(movie_id)
+    CONSTRAINT fk_movie_id FOREIGN KEY (movie_id) REFERENCES `movie`(id)
 );
 
 

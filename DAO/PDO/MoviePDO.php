@@ -15,7 +15,7 @@
         private $genreDAO;
 
         public function __construct() {
-            $this->fileName = ROOT . "Data/movies.json";
+            $this->genreDAO = new GenreDAO();
         }
 
         public function get($id) {
@@ -46,56 +46,38 @@
 
         private function SaveData()
         {
-            $arrayToEncode = array();
 
-            foreach($this->moviesList as $movie)
-            {   
-                $valuesArray["id"] = $movie->getId();         
-                $valuesArray["title"] = $movie->getTitle();
-                $valuesArray["overview"] = $movie->getOverview();
-                $valuesArray["poster_path"] = $movie->getPoster_path();
-                $valuesArray["language"] = $movie->getLanguage();
-                $valuesArray["adult"] = $movie->getAdult();
-                $valuesArray["vote_average"] = $movie->getVote_average();
-                $valuesArray["genres"] = $this->getGenreIdList($movie->getGenres());
-
-                array_push($arrayToEncode,$valuesArray);
-            }
-
-            $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-        
-            file_put_contents('Data/movies.json', $jsonContent);
+             foreach($this->moviesList as $movie)
+             {   
+              $this->add($movie);
+             }
+            
         }
 
         private function RetrieveData()
         {
-            $this->userList = array();
-
-            if(file_exists('Data/movies.json'))
-            {
-                $jsonContent = file_get_contents('Data/movies.json');
-
-                $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-                foreach($arrayToDecode as $valuesArray)
-                {
-                    $movie = new Movie();
-
-                    $movie->setId($valuesArray["id"]);
-                    $movie->setTitle($valuesArray["title"]);
-                    $movie->setOverview($valuesArray["overview"]);
-                    $movie->setPoster_path($valuesArray["poster_path"]);
-                    $movie->setLanguage($valuesArray["language"]);
-                    $movie->setAdult($valuesArray["adult"]);
-                    $movie->setVote_average($valuesArray["vote_average"]);
-
-                    $genres = $this->getGenreList($valuesArray["genres"]);
-
-                    $movie->setGenres($genres);
-                    
-                    array_push($this->moviesList, $movie);
-                }
-            }
+            $query = "
+            SELECT * FROM movie ";
+ 
+            $parameters = array();
+ 
+            try {
+                 
+             $this->connection = Connection::GetInstance();
+             $resultSet = $this->connection->Execute($query, $parameters);
+             
+ 
+             }catch(Exception $ex) {
+             throw $ex;
+             }
+ 
+             if(!empty($resultSet)){
+             $this->moviesList = $this->map($resultSet);
+             return $this->moviesList;
+             // deberia hacer un foreach y mapear uno a uno ?
+           }else {
+             return false;
+          }
         }
 
 
@@ -123,6 +105,48 @@
             }
 
             return $genresIdsList;
+        }
+
+        public function add(Movie $movie){
+
+            $query = "
+            INSERT INTO movie (movie_id, duration, title, language, poster_path, adult, overview, vote_average) VALUES (:movie_id, :duration, :title, :language, :poster_path, :adult, :overview, :vote_average) ";
+
+            $parameters['movie_id'] = $movie->getId();
+            $parameters['duration'] = $movie->getDuration();
+            $parameters['title'] = $movie->getTitle();
+            $parameters['language'] = $movie->getLanguage();
+            $parameters['poster_path'] = $movie->getPoster_path();
+            $parameters['adult'] = $movie->getAdult();
+            $parameters['overview'] = $movie->getOverview();
+            $parameters['vote_average'] = $movie->getVote_average();
+
+            try {
+
+                $this->connection = Connection::GetInstance();
+                
+                return $this->connection->ExecuteNonQuery($query, $parameters);
+            }catch(Exception $ex) {
+                throw $ex;
+            }
+
+        }
+
+        
+         /**
+         * Map model
+         */
+        public function map($data){
+            
+            $data = is_array($data) ? $data : [];
+
+            $values = array_map(function($row){
+                $movie = new Movie($row['id'], $row['title'], $row['overview'], $row['poster_path'], $row['language'], $row['adult'], $row['vote_average'], $row['genres']);
+
+                return $movie;
+            }, $data);
+
+            return count($values) > 1 ? $values : $values['0'];
         }
     }
     

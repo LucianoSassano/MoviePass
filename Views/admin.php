@@ -23,13 +23,15 @@
                             <hr>
                             <p> <?php echo $movie->getAdult() ? "Adult only" : "Family friendly" ?> </p>
                             <hr>
+                            
                             <p>
                                 <p>Genres:</p>
-                                <?php
-                                foreach ($movie->getGenres() as $genre) {
-                                    echo $genre->getName() . " , ";
-                                } ?>
+                               <?php
+                               // foreach ($movie->getGenres() as $genre) {
+                                 //   echo $genre->getName() . " , ";
+                               // } ?>
                             </p>
+                           
                             <hr>
                             <form action="<?php echo FRONT_ROOT . "show/createView" ?>" method="POST">
                                 <input type="number" name="id" value="<?php echo $movie->getId(); ?>" hidden>
