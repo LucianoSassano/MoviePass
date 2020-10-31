@@ -37,10 +37,11 @@ CREATE TABLE IF NOT EXISTS `profile`(
 
 
 CREATE TABLE IF NOT EXISTS `genre`(
-    genre_id SMALLINT(5) UNSIGNED AUTO_INCREMENT,
+    id SMALLINT(5) UNSIGNED AUTO_INCREMENT,
+    genre_id SMALLINT(5) UNSIGNED,
     name VARCHAR(20),
 
-    CONSTRAINT pk_genre_id PRIMARY KEY (genre_id)
+    CONSTRAINT pk_genre_id PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS `movie`(
@@ -62,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `genre_x_movie`(
     movie_id SMALLINT(5) UNSIGNED,
 
     CONSTRAINT pk_genre_x_movie PRIMARY KEY (genre_movie_id),
-    CONSTRAINT fk_genre_id FOREIGN KEY (genre_id) REFERENCES `genre`(genre_id),
+    CONSTRAINT fk_genre_id FOREIGN KEY (genre_id) REFERENCES `genre`(id),
     CONSTRAINT fk_movie_id FOREIGN KEY (movie_id) REFERENCES `movie`(movie_id)
 );
 
