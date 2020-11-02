@@ -13,7 +13,17 @@
         private $genres = [];
         private $duration;
 
-       
+        function __construct($movie_id = '', $title = '', $overview = '', $poster_path = '', $language = '', $adult = '', $vote_average = '', $duration = '') {
+                $this->movie_id = $movie_id;
+                $this->title = $title;
+                $this->overview = $overview;
+                $this->poster_path = $poster_path;
+                $this->language = $language;
+                $this->adult = $adult;
+                $this->vote_average = $vote_average;
+                $this->genres = array();
+                $this->duration = $duration;
+        }
 
         /**
          * Get the value of movie_id

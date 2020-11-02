@@ -26,7 +26,6 @@
                     <div class="lead">
                         <img src="<?php echo "https://image.tmdb.org/t/p/w500/" . $show->getMovie()->getPoster_path(); ?>" class="card-img-top" alt="...">
                         <p>Date: <strong class="text-bold"> <?php echo $show->getDate(); ?> </strong></p>
-                        <p>Time: <strong><?php echo $show->getTime(); ?> </strong></p>
                         <p>Price: <strong><?php echo $show->getPrice(); ?> </strong></p>
                         <button class="btn btn-danger">Reserve</button>
 

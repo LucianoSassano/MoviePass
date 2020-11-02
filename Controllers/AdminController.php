@@ -2,8 +2,10 @@
 
 namespace Controllers;
 
-use DAO\JSON\MovieJSON as MovieDAO;
+use DAO\PDO\MoviePDO as MovieDAO;
 use DAO\JSON\TheaterJSON as TheaterDao;
+
+
 use Models\Theater;
 
 class AdminController
@@ -16,11 +18,13 @@ class AdminController
     {
         $this->movieDAO = new MovieDAO();
         $this->theaterDAO = new TheaterDAO();
+    
     }
 
     function dashboard()
     {
         $movies = $this->movieDAO->getAll();
+        
         require_once(VIEWS_PATH . "admin.php");
     }
 

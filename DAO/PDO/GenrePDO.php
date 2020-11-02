@@ -12,20 +12,29 @@
         private $genresList = array();
         private $connection;
 
-        public function __construct() {
-            
-        }
-
         public function get($id) {
-           $this->RetrieveData();
-           $founded = null;
+            
+            $query= "
+            SELECT * FROM genres 
+            WHERE genre_id = :id ";
 
-           foreach($this->genresList as $genre) {
-               if($genre->getId() == $id) {
-                   $founded = $genre;
-               }
+           $parameters['id'] = $id;
+
+           try {
+
+               $this->connection = Connection::GetInstance();
+               $resultSet = $this->connection->Execute($query, $parameters);
+               //print_r($resultSet);
+           }catch(Exception $ex) {
+               throw $ex;
            }
-           return $founded;
+
+           if(!empty($resultSet)){
+               return $this->map($resultSet);
+               //print_r($this->map($resultSet));
+           }else {
+               return false;
+           }
         }
 
         /**
@@ -43,32 +52,44 @@
         }
 
         public function getAll() {
-            $this->RetrieveData();
-            return $this->genresList;
+
+            $query = "
+            SELECT * FROM genres;";
+
+            $parameters = array();
+
+            try {
+
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query, $parameters);
+
+            }catch(Exception $ex) {
+                throw $ex;
+            }
+
+            if(!empty($resultSet)){                
+                return $this->map($resultSet);
+                // print_r($this->map($resultSet));
+            }else {
+                return false;
+            }
         }
 
         public function updateAll($genresArray) {
-            $this->genresList = $genresArray;
-            $this->SaveData();
 
-            return $this->genresList;
+            foreach($genresArray as $genre) {
+                $this->add($genre);
+            }
+            return $this->getAll();
         }
 
-        private function SaveData()
-        {
-
-
-          foreach($this->genresList as $genre)
-          {   
-              $this->add($genre);
-          }
-      
-        }
 
         public function add(Genre $genre){
 
             $query = "
-            INSERT INTO genre (genre_id, name) VALUES (:genre_id, :name) ";
+            INSERT INTO genres (genre_id, name)
+                SELECT :genre_id, :name
+            WHERE NOT EXISTS (SELECT genre_id FROM genres WHERE genre_id = :genre_id);";
 
             $parameters['genre_id'] = $genre->getId();
             $parameters['name'] = $genre->getName();
@@ -81,38 +102,39 @@
             }catch(Exception $ex) {
                 throw $ex;
             }
-
         }
 
-        private function RetrieveData()
-        {
+        public function getByMovieId($movie_id){
 
-           $query = "
-           SELECT * FROM genre ";
+            $query = "
+            SELECT * FROM genres as g
+            INNER JOIN genre_x_movies as g_x_m
+            ON g.genre_id = g_x_m.genre_id
+            WHERE g_x_m.movie_id = :movie_id;
+            ";
 
-           $parameters = array();
+            $parameters['movie_id'] = $movie_id;
 
-           try {
+            try {
+
+                $this->connection = Connection::GetInstance();
                 
-            $this->connection = Connection::GetInstance();
-            $resultSet = $this->connection->Execute($query, $parameters);
-            
-
+                $resultSet =  $this->connection->Execute($query, $parameters);
             }catch(Exception $ex) {
-            throw $ex;
+                throw $ex;
             }
 
-            if(!empty($resultSet)){
-             $this->genreList = $this->map($resultSet);
-             return $this->genresList;
-            // deberia hacer un foreach y mapear uno a uno ?
-          }else {
-            return false;
-         }
+            if(!empty($resultSet)){                
+                return $this->map($resultSet);
+            }else {
+                return false;
+            }
+
+            
 
         }
 
-              /**
+        /**
          * Map model
          */
         public function map($data){
@@ -120,11 +142,9 @@
             $data = is_array($data) ? $data : [];
 
             $values = array_map(function($row){
-                $genre = new Genre($row['name']);
-                $genre->setId($row['genre_id']);
-                
 
-                return $genre;
+                return new Genre($row['genre_id'], $row['name']);
+                
             }, $data);
 
             return count($values) > 1 ? $values : $values['0'];

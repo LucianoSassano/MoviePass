@@ -9,6 +9,7 @@
             <hr>
             <form action="<?php echo FRONT_ROOT . "show/create" ?>" method="POST">
                 <input type="number" name="movieId" value="<?php echo $movie_id; ?>" hidden>
+                <input type="number" name="theater_id" value=<?php echo $theater->getId() ?> hidden>
             <?php 
             if(!empty($theater->getRooms())){
                 foreach($theater->getRooms() as $room){ ?>

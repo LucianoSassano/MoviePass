@@ -7,14 +7,14 @@
             private $id;
             private $movie;
             private $date;
-            private $time;
             private $price;
+            private $endTime;
 
-            function __construct($date="", $time="", $price="")
+            function __construct($date="", $price="")
         {
             $this->date = $date;
-            $this->time = $time;
             $this->price = $price;
+            $this->endTime = "";
             $this->movie = "";
         }
 
@@ -100,22 +100,23 @@
                         return $this;
             }
 
+
             /**
-             * Get the value of time
+             * Get the value of endTime
              */ 
-            public function getTime()
+            public function getEndTime()
             {
-                        return $this->time;
+                        return $this->endTime;
             }
 
             /**
-             * Set the value of time
+             * Set the value of endTime
              *
              * @return  self
              */ 
-            public function setTime($time)
+            public function setEndTime($endTime)
             {
-                        $this->time = $time;
+                        $this->endTime = $endTime;
 
                         return $this;
             }

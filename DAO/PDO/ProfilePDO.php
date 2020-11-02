@@ -16,7 +16,7 @@ class ProfilePDO{
         public function add(Profile $profile, $user_id) {
             
             $query = "
-            INSERT INTO profile (first_name, last_name , dni, user_id) VALUES (:first_name , :last_name, :dni, :user_id) ";
+            INSERT INTO profiles (first_name, last_name , dni, user_id) VALUES (:first_name , :last_name, :dni, :user_id) ";
 
             $parameters['first_name'] = $profile->getFirst_name();
             $parameters['last_name'] = $profile->getLast_name();

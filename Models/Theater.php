@@ -10,8 +10,9 @@
         private $rooms;
 
 
-        function __construct($name="", $address="")
+        function __construct($id="",$name="", $address="")
         {
+            $this->id = $id;
             $this->name = $name;
             $this->address = $address;
             $this->rooms = array();

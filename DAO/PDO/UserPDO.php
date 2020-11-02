@@ -25,10 +25,10 @@
         public function get($id) {
 
             $query = "
-            SELECT * FROM user as u
-            INNER JOIN role as r
+            SELECT * FROM users as u
+            INNER JOIN roles as r
             ON r.role_id = u.role_id
-            INNER JOIN profile as p
+            INNER JOIN profiles as p
             ON p.user_id = u.user_id
             WHERE u.user_id = :id ;";
 
@@ -58,8 +58,8 @@
         public function getByEmailNoProfile($email)
         {
             $query = "
-            SELECT * FROM user as u
-            INNER JOIN role as r
+            SELECT * FROM users as u
+            INNER JOIN roles as r
             ON r.role_id = u.role_id
             WHERE u.email = :email";
 
@@ -89,10 +89,10 @@
         public function getByEmail($email)
         {
             $query = "
-            SELECT * FROM user as u
-            INNER JOIN role as r
+            SELECT * FROM users as u
+            INNER JOIN roles as r
             ON r.role_id = u.role_id
-            INNER JOIN profile as p
+            INNER JOIN profiles as p
             ON p.user_id = u.user_id
             WHERE u.email = :email";
 
@@ -122,7 +122,7 @@
         public function add(User $user) {
             
             $query = "
-            INSERT INTO user (role_id, email , password) VALUES (:role_id , :email, :password) ";
+            INSERT INTO users (role_id, email , password) VALUES (:role_id , :email, :password) ";
 
             $parameters['role_id'] = $user->getRole()->getId();
             $parameters['email'] = $user->getEmail();

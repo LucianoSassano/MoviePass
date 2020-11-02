@@ -205,7 +205,7 @@
                     $show->setMovie($movie); // TIENE Q DEVOLVER OBJ
 
                     $show->setDate($valuesArray["date"]);
-                    $show->setTime($valuesArray["time"]);
+                   
                     $show->setPrice($valuesArray["price"]);
                     
                     array_push($this->showList, $show);

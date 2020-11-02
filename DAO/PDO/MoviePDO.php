@@ -3,6 +3,7 @@
     namespace DAO\PDO;
 
     use DAO\PDO\GenrePDO as GenreDAO;
+    use DAO\PDO\MovieGenrePDO as MovieGenreDAO;
     use Models\Movie;
     use \PDO;
     use \Exception;
@@ -12,72 +13,105 @@
 
         private $moviesList = array();
         private $connection;
-        private $genreDAO;
+        private $movieGenreDAO;
 
         public function __construct() {
+            $this->movieGenreDAO = new MovieGenreDAO();
             $this->genreDAO = new GenreDAO();
         }
 
         public function get($id) {
 
-            $this->RetrieveData();
-            $founded = null;
+            $query= "
+            SELECT * FROM movies as m 
+             WHERE m.movie_id = :id ";
 
-            foreach($this->moviesList as $movie) {
-                if($movie->getId() == $id) {
-                    $founded = $movie;
-                }
+            $parameters['id'] = $id;
+
+            try {
+
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query, $parameters);
+                //print_r($resultSet);
+            }catch(Exception $ex) {
+                throw $ex;
             }
-            return $founded;
+
+            if(!empty($resultSet)){
+                return $this->map($resultSet);
+                //print_r($this->map($resultSet));
+            }else {
+                return false;
+            }
         }
 
         public function getAll() {
-            $this->RetrieveData();
-            return $this->moviesList;
+
+            $query = "
+            SELECT * FROM movies;";
+
+            $parameters = array();
+
+            try {
+
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query, $parameters);
+
+            }catch(Exception $ex) {
+                throw $ex;
+            }
+
+            if(!empty($resultSet)){                
+                return $this->map($resultSet);
+           
+            }else {
+                return false;
+            }
+                    
         }
 
         public function updateAll($moviesArray) {
-            $this->moviesList = $moviesArray;
-            $this->SaveData();
-            
 
-            return $this->moviesList;
+            foreach($moviesArray as $movie) {
+                $this->add($movie);
+            }
+            return $this->getAll();
         }
 
-        private function SaveData()
-        {
+        public function add(Movie $movie) {
 
-             foreach($this->moviesList as $movie)
-             {   
-              $this->add($movie);
-             }
+            // Inserta si o solo si la pelicula no existe ya en la base de datos, agrega solo las nuevas de la api
+            $query= "
+            INSERT INTO movies (movie_id, duration, title, language, poster_path, adult, overview, vote_average)
+                SELECT :movie_id, :duration, :title, :language, :poster_path, :adult, :overview, :vote_average
+            WHERE NOT EXISTS (SELECT movie_id FROM movies WHERE movie_id = :movie_id);";
+
+            $parameters['movie_id'] = $movie->getId();
+            $parameters['duration'] = $movie->getDuration();
+            $parameters['title'] = $movie->getTitle();
+            $parameters['language'] = $movie->getLanguage();
+            $parameters['poster_path'] = $movie->getPoster_path();
+            $parameters['adult'] = $movie->getAdult();
+            $parameters['overview'] = $movie->getOverview();
+            $parameters['vote_average'] = $movie->getVote_average();
+
             
-        }
 
-        private function RetrieveData()
-        {
-            $query = "
-            SELECT * FROM movie ";
- 
-            $parameters = array();
- 
             try {
-                 
-             $this->connection = Connection::GetInstance();
-             $resultSet = $this->connection->Execute($query, $parameters);
-             
- 
-             }catch(Exception $ex) {
-             throw $ex;
-             }
- 
-             if(!empty($resultSet)){
-             $this->moviesList = $this->map($resultSet);
-             return $this->moviesList;
-             // deberia hacer un foreach y mapear uno a uno ?
-           }else {
-             return false;
-          }
+                $this->connection = Connection::GetInstance();
+                $rows = $this->connection->ExecuteNonQuery($query, $parameters);
+
+                if(!empty($movie->getGenres())){
+                    foreach ($movie->getGenres() as $genre) {
+                        if($genre){
+                            $this->movieGenreDAO->add($movie->getId(), $genre->getId());
+                        }
+                    }
+                }
+                return $rows;
+            }catch (Exception $ex) {
+                throw $ex;
+            }
         }
 
 
@@ -103,33 +137,7 @@
             foreach($genres as $genre) {
                 array_push($genresIdsList, $genre->getId());
             }
-
             return $genresIdsList;
-        }
-
-        public function add(Movie $movie){
-
-            $query = "
-            INSERT INTO movie (movie_id, duration, title, language, poster_path, adult, overview, vote_average) VALUES (:movie_id, :duration, :title, :language, :poster_path, :adult, :overview, :vote_average) ";
-
-            $parameters['movie_id'] = $movie->getId();
-            $parameters['duration'] = $movie->getDuration();
-            $parameters['title'] = $movie->getTitle();
-            $parameters['language'] = $movie->getLanguage();
-            $parameters['poster_path'] = $movie->getPoster_path();
-            $parameters['adult'] = $movie->getAdult();
-            $parameters['overview'] = $movie->getOverview();
-            $parameters['vote_average'] = $movie->getVote_average();
-
-            try {
-
-                $this->connection = Connection::GetInstance();
-                
-                return $this->connection->ExecuteNonQuery($query, $parameters);
-            }catch(Exception $ex) {
-                throw $ex;
-            }
-
         }
 
         
@@ -141,8 +149,8 @@
             $data = is_array($data) ? $data : [];
 
             $values = array_map(function($row){
-                $movie = new Movie($row['id'], $row['title'], $row['overview'], $row['poster_path'], $row['language'], $row['adult'], $row['vote_average'], $row['genres']);
-
+                $movie = new Movie($row['movie_id'], $row['title'], $row['overview'], $row['poster_path'], $row['language'], $row['adult'], $row['vote_average'], $row['duration']) ;
+                $movie->setGenres($this->genreDAO->getByMovieId($row['movie_id']));
                 return $movie;
             }, $data);
 

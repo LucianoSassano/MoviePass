@@ -2,12 +2,12 @@
 
 namespace Controllers;
 
-use DAO\JSON\ShowJSON as ShowDAO;
-use DAO\JSON\MovieJSON as MovieDAO;
-use DAO\JSON\TheaterJSON as TheaterDAO;
-use DAO\JSON\RoomJSON as RoomDAO;
-use DAO\JSON\GenreJSON as GenreDAO;
-
+use DAO\PDO\ShowPDO as ShowDAO;
+use DAO\PDO\MoviePDO as MovieDAO;
+use DAO\PDO\TheaterPDO as TheaterDAO;
+use DAO\PDO\RoomPDO as RoomDAO;
+use DAO\PDO\GenrePDO as GenreDAO;
+use DateTime;
 use Models\Show;
 
 class ShowController
@@ -42,23 +42,41 @@ class ShowController
         require_once(VIEWS_PATH . "chooseRoom.php");
     }
 
-    function create($movie_id , $room_id){
+    function create($movie_id , $room_id, $theater_id){
 
         $movie = $this->movieDAO->get($movie_id);
         $room = $this->roomDAO->get($room_id);
+        $theater = $this->theaterDAO->get($theater_id);
 
-        // En la siguiente vista podria mostrar la data de la movie ya q voy a tener el objeto guiño guiño
+        // En la siguiente vista podria mostrar la data de la movie ya q voy a tener el objeto 
         require_once(VIEWS_PATH . "show-creation.php");
     }
 
     function add($date, $time, $price, $room_id, $movie_id) {
 
         if($date && $time && $price) {
-            $show = new Show($date, $time, $price);
+            date_default_timezone_set('America/Argentina/Buenos_Aires');
+            $dateTime = new DateTime("{$date} {$time}");  //fecha y hora de inicio del show
+            $dateTime = date_format($dateTime, 'Y-m-d H:i:s');
+
             $movie = $this->movieDAO->get($movie_id);
+            $movieDurationInMinutes = $movie->getDuration(); // duracion en minutos de la pelicula
+
+            $endTime = new DateTime("{$date}{$time}");
+            
+            $endTime->modify("+{$movieDurationInMinutes} minutes"); // a la hora de inicio le sumamos la duracion de la pelicula
+            
+            $endTime->modify('+15 minutes'); // fecha y hora de finalizacion de la pelicula ya contemplados los 15 minutos entre pelicula y pelicula;
+  
+            
+            $endTime = date_format($endTime, 'Y-m-d H:i:s' );
+          
+            
+            $show = new Show($dateTime, $price);
             $show->setMovie($movie);
-            // var_dump($show->getMovie());     la pelicula esta creada bien
-            $this->showDAO->add($show);
+            $show->setEndTime($endTime);
+       
+            $this->showDAO->add($show, $room_id);
 
             $this->getActive();
         }else { echo "ERROR";}
