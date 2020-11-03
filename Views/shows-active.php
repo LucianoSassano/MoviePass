@@ -20,24 +20,41 @@
                 </form>
             </div>
 
-            <?php
-            if (!empty($shows)) {
-                foreach ($shows as $show) { ?>
-                    <div class="lead">
-                        <img src="<?php echo "https://image.tmdb.org/t/p/w500/" . $show->getMovie()->getPoster_path(); ?>" class="card-img-top" alt="...">
-                        <p>Datetime of show start: <strong class="text-bold"> <?php echo $show->getDate(); ?> </strong></p>
-                        <p>Datetime of show end: <strong class="text-bold"> <?php echo $show->getEndTime(); ?> </strong></p>
-                        <p>Movie Duration: <strong class="text-bold"> <?php echo $show->getMovie()->getDuration(); ?> minutes </strong></p>
+            <div class="card-columns">
 
-                        <p>Price: <strong> $ <?php echo $show->getPrice(); ?> </strong></p>
+                <?php
+                if (!empty($shows)) {
+                    foreach ($shows as $show) { ?>
+                        <div class="card" style="width: 18rem;">
+                            <img src="<?php echo "https://image.tmdb.org/t/p/w500/" . $show->getMovie()->getPoster_path(); ?>" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p>Datetime of show start: <strong class="text-bold"> <?php echo $show->getDate(); ?> </strong></p>
+                                <p>Datetime of show end: <strong class="text-bold"> <?php echo $show->getEndTime(); ?> </strong></p>
+                                <p>Movie Duration: <strong class="text-bold"> <?php echo $show->getMovie()->getDuration(); ?> minutes </strong></p>
+                                <p>Price: <strong> $ <?php echo $show->getPrice(); ?> </strong></p>
+                                <hr>
+                                <p>
+                                    <p>Genres:</p>
+                                    <?php
+                                    if (!empty($show->getMovie()->getGenres())) {
+                                        if (is_array($show->getMovie()->getGenres())) {
+                                            foreach ($show->getMovie()->getGenres() as $genre) {
+                                                echo $genre->getName() . " , ";
+                                            }
+                                        } else {
+                                            echo $genre->getName();
+                                        }
+                                    }
+                                    ?>
+                                </p>
+                            </div>
 
-
-                        <hr>
-                    </div>
-                <?php } ?>
-            <?php } else {
-                echo "No shows here ...";
-            } ?>
+                        </div>
+                    <?php } ?>
+                <?php } else {
+                    echo "No shows here ...";
+                } ?>
+            </div>
             </form>
         </div>
     </div>

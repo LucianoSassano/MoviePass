@@ -135,6 +135,8 @@
 
 
         public function checkShow($show){
+
+            //validar si la movie existe en otro cine y si existe en el cine que se ecuentre en otra sala 
             $query = " 
             SELECT * FROM `shows` WHERE NOT movie_id = '".$show->getMovie()->getId()."' AND
              ('".$show->getDate()."' NOT BETWEEN date AND endTime)
@@ -144,7 +146,7 @@
 
                 $this->connection = Connection::GetInstance();
                 $resultSet = $this->connection->Execute($query);
-                var_dump($resultSet);
+                //var_dump($resultSet);
 
             }catch(Exception $ex) {
                 throw $ex;

@@ -5,7 +5,7 @@
     <div class="shows-active">
         <div class="container mt-3">
 
-            <h2>Shows list</h2>
+            <h2>Now Playing</h2>
             <hr>
             <div class="form-group">
                 <form action="<?php echo FRONT_ROOT . "show/filterClientSide" ?>" method="POST">
@@ -20,23 +20,25 @@
                 </form>
             </div>
 
-            <?php
-            if (!empty($shows)) {
-                foreach ($shows as $show) { ?>
-                    <div class="lead">
-                        <img src="<?php echo "https://image.tmdb.org/t/p/w500/" . $show->getMovie()->getPoster_path(); ?>" class="card-img-top" alt="...">
-                        <p>Date: <strong class="text-bold"> <?php echo $show->getDate(); ?> </strong></p>
-                        <p>Price: <strong><?php echo $show->getPrice(); ?> </strong></p>
-                        <button class="btn btn-danger">Reserve</button>
+            <div class="card-columns">
+                <?php
+                if (!empty($shows)) {
+                    foreach ($shows as $show) { ?>
+                        <div class="card" style="width: 18rem;">
+                            <img src="<?php echo "https://image.tmdb.org/t/p/w500/" . $show->getMovie()->getPoster_path(); ?>" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p>Show date: <strong class="text-bold"> <?php echo $show->getDate(); ?> </strong></p>
+                                <p>Show duration: <strong class="text-bold"> <?php echo $show->getMovie()->getDuration(); ?> minutes </strong></p>
+                                <p>Price: <strong> $ <?php echo $show->getPrice(); ?> </strong></p>
+                                <button class="btn btn-danger">Reserve</button>
+                            </div>
+                        </div>
+                    <?php } ?>
+                <?php } else {
+                    echo "No shows here ...";
+                } ?>
 
-
-                        <hr>
-                    </div>
-                <?php } ?>
-            <?php } else {
-                echo "No shows here ...";
-            } ?>
-
+            </div>
 
             </form>
         </div>

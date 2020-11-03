@@ -4,8 +4,8 @@ namespace Controllers;
 
 
 
-    use DAO\JSON\GenreJSON as GenreDAO;
-    use DAO\JSON\ShowJSON as ShowDAO;
+    use DAO\PDO\GenrePDO as GenreDAO;
+    use DAO\PDO\ShowPDO as ShowDAO;
 
     
     
