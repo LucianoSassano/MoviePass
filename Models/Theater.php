@@ -4,15 +4,15 @@
 
     class Theater{
 
-        private $id;
+        private $theater_id;
         private $name;
         private $address;
         private $rooms;
 
 
-        function __construct($id="",$name="", $address="")
+        function __construct($theater_id="",$name="", $address="")
         {
-            $this->id = $id;
+            $this->theater_id = $theater_id;
             $this->name = $name;
             $this->address = $address;
             $this->rooms = array();
@@ -24,9 +24,9 @@
          *
          * @return  self
          */ 
-        public function setId($id)
+        public function setId($theater_id)
         {
-                $this->id = $id;
+                $this->theater_id = $theater_id;
 
                 return $this;
         }
@@ -36,7 +36,7 @@
          */ 
         public function getId()
         {
-                return $this->id;
+                return $this->theater_id;
         }
 
         /**

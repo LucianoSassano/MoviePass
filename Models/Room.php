@@ -4,10 +4,11 @@
 
     class Room{
 
-        private $id;
+        private $room_id;
         private $name;
         private $capacity;
         private $shows;
+        private $theater;
 
 
         function __construct($name="", $capacity="")
@@ -15,14 +16,49 @@
             $this->name = $name;
             $this->capacity = $capacity;
             $this->shows = array();
+            $this->theater = "";
+        }
+
+    
+
+        /**
+         * Get the value of room_id
+         */ 
+        public function getRoom_id()
+        {
+                return $this->room_id;
         }
 
         /**
-         * Get the value of id
+         * Set the value of room_id
+         *
+         * @return  self
          */ 
-        public function getId()
+        public function setRoom_id($room_id)
         {
-                return $this->id;
+                $this->room_id = $room_id;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of name
+         */ 
+        public function getName()
+        {
+                return $this->name;
+        }
+
+        /**
+         * Set the value of name
+         *
+         * @return  self
+         */ 
+        public function setName($name)
+        {
+                $this->name = $name;
+
+                return $this;
         }
 
         /**
@@ -46,7 +82,7 @@
         }
 
         /**
-         * Get the value of theather
+         * Get the value of shows
          */ 
         public function getShows()
         {
@@ -54,7 +90,7 @@
         }
 
         /**
-         * Set the value of theather
+         * Set the value of shows
          *
          * @return  self
          */ 
@@ -66,33 +102,21 @@
         }
 
         /**
-         * Set the value of id
-         *
-         * @return  self
+         * Get the value of theater
          */ 
-        public function setId($id)
+        public function getTheater()
         {
-                $this->id = $id;
-
-                return $this;
+                return $this->theater;
         }
 
         /**
-         * Get the value of name
-         */ 
-        public function getName()
-        {
-                return $this->name;
-        }
-
-        /**
-         * Set the value of name
+         * Set the value of theater
          *
          * @return  self
          */ 
-        public function setName($name)
+        public function setTheater($theater)
         {
-                $this->name = $name;
+                $this->theater = $theater;
 
                 return $this;
         }

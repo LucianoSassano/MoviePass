@@ -52,7 +52,7 @@ class ShowController
         require_once(VIEWS_PATH . "show-creation.php");
     }
 
-    function add($date, $time, $price, $room_id, $movie_id) {
+    function add($date, $time, $price,$theater_id, $room_id, $movie_id) {
 
         if($date && $time && $price) {
             date_default_timezone_set('America/Argentina/Buenos_Aires');
@@ -62,21 +62,27 @@ class ShowController
             $movie = $this->movieDAO->get($movie_id);
             $movieDurationInMinutes = $movie->getDuration(); // duracion en minutos de la pelicula
 
-            $endTime = new DateTime("{$date}{$time}");
+            $startTime = new DateTime("{$time}"); //hora de inicio de la funcion
+
+            $startTime = date_format($startTime, 'H:i:s');
+
+            $endTime = new DateTime("{$time}"); // hora de finalizacion de la funcion
             
             $endTime->modify("+{$movieDurationInMinutes} minutes"); // a la hora de inicio le sumamos la duracion de la pelicula
             
             $endTime->modify('+15 minutes'); // fecha y hora de finalizacion de la pelicula ya contemplados los 15 minutos entre pelicula y pelicula;
   
             
-            $endTime = date_format($endTime, 'Y-m-d H:i:s' );
+            $endTime = date_format($endTime, 'H:i:s' );
           
-            
+        
             $show = new Show($dateTime, $price);
             $show->setMovie($movie);
+            $show->setStartTime($startTime);  // es el mismo valor que date pero al guardar en nuestra db solo guarda el timepo y no la fecha.
             $show->setEndTime($endTime);
+            
        
-            $this->showDAO->add($show, $room_id);
+            $this->showDAO->add($show,$theater_id,$room_id);
 
             $this->getActive();
         }else { echo "ERROR";}

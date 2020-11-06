@@ -29,6 +29,11 @@ namespace Controllers;
             require_once(VIEWS_PATH . "index.php");
 
         }
+
+        public function reserve($show_id){
+            $show = $this->showDAO->get($show_id);
+
+        }
     }
 
 

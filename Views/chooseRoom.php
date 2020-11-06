@@ -15,8 +15,9 @@
                 foreach($theater->getRooms() as $room){ ?>
                     <div class="lead">
                         <div class="float-right">
-                            <button type="submit" name="roomId" value="<?php echo $room->getId(); ?>" class="btn btn-dark">Select</button>
+                            <button type="submit" name="roomId" value="<?php echo $room->getRoom_id(); ?>" class="btn btn-dark">Select</button>
                         </div>
+                        <p>Id de sala:<strong> <?php echo $room->getRoom_id() ?> </strong></p>
                         <p>Name: <strong class="text-bold"> <?php echo $room->getName(); ?> </strong></p>
                         <p>Capacity:  <strong><?php echo $room->getCapacity(); ?> </strong></p>
                         

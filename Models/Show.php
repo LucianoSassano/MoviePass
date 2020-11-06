@@ -8,14 +8,22 @@
             private $movie;
             private $date;
             private $price;
+            private $startTime;
             private $endTime;
+            private $room;
+            private $theater;
 
             function __construct($date="", $price="")
         {
             $this->date = $date;
             $this->price = $price;
-            $this->endTime = "";
             $this->movie = "";
+            $this->startTime = "";
+            $this->endTime = "";
+            $this->room = "";
+            $this->theater = "";
+            
+    
         }
 
             /**
@@ -117,6 +125,66 @@
             public function setEndTime($endTime)
             {
                         $this->endTime = $endTime;
+
+                        return $this;
+            }
+
+            /**
+             * Get the value of room
+             */ 
+            public function getRoom()
+            {
+                        return $this->room;
+            }
+
+            /**
+             * Set the value of room
+             *
+             * @return  self
+             */ 
+            public function setRoom($room)
+            {
+                        $this->room = $room;
+
+                        return $this;
+            }
+
+            /**
+             * Get the value of startTime
+             */ 
+            public function getStartTime()
+            {
+                        return $this->startTime;
+            }
+
+            /**
+             * Set the value of startTime
+             *
+             * @return  self
+             */ 
+            public function setStartTime($startTime)
+            {
+                        $this->startTime = $startTime;
+
+                        return $this;
+            }
+
+            /**
+             * Get the value of theater
+             */ 
+            public function getTheater()
+            {
+                        return $this->theater;
+            }
+
+            /**
+             * Set the value of theater
+             *
+             * @return  self
+             */ 
+            public function setTheater($theater)
+            {
+                        $this->theater = $theater;
 
                         return $this;
             }

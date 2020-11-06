@@ -20,6 +20,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT . 'movie/getAll' ?>">Movies</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT . 'admin/viewAnalytics' ?>">Analytics</a>
+                </li>
+
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <ul class="navbar-nav mr-auto">

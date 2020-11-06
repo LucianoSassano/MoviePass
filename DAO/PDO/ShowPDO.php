@@ -132,30 +132,102 @@
         //         throw $ex;
         //     }
         // }
+        
+        //chequea la existencia de la pelicula contenida en nustro show en todos los otros teatros en la fecha del show
+        public function checkMovieInOtherTheaters($show){
+            
+            //me va a traer todos los shows que tengan la movie de mi show en el mismo dia pero en otro teatro
 
-
-        public function checkShow($show){
-
-            //validar si la movie existe en otro cine y si existe en el cine que se ecuentre en otra sala 
             $query = " 
-            SELECT * FROM `shows` WHERE NOT movie_id = '".$show->getMovie()->getId()."' AND
-             ('".$show->getDate()."' NOT BETWEEN date AND endTime)
-             AND ('".$show->getEndTime()."' NOT BETWEEN date AND endTime);";
+            SELECT * FROM `shows` WHERE movie_id = '".$show->getMovie()->getId()."' 
+            AND theater_id != :theater_id
+            AND date = :date   ;";
+
+            $parameters['theater_id'] = $show->getTheater()->getId();
+            $parameters['date'] = $show->getDate();
             
             try {
 
                 $this->connection = Connection::GetInstance();
                 $resultSet = $this->connection->Execute($query);
-                //var_dump($resultSet);
+               
 
             }catch(Exception $ex) {
                 throw $ex;
             }
 
             if(empty($resultSet)){
-                return false;
-            }else{
                 return true;
+                // si retorna vacio la movie no se encuentra en otro teatro en la fecha especificada , se puede insertar el registro
+            }else{
+                return false;
+                // ya existe la movie en otro teatro en la fecha especificada , no se puede instertar el show
+            }
+
+        }
+
+        public function checkMovieInOtherRooms($show){
+
+            // seleciono todos los shows que tengan la movie especificada en la fecha y que no esten en mi sala
+
+            $query = " 
+            SELECT * FROM `shows` WHERE movie_id = '".$show->getMovie()->getId()."'
+            AND theater_id = :theater_id 
+            AND room_id != :room_id
+            AND date = :date  ;";
+
+            $parameters['theater_id'] = $show->getTheater()->getId();
+            $parameters['room_id'] = $show->getRoom()->getRoom_id();
+            $parameters['date'] = $show->getDate();
+            
+            try {
+
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query);
+               
+
+            }catch(Exception $ex) {
+                throw $ex;
+            }
+
+            if(empty($resultSet)){
+                return true;
+                // si retorna vacio la movie no se encuentra en otro room en la fecha especificada , se puede insertar el registro
+            }else{
+                return false;
+                // ya existe la movie en otro room en la fecha especificada , no se puede instertar el show
+            }
+
+
+        }
+
+
+    
+
+        public function checkShowDate($show){
+
+        
+            $query = " 
+            SELECT * FROM `shows` WHERE  
+            date = :date
+            and
+            ('".$show->getDate()."'  BETWEEN date AND endTime)
+             AND ('".$show->getEndTime()."'  BETWEEN date AND endTime);";
+            
+            try {
+
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query);
+               
+
+            }catch(Exception $ex) {
+                throw $ex;
+            }
+
+            if(!empty($resultSet)){
+                return true;
+            }else{
+                return false;
             }
 
         }
@@ -163,39 +235,39 @@
         /**
          * Add new show
          */
-        public function add(Show $show, $room_id) {
+        public function add(Show $show,$theater_id, $room_id) {
 
 
-            //si esta vacio quiere decir que ya no existe esa pelicual con anterioridad por lo que podemos insertarla
-            if($this->checkShow($show)){
+            if(!$this->checkMovieExists($show)){
+                 //si esta vacio quiere decir que ya no existe esa pelicual con anterioridad por lo que podemos insertarla
+            if(!$this->checkShowDate($show)){
 
 
-                    $query = "
-                    SET FOREIGN_KEY_CHECKS=0;
-                    INSERT INTO `shows` (room_id, movie_id, date, price, endTime) 
-                    VALUES (:room_id, :movie_id, '".$show->getDate()."', :price, '".$show->getEndTime()."');
-                    SET FOREIGN_KEY_CHECKS=1;";
-        
-                    $parameters['room_id'] = $room_id;
-                    $parameters['movie_id'] = $show->getMovie()->getId();
-                    $parameters['price'] = $show->getPrice();
-                
-        
-                    try {
-        
-                        $this->connection = Connection::GetInstance();
-                        return $this->connection->ExecuteNonQuery($query, $parameters);
-        
-                    }catch(Exception $ex) {
-                        throw $ex;
-                    }
-                    
-                }else{
-                    echo "ERROR";
+                $query = "
+                SET FOREIGN_KEY_CHECKS=0;
+                INSERT INTO `shows` (room_id, movie_id, date, price, endTime) 
+                VALUES (:room_id, :movie_id, '".$show->getDate()."', :price, '".$show->getEndTime()."');
+                SET FOREIGN_KEY_CHECKS=1;";
+    
+                $parameters['room_id'] = $room_id;
+                $parameters['movie_id'] = $show->getMovie()->getId();
+                $parameters['price'] = $show->getPrice();
+            
+    
+                try {
+    
+                    $this->connection = Connection::GetInstance();
+                    return $this->connection->ExecuteNonQuery($query, $parameters);
+    
+                }catch(Exception $ex) {
+                    throw $ex;
                 }
                 
-            
-            
+            }else{
+                echo "ERROR";
+            }
+            }
+                
          
         }
 

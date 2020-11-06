@@ -37,7 +37,7 @@
                                                 echo $genre->getName() . " , ";
                                             }
                                         }else{
-                                            echo $genre->getName();
+                                            echo 'movies has no genres';
                                         }
                                          
                                     }

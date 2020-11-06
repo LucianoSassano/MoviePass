@@ -32,7 +32,7 @@
                 </div>
                
                 <div class="float-right mt-2">
-                    <input type="number" value="<?php echo $room->getId(); ?>" name="room_id" hidden>
+                    <input type="number" value="<?php echo $room->getRoom_id(); ?>" name="room_id" hidden>
                     <input type="number" value="<?php echo $movie->getId(); ?>" name="movie_id" hidden>
                     
                     <button type="submit" class="btn btn-primary">Create show</button>

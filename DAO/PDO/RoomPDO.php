@@ -137,7 +137,7 @@
 
             $values = array_map(function($row){
                 $room = new Room($row['name'], $row['capacity']);
-                $room->setId($row['room_id']);
+                $room->setRoom_id($row['room_id']);
                 $room->setShows($this->showDAO->getByRoom($row['room_id']));
                 return $room;
             }, $data);

@@ -61,9 +61,8 @@
                 throw $ex;
             }
 
-            if(!empty($resultSet)){                
+            if(!empty($resultSet)){
                 return $this->map($resultSet);
-           
             }else {
                 return false;
             }

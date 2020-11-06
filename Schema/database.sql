@@ -92,13 +92,16 @@ CREATE TABLE IF NOT EXISTS `rooms`(
 CREATE TABLE IF NOT EXISTS `shows`(
     show_id INTEGER(50) UNSIGNED AUTO_INCREMENT,
     room_id INTEGER(50) UNSIGNED,
+    theater_id INTEGER(50) UNSIGNED,
     movie_id INTEGER(50) UNSIGNED,
-    date datetime,
-    endTime datetime,
+    date date,
+    startTime time,
+    endTime time,
     price FLOAT UNSIGNED,
 
     CONSTRAINT pk_show_id PRIMARY KEY (show_id),
     CONSTRAINT fk_room_id FOREIGN KEY (room_id) REFERENCES `rooms`(room_id),
+    CONSTRAINT fk_theater_id_ FOREIGN KEY (theater_id) REFERENCES `theaters`(theater_id),
     CONSTRAINT fk_movie_id_ FOREIGN KEY (movie_id) REFERENCES `movies`(id)
 );
 
