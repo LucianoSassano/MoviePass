@@ -139,10 +139,11 @@
             //me va a traer todos los shows que tengan la movie de mi show en el mismo dia pero en otro teatro
 
             $query = " 
-            SELECT * FROM `shows` WHERE movie_id = '".$show->getMovie()->getId()."' 
-            AND theater_id != :theater_id
-            AND date = :date   ;";
+            SELECT * FROM `shows` as s WHERE s.movie_id = : '".$show->getMovie()->getId()."'
+            AND s.theater_id != :theater_id
+            AND s.date = :date ";
 
+           // $parameters['movie_id'] = $show->getMovie()->getId();
             $parameters['theater_id'] = $show->getTheater()->getId();
             $parameters['date'] = $show->getDate();
             
@@ -210,10 +211,10 @@
             $query = " 
             SELECT * FROM `shows` WHERE  
             date = :date
-            and
-            ('".$show->getDate()."'  BETWEEN date AND endTime)
-             AND ('".$show->getEndTime()."'  BETWEEN date AND endTime);";
-            
+            and startTime = :startTime ;";
+
+            $parameters['date'] = $show->getDate();
+            $parameters['startTime'] = $show->getStartTime();            
             try {
 
                 $this->connection = Connection::GetInstance();
@@ -224,7 +225,8 @@
                 throw $ex;
             }
 
-            if(!empty($resultSet)){
+            if(empty($resultSet)){
+                // si retorna vacio quiere decir que el horario y la fecha seleccionada se encuentran libres por lo que se puede insertar el show
                 return true;
             }else{
                 return false;
@@ -238,29 +240,30 @@
         public function add(Show $show,$theater_id, $room_id) {
 
 
-            if(!$this->checkMovieExists($show)){
-                 //si esta vacio quiere decir que ya no existe esa pelicual con anterioridad por lo que podemos insertarla
-            if(!$this->checkShowDate($show)){
+            if($this->checkMovieInOtherTheaters($show)){
+               
+            if($this->checkMovieInOtherRooms($show)){
 
-
-                $query = "
-                SET FOREIGN_KEY_CHECKS=0;
-                INSERT INTO `shows` (room_id, movie_id, date, price, endTime) 
-                VALUES (:room_id, :movie_id, '".$show->getDate()."', :price, '".$show->getEndTime()."');
-                SET FOREIGN_KEY_CHECKS=1;";
-    
-                $parameters['room_id'] = $room_id;
-                $parameters['movie_id'] = $show->getMovie()->getId();
-                $parameters['price'] = $show->getPrice();
-            
-    
-                try {
-    
-                    $this->connection = Connection::GetInstance();
-                    return $this->connection->ExecuteNonQuery($query, $parameters);
-    
-                }catch(Exception $ex) {
-                    throw $ex;
+                if($this->checkShowDate($show)){
+                    $query = "
+                    SET FOREIGN_KEY_CHECKS=0;
+                    INSERT INTO `shows` (room_id, movie_id, date, price, startTime, endTime) 
+                    VALUES (:room_id, :movie_id, '".$show->getDate()."', :price, '".$show->getStartTime()."', '".$show->getEndTime()."');
+                    SET FOREIGN_KEY_CHECKS=1;";
+        
+                    $parameters['room_id'] = $room_id;
+                    $parameters['movie_id'] = $show->getMovie()->getId();
+                    $parameters['price'] = $show->getPrice();
+                
+        
+                    try {
+        
+                        $this->connection = Connection::GetInstance();
+                        return $this->connection->ExecuteNonQuery($query, $parameters);
+        
+                    }catch(Exception $ex) {
+                        throw $ex;
+                    }
                 }
                 
             }else{

@@ -52,12 +52,12 @@ class ShowController
         require_once(VIEWS_PATH . "show-creation.php");
     }
 
-    function add($date, $time, $price,$theater_id, $room_id, $movie_id) {
+    function add($date, $time, $price,$theater_id, $movie_id, $room_id) {
 
         if($date && $time && $price) {
             date_default_timezone_set('America/Argentina/Buenos_Aires');
-            $dateTime = new DateTime("{$date} {$time}");  //fecha y hora de inicio del show
-            $dateTime = date_format($dateTime, 'Y-m-d H:i:s');
+            $date = new DateTime("{$date} {$time}");  //fecha y hora de inicio del show
+            $date = date_format($date, 'Y-m-d');
 
             $movie = $this->movieDAO->get($movie_id);
             $movieDurationInMinutes = $movie->getDuration(); // duracion en minutos de la pelicula
@@ -67,8 +67,15 @@ class ShowController
             $startTime = date_format($startTime, 'H:i:s');
 
             $endTime = new DateTime("{$time}"); // hora de finalizacion de la funcion
+
+            // si la pelicula dura mas de 2 horas de reproduccion directamente la funcion es de 3 hs 
+            // de lo contratio es de 2 horas 
             
-            $endTime->modify("+{$movieDurationInMinutes} minutes"); // a la hora de inicio le sumamos la duracion de la pelicula
+            if($movieDurationInMinutes > 120 ){
+                $endTime->modify('+3 hours');
+            }else{
+                $endTime->modify('+2 hours');
+            }
             
             $endTime->modify('+15 minutes'); // fecha y hora de finalizacion de la pelicula ya contemplados los 15 minutos entre pelicula y pelicula;
   
@@ -76,10 +83,11 @@ class ShowController
             $endTime = date_format($endTime, 'H:i:s' );
           
         
-            $show = new Show($dateTime, $price);
+            $show = new Show($date, $price);
             $show->setMovie($movie);
             $show->setStartTime($startTime);  // es el mismo valor que date pero al guardar en nuestra db solo guarda el timepo y no la fecha.
             $show->setEndTime($endTime);
+            $show->setTheater($this->theaterDAO->get($theater_id));
             
        
             $this->showDAO->add($show,$theater_id,$room_id);
