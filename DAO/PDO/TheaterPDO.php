@@ -116,6 +116,29 @@
             }
         }
 
+        public function getByName($name) {
+
+            $query = "
+            SELECT * FROM `theaters` WHERE name = :name";
+
+            $parameters['name'] = $name;
+
+            try {
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query, $parameters);
+            }catch (Exception $ex) {
+                throw $ex;
+            }
+
+            if(!empty($resultSet)){
+                return $this->map($resultSet);
+            }else {
+                return null;
+            }
+
+        }
+
+
         public function getByAddress($address) {
 
             $query = "
