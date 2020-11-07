@@ -9,24 +9,15 @@
 /*--------------Home View---------------- */
 .home{
     height: 100vh;
-    background:#614A6D;
+    background-image: linear-gradient(to right bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover; /* Resize the background image to cover the entire container */
   
 }
 
-.home .container{
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-}
 
-#carouselExampleIndicators{
-    height: 1vh;
-    margin-top: 1vh;
-}
+
 
 /*--------------End of the Home View---------------- */
 

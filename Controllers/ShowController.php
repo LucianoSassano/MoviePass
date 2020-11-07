@@ -97,6 +97,7 @@ class ShowController
             $show->setStartTime($startTime);  // es el mismo valor que date pero al guardar en nuestra db solo guarda el timepo y no la fecha.
             $show->setEndTime($endTime);
             $show->setTheater($this->theaterDAO->get($theater_id));
+            $show->setRoom($this->roomDAO->get($room_id));
 
 
             $this->showDAO->add($show, $theater_id, $room_id);
@@ -138,5 +139,16 @@ class ShowController
 
         $genres = $this->genreDAO->getAll();
         require_once(VIEWS_PATH . "index.php");
+    }
+
+    function showReservation($show_id){
+        $show = $this->showDAO->get($show_id);
+        require_once(VIEWS_PATH . "show-reservation.php");
+    }
+
+    function confirmReservation($show_id){
+
+        require_once(VIEWS_PATH . "client-shows.php");
+
     }
 }

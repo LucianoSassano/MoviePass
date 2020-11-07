@@ -28,7 +28,8 @@
                         <div class="card" style="width: 18rem;">
                             <img src="<?php echo "https://image.tmdb.org/t/p/w500/" . $show->getMovie()->getPoster_path(); ?>" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <p>Datetime of show start: <strong class="text-bold"> <?php echo $show->getDate(); ?> </strong></p>
+                                <p>Date of show: <strong class="text-bold"> <?php echo $show->getDate(); ?> </strong></p>
+                                <p>Show start: <strong class="text-bold"> <?php echo $show->getStartTime(); ?> </strong></p>
                                 <p>Show end: <strong class="text-bold"> <?php echo $show->getEndTime(); ?> </strong></p>
                                 <p>Movie Duration: <strong class="text-bold"> <?php echo $show->getMovie()->getDuration(); ?> minutes </strong></p>
                                 <p>Price: <strong> $ <?php echo $show->getPrice(); ?> </strong></p>

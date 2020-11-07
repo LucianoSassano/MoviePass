@@ -1,6 +1,6 @@
 <?php require_once(VIEWS_PATH . "header.php") ?>
 
-<body style="background-color:#3E5CB2">
+<body class="home">
     <?php require_once(VIEWS_PATH . 'navbar.php'); ?>
     <div class="shows-active">
         <div class="container mt-3">
@@ -30,7 +30,11 @@
                                 <p>Show date: <strong class="text-bold"> <?php echo $show->getDate(); ?> </strong></p>
                                 <p>Show duration: <strong class="text-bold"> <?php echo $show->getMovie()->getDuration(); ?> minutes </strong></p>
                                 <p>Price: <strong> $ <?php echo $show->getPrice(); ?> </strong></p>
-                                <button class="btn btn-danger">Reserve</button>
+                                <form action="<?php echo FRONT_ROOT . "show/showReservation" ?>">
+                                    <button type="submit" class="btn btn-danger">Reserve</button>
+                                    <input name="show_id" value="<?php echo $show->getId(); ?>" type="number" hidden> 
+                                </form>
+
                             </div>
                         </div>
                     <?php } ?>

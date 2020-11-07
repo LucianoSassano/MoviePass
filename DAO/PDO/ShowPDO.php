@@ -139,7 +139,7 @@
             //me va a traer todos los shows que tengan la movie de mi show en el mismo dia pero en otro teatro
 
             $query = " 
-            SELECT * FROM `shows` as s WHERE s.movie_id = : '".$show->getMovie()->getId()."'
+            SELECT * FROM `shows` as s WHERE s.movie_id ='".$show->getMovie()->getId()."'
             AND s.theater_id != :theater_id
             AND s.date = :date ";
 
@@ -150,7 +150,7 @@
             try {
 
                 $this->connection = Connection::GetInstance();
-                $resultSet = $this->connection->Execute($query);
+                $resultSet = $this->connection->Execute($query, $parameters);
                
 
             }catch(Exception $ex) {
@@ -169,6 +169,7 @@
 
         public function checkMovieInOtherRooms($show){
 
+
             // seleciono todos los shows que tengan la movie especificada en la fecha y que no esten en mi sala
 
             $query = " 
@@ -184,7 +185,7 @@
             try {
 
                 $this->connection = Connection::GetInstance();
-                $resultSet = $this->connection->Execute($query);
+                $resultSet = $this->connection->Execute($query, $parameters);
                
 
             }catch(Exception $ex) {
@@ -218,7 +219,7 @@
             try {
 
                 $this->connection = Connection::GetInstance();
-                $resultSet = $this->connection->Execute($query);
+                $resultSet = $this->connection->Execute($query,$parameters);
                
 
             }catch(Exception $ex) {
@@ -247,12 +248,16 @@
                 if($this->checkShowDate($show)){
                     $query = "
                     SET FOREIGN_KEY_CHECKS=0;
-                    INSERT INTO `shows` (room_id, movie_id, date, price, startTime, endTime) 
-                    VALUES (:room_id, :movie_id, '".$show->getDate()."', :price, '".$show->getStartTime()."', '".$show->getEndTime()."');
+                    INSERT INTO `shows` (room_id, theater_id, movie_id, date, startTime, endTime, price) 
+                    VALUES (:room_id, :theater_id, :movie_id, :date, :startTime, :endTime, :price);
                     SET FOREIGN_KEY_CHECKS=1;";
         
                     $parameters['room_id'] = $room_id;
+                    $parameters['theater_id'] = $theater_id;
                     $parameters['movie_id'] = $show->getMovie()->getId();
+                    $parameters['date'] = $show->getDate();
+                    $parameters['startTime'] = $show->getStartTime();
+                    $parameters['endTime'] = $show->getEndTime();
                     $parameters['price'] = $show->getPrice();
                 
         
@@ -284,13 +289,14 @@
             $values = array_map(function($row){
                 $show = new Show($row['date'], $row['price']);
                 $show->setId($row['show_id']);
+                $show->setStartTime($row['startTime']);
                 $show->setEndTime($row['endTime']);
                 $show->setMovie($this->movieDAO->get($row['movie_id']));
 
                 return $show;
             }, $data);
 
-            return count($values) > 0 ? $values : $values['0'];
+            return count($values) > 1 ? $values : $values['0'];
         }
     }
 

@@ -7,7 +7,7 @@
       <?php if (isset($_SESSION["loggedUser"]) && $_SESSION["loggedUser"]->getRole()->getId() == 1) { ?>
 
         <li class="nav-item">
-          <a class="nav-link" href="#">My Shows</a>
+          <a class="nav-link" href="<?php echo FRONT_ROOT . 'ticket/showMyTickets' ?>">My Shows</a>
         </li>
 
       <?php } ?>

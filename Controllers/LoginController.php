@@ -39,7 +39,6 @@
                     if($user->getPassword() == $password) {
                         $pass = "entro en pass";
                      
-
                         $_SESSION['loggedUser'] = $user;    // almacena el usuario en la session
 
                         if($user->getRole()->getId() == User::ADMIN_ROLE){
