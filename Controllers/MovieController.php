@@ -47,6 +47,24 @@
             require_once(VIEWS_PATH . "admin.php");
         }
 
+        function searchMovie($movie_name){
+
+            $movie_name = strtolower($movie_name);
+            $moviesInDb = $this->movieDAO->getAll();
+            
+
+            foreach($moviesInDb as $movieDb){
+                $movieDbName = strtolower($movieDb->getTitle());
+                if($movie_name == $movieDbName){
+
+                    $movie = $movieDb;
+                    require_once(VIEWS_PATH . "search-results.php");
+                }
+            }
+            $errorMsg = 'No movies match the input ' . $movie_name .";"; 
+            require_once(VIEWS_PATH . "search-results.php");
+        }
+
 
 
 
