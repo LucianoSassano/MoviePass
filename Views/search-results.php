@@ -6,12 +6,14 @@
         <div class="container">
             <?php if (!isset($errorMsg)) { ?>
 
-                <div class="card" style="width: 18rem;">
+                <div class="card mx-auto" style="width: 45rem;">
                     <img src="<?php echo "https://image.tmdb.org/t/p/original/" . $movie->getPoster_path(); ?>" class="card-img-top" alt="...">
                     <div class="card-body">
 
                         <h5 class="card-title"><?php echo $movie->getTitle(); ?></h5>
                         <p class="card-text"><?php echo $movie->getOverview(); ?></p>
+                        <hr>
+                        <h6 class="card-title">Movie Duration: <?php echo $movie->getDuration(); ?> minutes</h6>
                         <hr>
                         <p> <?php echo $movie->getAdult() ? "Adult only" : "Family friendly" ?> </p>
                         <hr>
