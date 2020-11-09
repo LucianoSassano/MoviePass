@@ -7,7 +7,6 @@
             <h2>Theater Modification</h2>
             <hr>
             <form action="<?php echo FRONT_ROOT . "theater/modify" ?>" method="POST">
-            <input type="number" name="id" value="<?php echo $theater->getId(); ?>" hidden>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="theaterName">Theater Name</label>
