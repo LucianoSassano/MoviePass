@@ -4,33 +4,49 @@
     use Models\Movie as Movie;
     use Models\Genre as Genre;
 
-    use DAO\MovieJSON as MovieDAO;
-    use DAO\GenreJSON as GenreDAO;
-
-    define("API_KEY","5c5b380ac89e5a3c6c206ccd2adda7f3");
+    use DAO\PDO\MoviePDO as MovieDAO;
+    use DAO\PDO\GenrePDO as GenreDAO;
+    use DAO\PDO\ApiPDO as ApiDAO;
+    use DAO\PDO\TheaterPDO as TheaterDAO;
     
     class MovieController{
 
         private $movieDAO;
         private $genreDAO;
+        private $apiDAO;
 
         function __construct()
         {
             $this->movieDAO = new MovieDAO();
             $this->genreDAO = new GenreDAO();
+            $this->apiDAO = new ApiDAO();
+        }
+
+        /**
+         * Get theaters, with rooms, with shows from movie
+         */
+        public function getShows($movie_id) {
+
+            $theatersDAO = new TheaterDAO();
+
+            $theaters = $theatersDAO->getByMovie($movie_id);
+
+            $movie = $this->movieDAO->get($movie_id);
+
+            require_once(VIEWS_PATH . "movie-shows.php");
         }
 
 
         public function getAll() {
             $movies = $this->movieDAO->getAll();
-            require_once(VIEWS_PATH . "admin.php");
+            require_once(VIEWS_PATH . "movies.php");
         }
 
         public function updateAll() {
 
             // Trae peliculas de la API (array)
-            $moviesArray = $this->getTopMovies();
-            $genresArray = $this->getGenres();
+            $moviesArray = $this->apiDAO->getTopMovies();
+            $genresArray = $this->apiDAO->getGenres();
             $movies = array();
 
             if($moviesArray && $genresArray) {
@@ -39,57 +55,32 @@
 
                 if(!empty($genres)) {   // Valido que se actualicen los generos
                     $movies = $this->movieDAO->updateAll($moviesArray);
+                    if(!empty($moviesArray)){
+                        echo "<script>alert('Movies Updated!');</script>";
+                    }
                 }
             }
             require_once(VIEWS_PATH . "admin.php");
         }
 
-        // Metodo privado que devuelve array de peliculas populares de la api
-        private function getTopMovies() {
+        function searchMovie($movie_name){
 
-            $url = "https://api.themoviedb.org/3/movie/popular?api_key=" . API_KEY;
-            $results = file_get_contents($url);
-            $resultJSON = json_decode($results, true);
-            $movieList = array();
+            $movie_name = strtolower($movie_name);
+            $moviesInDb = $this->movieDAO->getAll();
+            
 
-            foreach($resultJSON['results'] as $movie) {
-                $newMovie = new Movie();
-                $newMovie->setId($movie['id']);
-                $newMovie->setTitle($movie['original_title']);
-                $newMovie->setOverview($movie['overview']);
-                $newMovie->setPoster_path($movie['poster_path']);
-                $newMovie->setLanguage($movie['original_language']);
-                $newMovie->setAdult($movie['adult']);
-                $newMovie->setVote_average($movie['vote_count']);
+            foreach($moviesInDb as $movieDb){
+                $movieDbName = strtolower($movieDb->getTitle());
+                if($movie_name == $movieDbName){
 
-                // Convierte el array de ids de generos en array de obj genero
-                $genres = $this->movieDAO->getGenreList($movie["genre_ids"]);
-
-                $newMovie->setGenres($genres);
-
-
-                array_push($movieList, $newMovie);
+                    $movie = $movieDb;
+                    require_once(VIEWS_PATH . "search-results.php");
+                }
             }
-            return $movieList;
+            $errorMsg = 'No movies match the input ' . $movie_name .";"; 
+            require_once(VIEWS_PATH . "search-results.php");
         }
 
-        public function getGenres(){
-
-            $url="https://api.themoviedb.org/3/genre/movie/list?api_key=" . API_KEY;
-            $results = file_get_contents($url);
-            $resultJSON = json_decode($results,true);
-            $genreList = array();
-
-            foreach($resultJSON['genres'] as $genre){
-                $newGenre = new Genre();
-                $newGenre->setId($genre['id']);
-                $newGenre->setName($genre['name']);
-
-                array_push($genreList, $newGenre);
-            }
-
-            return $genreList;
-        }
 
 
 

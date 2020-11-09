@@ -2,8 +2,8 @@
 
 namespace Controllers;
 
-use DAO\RoomJSON as RoomDAO;
-use DAO\TheaterJSON as TheaterDAO;
+use DAO\PDO\RoomPDO as RoomDAO;
+use DAO\PDO\TheaterPDO as TheaterDAO;
 use Models\Room;
 
 class RoomController
@@ -30,9 +30,9 @@ class RoomController
     {
 
         $room = new Room($name, $capacity);
-        $this->roomDAO->add($room);
+        $this->roomDAO->add($room, $theater_id);
 
-        $theater = $this->theaterDAO->addRoom($theater_id, $room);
+        // $theater = $this->theaterDAO->addRoom($theater_id, $room);
         
         $theaters = $this->theaterDAO->getAll();
         require_once(VIEWS_PATH . "theaters.php");

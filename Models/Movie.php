@@ -3,7 +3,7 @@
 
     class Movie{
         
-        private $id;
+        private $movie_id;
         private $title;
         private $overview;
         private $poster_path;
@@ -11,34 +11,36 @@
         private $adult;
         private $vote_average;
         private $genres = [];
+        private $duration;
 
-        function __construct($id="", $title="", $overview="", $poster_path="", $language="", $adult="", $vote_average="", $genres=array()) {
-                $this->id = $id;
+        function __construct($movie_id = '', $title = '', $overview = '', $poster_path = '', $language = '', $adult = '', $vote_average = '', $duration = '') {
+                $this->movie_id = $movie_id;
                 $this->title = $title;
                 $this->overview = $overview;
                 $this->poster_path = $poster_path;
                 $this->language = $language;
                 $this->adult = $adult;
                 $this->vote_average = $vote_average;
-                $this->genres = $genres;
+                $this->genres = array();
+                $this->duration = $duration;
         }
 
         /**
-         * Get the value of id
+         * Get the value of movie_id
          */ 
         public function getId()
         {
-                return $this->id;
+                return $this->movie_id;
         }
 
         /**
-         * Set the value of id
+         * Set the value of movie_id
          *
          * @return  self
          */ 
-        public function setId($id)
+        public function setId($movie_id)
         {
-                $this->id = $id;
+                $this->movie_id = $movie_id;
 
                 return $this;
         }
@@ -186,6 +188,29 @@
         }
 
         
+
+
+ 
+
+        /**
+         * Get the value of duration
+         */ 
+        public function getDuration()
+        {
+                return $this->duration;
+        }
+
+        /**
+         * Set the value of duration
+         *
+         * @return  self
+         */ 
+        public function setDuration($duration)
+        {
+                $this->duration = $duration;
+
+                return $this;
+        }
     }
 
 

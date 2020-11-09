@@ -2,9 +2,11 @@
 
     namespace Controllers;
 
-    use DAO\UserJSON as UserDAO;
-    use DAO\MovieJSON as MovieDAO;
+    use DAO\PDO\UserPDO as UserDAO;
+    use DAO\JSON\MovieJSON as MovieDAO;
     use Models\User;
+
+    use Utils\Helper\Helper;
 
     class LoginController{
 
@@ -27,18 +29,23 @@
 
         function login($email, $password)
         {
+        
             // Valido que venga data
             if($email && $password) {
-
+                
                 $user = $this->userDAO->getByEmail($email);
-
+               
                 if($user){  // Si el usuario existe
+                    
                     // Verificar password
                     if($user->getPassword() == $password) {
-
+                        $pass = "entro en pass";
+                     
                         $_SESSION['loggedUser'] = $user;    // almacena el usuario en la session
 
-                        if($user->getRole() == User::ADMIN_ROLE){
+                        if($user->getRole()->getId() == User::ADMIN_ROLE){
+                            $prole = "role de admin entro";
+                            
                             $movies = $this->movieDAO->getAll();
                             require_once(VIEWS_PATH . "admin.php"); // Redirecciona al sistema logueado como admin
                         } else {
@@ -54,6 +61,18 @@
                 $errorMsg = "Datos invalidos";  // Esto se envia al login.php y se muestra 
                 require_once(VIEWS_PATH . "login.php");
             }            
+        }
+
+        public function FacebookLogin(){
+
+            $user = Helper::facebookAPI();
+
+            $email = (string)$user['email'];
+            $pass = (string)$user['id'];
+
+            if($user){
+                $this->login($email, $pass);
+            }
         }
 
         function logout() {

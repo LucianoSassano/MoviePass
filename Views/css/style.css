@@ -5,28 +5,120 @@
 }
 
 
+/*--------------Index View---------------- */
+
+.index{
+
+    height: 100vh;
+    background-image: url("https://images.unsplash.com/photo-1512149074996-e923ac45be6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    
+
+}
+
+/* Position text in the middle of the page/image */
+.index .bg-text {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+  }
+
+
+
+
+/*--------------End of Index View---------------- */
 
 /*--------------Home View---------------- */
-.home{
+
+
+.home-shows{
+
     height: 100vh;
-    background:#614A6D;
+    background-image: url("https://images.unsplash.com/photo-1512149074996-e923ac45be6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+
+}
+
+.home-shows .container {
+    color: white;
+    text-shadow: 2px 2px 2px black; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.home-shows .container .card-body
+{
+    display: flex;
+    flex-direction: column;
+    background-color: #262423;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+
+
+
+/*--------------End of the Home View---------------- */
+
+/*--------------Home View---------------- */
+.homeViewShow{
+    
+    background-image: linear-gradient(to right top, #845ec2, #806ecc, #7e7cd4, #7d8adb, #7f97e1, #8e99e3, #9c9ae5, #a99ce6, #c590dc, #df83ca, #f377b0, #ff6f91);
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover; /* Resize the background image to cover the entire container */
   
 }
 
-.home .container{
-    height: 100vh;
+.homeViewShow .container {
+    color: #D1C4C2;
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+
+    
 }
 
-#carouselExampleIndicators{
-    height: 1vh;
-    margin-top: 1vh;
+
+.homeViewShow h2{
+    text-align: center;
 }
+
+.homeViewShow hr{
+    border-top: 2px solid wheat;
+}
+
+
+
+.homeViewShow .card-header{
+    color: black;
+}
+
+.homeViewShow .container .card-body
+{
+    display: flex;
+    flex-direction: column;
+    background-color: #262423;
+    align-items: center;
+    justify-content: center;
+    
+}
+
 
 /*--------------End of the Home View---------------- */
 
@@ -127,28 +219,70 @@
 
 /*--------------Admin View---------------- */
 
-.admin{
+
+
+.admin-dashboard{
+
+    height: 100vh;
+    background-image: url("https://images.unsplash.com/photo-1554224154-26032ffc0d07?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1012&q=80");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
     
+
+}
+
+/* Position text in the middle of the page/image */
+.admin-dashboard .bg-text {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+  }
+  
+
+
+
+
+
+/*--------------End of Admin View---------------- */
+
+/*--------------Start of activeMovies View---------------- */
+
+
+.activeMovies{
     
+    background-image: linear-gradient(to right top, #051937, #102b65, #323a93, #6146c0, #984be9);
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;  
 
 }
 
-.admin .container{
+.activeMovies .container{
    
     flex-direction: column;
 }
 
-.admin .container .card{
+.activeMovies .container .card{
     margin-top: 10vh;
     
 }
 
+/*--------------End of activeMovies View---------------- */
 
-
-/*--------------End of Admin View---------------- */
 
 /*--------------Shows View---------------- */
 
@@ -188,6 +322,11 @@
 
 /*--------------Theaters View---------------- */
 .theaters{
+    height: 100vh;
+    background-image: url("https://images.unsplash.com/photo-1514899706957-d22ee867a77b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -249,14 +388,36 @@
 
 /*--------------Shows Active View---------------- */
 
-.shows-active .container {
-    color: #EEF0F5;
- 
+.shows-active{
+
+    height: 100vh;
+    background-image: linear-gradient(to right top, #845ec2, #806ecc, #7e7cd4, #7d8adb, #7f97e1, #8e99e3, #9c9ae5, #a99ce6, #c590dc, #df83ca, #f377b0, #ff6f91);
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+
 }
 
-.shows-active img{
-    width: 25vw;
-    height: 55vh;
+.shows-active .container {
+    color: #D1C4C2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
 }
+
+.shows-active .container .card-body
+{
+    display: flex;
+    flex-direction: column;
+    background-color: #262423;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+
+
 /*--------------End of Shows Active View---------------- */
 

@@ -25,9 +25,17 @@ require_once(VIEWS_PATH . "header.php");
                     <select name="theater_id" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
                         <option selected>Choose a theater...</option>
 
-                        <?php foreach ($theaterList as $theater) { ?>
-                            <option value="<?php echo $theater->getId(); ?>"> <?php echo $theater->getName(); ?></option>
-                        <?php } ?>
+                        <?php 
+                        if(is_array($theaterList)){
+                            if(!empty($theaterList))
+                            foreach ($theaterList as $theater) { ?>
+                                <option value="<?php echo $theater->getId(); ?>"> <?php echo $theater->getName(); ?></option>
+                        <?php 
+                            }
+                        } else { ?>
+                            <option value="<?php echo $theaterList->getId(); ?>"> <?php echo $theaterList->getName(); ?></option>
+                        <?php
+                        } ?>
                     </select>
                 </div>
                 <input type="number" name="movie_id" value="<?php echo $movie->getId(); ?>" hidden>

@@ -5,6 +5,7 @@
     <div class="container">
         <div class="row">
             <form class="signup-form" action="<?php echo FRONT_ROOT . "user/create" ?>" method="POST">
+            <?php \Utils\Helper\Helper::facebookAPI(true); ?>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email</label>
                     <br>

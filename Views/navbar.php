@@ -4,13 +4,17 @@
       <li class="nav-item active">
         <a class="nav-link" href="<?php echo FRONT_ROOT . 'home/index' ?>">Home <span class="sr-only">(current)</span></a>
       </li>
-      <?php if (isset($_SESSION["loggedUser"]) && $_SESSION["loggedUser"]->getRole() == 1) { ?>
+      <?php 
+      if(isset($_SESSION["loggedUser"])) { 
+        ?>
 
         <li class="nav-item">
-          <a class="nav-link" href="#">My Shows</a>
+          <a class="nav-link" href="<?php echo FRONT_ROOT . 'ticket/showMyTickets' ?>">My Shows</a>
         </li>
 
-      <?php } ?>
+      <?php 
+      } 
+      ?>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <ul class="navbar-nav mr-auto">

@@ -2,14 +2,29 @@
 
     namespace Models;
 
-        class Ticket{
+use DateTime;
+
+class Ticket{
 
             private $id;
             private $show;
-            private $seat;
+            private $seat_number;
             private $client;
             private $date;
             private $cost;
+
+            function __construct($seat_number, $cost)
+            {
+
+                
+                $this->seat_number = $seat_number;
+                $this->date = (new DateTime('now'))->format('Y-m-d H:i:s');
+                $this->cost = $cost;
+                $this->show = "";
+                $this->client = "";
+                
+                
+            }
 
 
             /**
@@ -40,25 +55,7 @@
                         return $this;
             }
 
-            /**
-             * Get the value of seat
-             */ 
-            public function getSeat()
-            {
-                        return $this->seat;
-            }
-
-            /**
-             * Set the value of seat
-             *
-             * @return  self
-             */ 
-            public function setSeat($seat)
-            {
-                        $this->seat = $seat;
-
-                        return $this;
-            }
+            
 
             /**
              * Get the value of client
@@ -116,6 +113,26 @@
             public function setCost($cost)
             {
                         $this->cost = $cost;
+
+                        return $this;
+            }
+
+            /**
+             * Get the value of seat_number
+             */ 
+            public function getSeat_number()
+            {
+                        return $this->seat_number;
+            }
+
+            /**
+             * Set the value of seat_number
+             *
+             * @return  self
+             */ 
+            public function setSeat_number($seat_number)
+            {
+                        $this->seat_number = $seat_number;
 
                         return $this;
             }

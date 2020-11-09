@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use DAO\TheaterJSON as TheaterDAO;
+use DAO\PDO\TheaterPDO as TheaterDAO;
 use Models\Theater;
 
 class TheaterController
@@ -33,8 +33,8 @@ class TheaterController
     {
         if ($name && $address) {
             //valido la existencia del cine por la direccion si existe no grava el nuevo cine
-            if ($this->validate($address)) {
-                $newTheater = new Theater($name, $address);
+            if ( $this->validateName($name) &&  $this->validateAddress($address)) {
+                $newTheater = new Theater('', $name, $address);
                 $this->theaterDAO->add($newTheater);
 
                 echo '<script>alert("Theater Creation Successfull")</script>';
@@ -49,8 +49,12 @@ class TheaterController
             require_once(VIEWS_PATH . "theater-creation.php");
         }
     }
+    
+    public function validateName($name){
+        return $this->theaterDAO->getByName($name) == NULL ? true : false;
+    }
 
-    public function validate($address)
+    public function validateAddress($address)
     {
         return $this->theaterDAO->getByAddress($address) == NULL ? true : false;
     }
@@ -61,7 +65,7 @@ class TheaterController
     function modifyView($id)
     {
         $theater = $this->theaterDAO->get($id);
-
+        
         require_once(VIEWS_PATH . "theaterMod.php");
     }
 
@@ -70,9 +74,8 @@ class TheaterController
 
         if ($name && $address) { // Valido la data que viene
 
-            $edited = new Theater($name, $address); // Instancio el theater
-            $edited->setId($id);    // seteo el id con el que voy a buscar en el edit del dao
-
+            $edited = new Theater($id, $name, $address); // Instancio el theater
+        
             $this->theaterDAO->edit($edited);   // edito en el dao
 
             $this->showAll();  // redirecciono a la lista de theaters
@@ -83,3 +86,4 @@ class TheaterController
         }
     }
 }
+?>

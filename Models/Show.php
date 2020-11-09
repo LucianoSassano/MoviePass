@@ -7,15 +7,23 @@
             private $id;
             private $movie;
             private $date;
-            private $time;
             private $price;
+            private $startTime;
+            private $endTime;
+            private $room;
+            private $theater;
 
-            function __construct($date="", $time="", $price="")
+            function __construct($date="", $price="")
         {
             $this->date = $date;
-            $this->time = $time;
             $this->price = $price;
             $this->movie = "";
+            $this->startTime = "";
+            $this->endTime = "";
+            $this->room = "";
+            $this->theater = "";
+            
+    
         }
 
             /**
@@ -100,22 +108,83 @@
                         return $this;
             }
 
+
             /**
-             * Get the value of time
+             * Get the value of endTime
              */ 
-            public function getTime()
+            public function getEndTime()
             {
-                        return $this->time;
+                        return $this->endTime;
             }
 
             /**
-             * Set the value of time
+             * Set the value of endTime
              *
              * @return  self
              */ 
-            public function setTime($time)
+            public function setEndTime($endTime)
             {
-                        $this->time = $time;
+                        $this->endTime = $endTime;
+
+                        return $this;
+            }
+
+            /**
+             * Get the value of room
+             */ 
+            public function getRoom()
+            {
+                        return $this->room;
+            }
+
+            /**
+             * Set the value of room
+             *
+             * @return  self
+             */ 
+            public function setRoom($room)
+            {
+                        $this->room = $room;
+
+                        return $this;
+            }
+
+            /**
+             * Get the value of startTime
+             */ 
+            public function getStartTime()
+            {
+                        return $this->startTime;
+            }
+
+            /**
+             * Set the value of startTime
+             *
+             * @return  self
+             */ 
+            public function setStartTime($startTime)
+            {
+                        $this->startTime = $startTime;
+
+                        return $this;
+            }
+
+            /**
+             * Get the value of theater
+             */ 
+            public function getTheater()
+            {
+                        return $this->theater;
+            }
+
+            /**
+             * Set the value of theater
+             *
+             * @return  self
+             */ 
+            public function setTheater($theater)
+            {
+                        $this->theater = $theater;
 
                         return $this;
             }

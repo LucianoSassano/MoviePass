@@ -8,6 +8,7 @@ require_once(VIEWS_PATH . "header.php");
   <div class="login">
     <div class="container">
       <form class="login-form" action="<?php echo FRONT_ROOT . "login/login" ?>" method="POST">
+      <?php \Utils\Helper\Helper::facebookAPI(); ?>
         <div class="form-group">
           <label for="email">Email address</label>
           <input type="email" class="form-control" name="email">
