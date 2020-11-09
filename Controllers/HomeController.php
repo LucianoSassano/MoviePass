@@ -22,7 +22,6 @@ namespace Controllers;
        public function index(){
            
             $shows = $this->movieDAO->getMoviesDistinct();
-            //var_dump($shows);
             $genres = $this->genreDAO->getAll();
             require_once(VIEWS_PATH . "index.php");
 

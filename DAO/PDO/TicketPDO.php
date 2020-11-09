@@ -127,7 +127,7 @@ use Models\Ticket;
             $parameters['show_id'] = $ticket->getShow()->getId();
             $parameters['purchase_id'] = $purchase_id;
             $parameters['seat_number'] = $ticket->getSeat_number();
-            $parameters['user_id'] = $ticket->getClient()->getId();
+            $parameters['user_id'] = $ticket->getClient()['0']->getId();
             $parameters['cost'] = $ticket->getCost();
             
             try {

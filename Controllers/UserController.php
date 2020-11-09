@@ -5,6 +5,8 @@
     use Models\User;
     use DAO\PDO\UserPDO as UserDAO;
     use DAO\PDO\ProfilePDO as ProfileDAO;
+    use DAO\PDO\MoviePDO as MovieDAO;
+    use DAO\PDO\GenrePDO as GenreDAO;
     use Models\Profile;
     use Models\Role;
 
@@ -13,10 +15,15 @@
 class UserController {
 
         private $userDAO;
+        private $profileDAO;
+        private $movieDAO;
+        private $genreDAO;
 
         public function __construct() {
             $this->userDAO = new UserDAO();
             $this->profileDAO = new ProfileDAO();
+            $this->movieDAO = new MovieDAO();
+            $this->genreDAO = new GenreDAO();
         }
 
         /**
@@ -28,12 +35,11 @@ class UserController {
             if($email && $password) {
                 if($this->validate($email)){
                     $user = new User($email, $password);
-                    $role = new Role(2,"Client");
+                    $role = new Role(User::CLIENT_ROLE,"Client");
                     $user->setRole($role); // Seteo como cliente de manera predeterminada
 
                     $this->userDAO->add($user);
 
-                    // Falta designar la session ( $_SESSION["loggedUser"] = $user )
                     $_SESSION["loggedUser"] = $user;
                     $user_email = $email;
                     require_once(VIEWS_PATH . "profile-creation.php");    // Aca tendria que redireccionar adentro ya logueado
@@ -75,7 +81,11 @@ class UserController {
                 $profile = new Profile($first_name, $last_name, $dni);
 
                 $this->profileDAO->add($profile, $user_id);
+                $shows = $this->movieDAO->getMoviesDistinct();
+                $genres = $this->genreDAO->getAll();
 
+                $_SESSION["loggedUser"] = $user;
+                
                 require_once(VIEWS_PATH . "index.php");
             }
             else{

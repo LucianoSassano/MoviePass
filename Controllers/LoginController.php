@@ -3,7 +3,8 @@
     namespace Controllers;
 
     use DAO\PDO\UserPDO as UserDAO;
-    use DAO\JSON\MovieJSON as MovieDAO;
+    use DAO\PDO\MoviePDO as MovieDAO;
+    use DAO\PDO\GenrePDO AS GenreDAO;
     use Models\User;
 
     use Utils\Helper\Helper;
@@ -12,11 +13,13 @@
 
         private $userDAO;
         private $movieDAO;
+        private $genreDAO;
 
         function __construct()
         {
             $this->userDAO = new UserDAO();
             $this->movieDAO = new MovieDAO();
+            $this->genreDAO = new GenreDAO();
         }
 
         public function index(){
@@ -36,19 +39,21 @@
                 $user = $this->userDAO->getByEmail($email);
                
                 if($user){  // Si el usuario existe
-                    
+               
                     // Verificar password
                     if($user->getPassword() == $password) {
-                        $pass = "entro en pass";
+                
                      
                         $_SESSION['loggedUser'] = $user;    // almacena el usuario en la session
 
                         if($user->getRole()->getId() == User::ADMIN_ROLE){
-                            $prole = "role de admin entro";
+                            
                             
                             $movies = $this->movieDAO->getAll();
                             require_once(VIEWS_PATH . "admin.php"); // Redirecciona al sistema logueado como admin
                         } else {
+                            $shows = $this->movieDAO->getMoviesDistinct();
+                            $genres = $this->genreDAO->getAll();
                             require_once(VIEWS_PATH . "index.php"); // Redirecciona al sistema logueado como user
                         }
                     }
@@ -78,6 +83,9 @@
         function logout() {
             session_destroy();
             session_start();
+
+            $shows = $this->movieDAO->getMoviesDistinct();
+            $genres = $this->genreDAO->getAll();
             require_once(VIEWS_PATH . "index.php");
         }
     }

@@ -4,16 +4,17 @@
       <li class="nav-item active">
         <a class="nav-link" href="<?php echo FRONT_ROOT . 'home/index' ?>">Home <span class="sr-only">(current)</span></a>
       </li>
-      <?php 
-      if(isset($_SESSION["loggedUser"])) { 
-        ?>
+      <?php
+      if (isset($_SESSION["loggedUser"])) {
+      ?>
 
         <li class="nav-item">
           <a class="nav-link" href="<?php echo FRONT_ROOT . 'ticket/showMyTickets' ?>">My Shows</a>
         </li>
 
-      <?php 
-      } 
+
+      <?php
+      }
       ?>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -29,6 +30,10 @@
           </li>
 
         <?php } else { ?>
+
+          <li class="nav-item">
+            <a class="nav-link"> Welcome  <?php echo $_SESSION["loggedUser"]->getEmail() ?> !</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo FRONT_ROOT . "login/logout" ?>">Logout</a>
           </li>

@@ -2,7 +2,7 @@
 
 <body class="homeViewShow">
     <?php require_once(VIEWS_PATH . 'navbar.php'); ?>
-    <div >
+    <div>
         <div class="container ">
             <div class="row">
                 <div class="col-md-6">
@@ -53,9 +53,15 @@
                                         <p>Show Start: <?php echo $show->getStartTime() ?></p>
                                         <p>Show End: <?php echo $show->getEndTime() ?></p>
                                         <p> Show date:
-                                            <a class="btn btn-warning" data-toggle="tooltip" data-placement="right" title="Click to make a reservation" href="<?php echo FRONT_ROOT . "purchase/seats/" . $show->getId(); ?>">
-                                                <?php echo $show->getDate() ?>
-                                            </a>
+
+                                            <form action="<?php echo FRONT_ROOT . "purchase/seats" ?>"  method="POST">
+                                                <input name="show_id" value="<?php echo $show->getId() ?>" hidden>
+                                                <input name="room_id" value="<?php echo $room->getRoom_id() ?>" hidden> 
+                                                <button type="submit" class="btn btn-warning" data-toggle="tooltip" data-placement="right" title="Click to make a reservation">
+                                                    <?php echo $show->getDate() ?>
+                                                </button>
+
+                                            </form>
                                         </p>
                                     <?php
                                     }

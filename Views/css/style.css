@@ -421,3 +421,27 @@
 
 /*--------------End of Shows Active View---------------- */
 
+/*--------------Start of chooseSeats View---------------- */
+
+.seatPicker{
+
+    height: 100vh;
+    background-image: url("https://images.unsplash.com/photo-1573901715464-3abada6ceed0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    color: white;
+
+}
+
+.seatPicker h1{
+    justify-content: center;
+    align-self: start;
+    color: white;
+    text-shadow: 3px 3px 3px black;
+}
+
+/*--------------End of chooseSeats View---------------- */
+
+
+
