@@ -1,7 +1,7 @@
 <?php require_once(VIEWS_PATH . "header.php") ?>
 
 <body class="homeViewShow">
-    <?php require_once(VIEWS_PATH . 'navbar.php'); ?>
+    <?php require_once(VIEWS_PATH . 'admin-navbar.php'); ?>
     <div>
         <div class="container ">
             <div class="row">
@@ -53,19 +53,12 @@
                                     <?php
                                     foreach ($room->getShows() as $show) {
                                     ?>
+                                        <br>
+                                        <p> Show date: <?php echo $show->getDate() ?></p>
                                         <p>Show Start: <?php echo $show->getStartTime() ?></p>
                                         <p>Show End: <?php echo $show->getEndTime() ?></p>
-                                        <p> Show date: <?php echo $show->getDate() ?>
+                                        <br>
 
-                                            <form action="<?php echo FRONT_ROOT . "purchase/seats" ?>"  method="POST">
-                                                <input name="show_id" value="<?php echo $show->getId() ?>" hidden>
-                                                <input name="room_id" value="<?php echo $room->getRoom_id() ?>" hidden> 
-                                                <button type="submit" class="btn btn-warning" data-toggle="tooltip" data-placement="right" title="Click to make a reservation">
-                                                   Reserve
-                                                </button>
-                                                <a class="btn btn-danger">Delete</a>
-
-                                            </form>
                                         </p>
 
                                     <?php

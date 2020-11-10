@@ -98,6 +98,8 @@
 
         }
 
+        
+
         public function getByGenre($genre_id){
 
             $query = 
@@ -158,17 +160,17 @@
 
         
         //chequea la existencia de la pelicula contenida en nustro show en todos los otros teatros en la fecha del show
-        public function checkMovieInOtherTheaters($show){
+        public function checkMovieInOtherTheaters($show,$theater_id){
             
             //me va a traer todos los shows que tengan la movie de mi show en el mismo dia pero en otro teatro
 
             $query = " 
-            SELECT * FROM `shows` as s WHERE s.movie_id ='".$show->getMovie()->getId()."'
-            AND s.theater_id != :theater_id
-            AND s.date = :date ";
+            SELECT * FROM `shows` as s WHERE s.movie_id = :movie_id
+            AND s.date = :date 
+            AND s.theater_id != :theater_id;";
 
-           // $parameters['movie_id'] = $show->getMovie()->getId();
-            $parameters['theater_id'] = $show->getTheater()->getId();
+            $parameters['movie_id'] = $show->getMovie()->getId();
+            $parameters['theater_id'] = $theater_id;
             $parameters['date'] = $show->getDate();
             
             try {
@@ -181,29 +183,31 @@
                 throw $ex;
             }
 
-            if(empty($resultSet)){
-                return true;
-                // si retorna vacio la movie no se encuentra en otro teatro en la fecha especificada , se puede insertar el registro
+            if(!empty($resultSet)){
+                 
+                return $this->map($resultSet);
+            
             }else{
-                return false;
-                // ya existe la movie en otro teatro en la fecha especificada , no se puede instertar el show
+                return $resultSet;
+             
             }
 
         }
 
-        public function checkMovieInOtherRooms($show){
+        public function checkMovieInOtherRooms($show,$room_id){
 
 
             // seleciono todos los shows que tengan la movie especificada en la fecha y que no esten en mi sala
 
             $query = " 
-            SELECT * FROM `shows` WHERE movie_id = '".$show->getMovie()->getId()."'
+            SELECT * FROM `shows` WHERE movie_id = :movie_id
             AND theater_id = :theater_id 
-            AND room_id != :room_id
-            AND date = :date ;";
+            AND date = :date
+            AND room_id != :room_id;";
 
+            $parameters['movie_id'] = $show->getMovie()->getId();
             $parameters['theater_id'] = $show->getTheater()->getId();
-            $parameters['room_id'] = $show->getRoom()->getRoom_id();
+            $parameters['room_id'] = $room_id;
             $parameters['date'] = $show->getDate();
             
             try {
@@ -216,12 +220,13 @@
                 throw $ex;
             }
 
-            if(empty($resultSet)){
-                return true;
-                // si retorna vacio la movie no se encuentra en otro room en la fecha especificada , se puede insertar el registro
+            if(!empty($resultSet)){
+             
+                return $this->map($resultSet);
+             
             }else{
-                return false;
-                // ya existe la movie en otro room en la fecha especificada , no se puede instertar el show
+                return $resultSet;
+             
             }
 
 
@@ -265,15 +270,7 @@
          * Add new show
          */
         public function add(Show $show,$theater_id, $room_id) {
-
-
-            if($this->checkMovieInOtherTheaters($show)){
-                var_dump("entro en teatro");
-               
-            if($this->checkMovieInOtherRooms($show)){
-                var_dump("entro en room");
-                if($this->checkShowDate($show)){
-                    var_dump("entro antes de la query");
+                  
                     $query = "
                     SET FOREIGN_KEY_CHECKS=0;
                     INSERT INTO `shows` (room_id, theater_id, movie_id, date, startTime, endTime, price) 
@@ -297,12 +294,6 @@
                     }catch(Exception $ex) {
                         throw $ex;
                     }
-                }
-                
-            }else{
-                echo "ERROR";
-            }
-            }
                 
          
         }

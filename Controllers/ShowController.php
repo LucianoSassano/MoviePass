@@ -54,12 +54,20 @@ class ShowController
         require_once(VIEWS_PATH . "show-creation.php");
     }
 
+    function delete($show_id)
+    {
+
+        if ($show_id) {
+            $show = $this->showDAO->get($show_id);
+        }
+    }
+
     function add($date, $time, $price, $theater_id, $movie_id, $room_id)
     {
 
         if ($date && $time && $price) {
             date_default_timezone_set('America/Argentina/Buenos_Aires');
-            $date = new DateTime("{$date} {$time}");  //fecha y hora de inicio del show
+            $date = new DateTime("{$date}");  //fecha y hora de inicio del show
             $date = date_format($date, 'Y-m-d');
 
             $movie = $this->movieDAO->get($movie_id);
@@ -70,11 +78,6 @@ class ShowController
             $startTime = date_format($startTime, 'H:i:s');
 
             $endTime = new DateTime("{$time}"); // hora de finalizacion de la funcion
-
-            // si la duracion de la movie es menor a dos horas la funcion es de 2hrs
-            // si la movie dura es mayor a dos hs pero menor a 2 horas y media la funcion dura 2 horas treinta 
-            // si la funcion es mayor a estas dos entonces directamente es de 3 horas la funcion
-
             if ($movieDurationInMinutes < 120) {
                 $endTime->modify('+2 hours');
             } else if ($movieDurationInMinutes > 120 && $movieDurationInMinutes < 150) {
@@ -100,9 +103,29 @@ class ShowController
             $show->setRoom($this->roomDAO->get($room_id));
 
 
-            $this->showDAO->add($show, $theater_id, $room_id);
+            $checkMovieInTheaters = $this->showDAO->checkMovieInOtherTheaters($show, $theater_id);
+            $checkMovieInRooms = $this->showDAO->checkMovieInOtherRooms($show, $room_id);
 
-            $this->getActive();
+            if (empty($checkMovieInTheaters)) {
+                
+                if(empty($checkMovieInRooms)){
+                    
+                    $this->showDAO->add($show, $theater_id, $room_id);
+                    $this->getActive();
+
+                }else{
+                    echo '<script language="javascript">';
+                    echo 'alert("Movie is in other room of the same theater on this date , record not inserted")';
+                    echo '</script>';
+                }
+            }else{
+                echo '<script language="javascript">';
+                echo 'alert("Movie is in other theater in the selected date , record not inserted")';
+                echo '</script>';
+
+            }
+
+             require_once(VIEWS_PATH . "admin.php");
         } else {
             echo "ERROR";
         }
@@ -121,8 +144,7 @@ class ShowController
 
         if ($genre_id) {
             $shows = $this->movieDAO->getMoviesDistinctByGenre($genre_id);
-            
-        }else {
+        } else {
             $shows = $this->movieDAO->getMoviesDistinct();
         }
 
@@ -134,7 +156,7 @@ class ShowController
     {
 
         if ($genre_id) {
-            $shows = $this->movieDAO->getMoviesDistinct($genre_id);
+            $shows = $this->movieDAO->getMoviesDistinctByGenre($genre_id);
         } else {
             $shows = $this->movieDAO->getMoviesDistinct();
         }
@@ -143,15 +165,17 @@ class ShowController
         require_once(VIEWS_PATH . "index.php");
     }
 
-    function showReservation($show_id){
+    function showReservation($show_id)
+    {
         $show = $this->showDAO->get($show_id);
-        
+
         require_once(VIEWS_PATH . "show-reservation.php");
     }
 
-    function confirmReservation($show_id){
+    function confirmReservation($show_id)
+    {
 
         require_once(VIEWS_PATH . "client-shows.php");
-
     }
 }
+?>

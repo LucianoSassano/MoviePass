@@ -8,8 +8,9 @@
     use DAO\PDO\GenrePDO as GenreDAO;
     use DAO\PDO\ApiPDO as ApiDAO;
     use DAO\PDO\TheaterPDO as TheaterDAO;
-    
-    class MovieController{
+use Models\User;
+
+class MovieController{
 
         private $movieDAO;
         private $genreDAO;
@@ -26,14 +27,28 @@
          * Get theaters, with rooms, with shows from movie
          */
         public function getShows($movie_id) {
-
             $theatersDAO = new TheaterDAO();
 
-            $theaters = $theatersDAO->getByMovie($movie_id);
+            if($_SESSION['loggedUser']->getRole()->getId() == User::ADMIN_ROLE){
 
-            $movie = $this->movieDAO->get($movie_id);
+                $theaters = $theatersDAO->getByMovie($movie_id);
+                $movie = $this->movieDAO->get($movie_id);
+                require_once(VIEWS_PATH . "admin-movie-shows.php");
 
-            require_once(VIEWS_PATH . "movie-shows.php");
+            }else if($_SESSION['loggedUser']->getRole()->getId() == User::CLIENT_ROLE){
+
+                $theaters = $theatersDAO->getByMovie($movie_id);
+                $movie = $this->movieDAO->get($movie_id);
+                require_once(VIEWS_PATH . "movie-shows.php");
+            }else{
+
+                $theaters = $theatersDAO->getByMovie($movie_id);
+
+                $movie = $this->movieDAO->get($movie_id);
+    
+                require_once(VIEWS_PATH . "movie-shows.php");
+
+            }
         }
 
 

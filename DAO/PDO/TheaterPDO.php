@@ -50,7 +50,7 @@
 
         public function getByMovie($movie_id) {
 
-            $query = " select distinct t.theater_id as theater_id, t.name as name, t.address as address 
+            $query = " select distinct t.theater_id , t.name , t.address 
             from theaters as t 
             inner join rooms as r 
             on t.theater_id = r.theater_id 
