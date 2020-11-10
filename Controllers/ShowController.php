@@ -72,60 +72,71 @@ class ShowController
 
             $movie = $this->movieDAO->get($movie_id);
             $movieDurationInMinutes = $movie->getDuration(); // duracion en minutos de la pelicula
-
+          
             $startTime = new DateTime("{$time}"); //hora de inicio de la funcion
 
             $startTime = date_format($startTime, 'H:i:s');
 
             $endTime = new DateTime("{$time}"); // hora de finalizacion de la funcion
-            if ($movieDurationInMinutes < 120) {
-                $endTime->modify('+2 hours');
-            } else if ($movieDurationInMinutes > 120 && $movieDurationInMinutes < 150) {
-                $endTime->modify('+2 hours');
-                $endTime->modify('+30 minutes');
-            } else {
-                $endTime->modify('+3 hours');
-            }
+          
+            $endTime->modify("+{$movieDurationInMinutes} minutes");
 
-            // una vez seteada la duracion de la funcion se le agregan los 15 minutos entre funcion y funcion
+            $endTime->modify('+15 minutes');
 
-            $endTime->modify('+15 minutes'); // fecha y hora de finalizacion de la pelicula ya contemplados los 15 minutos entre pelicula y pelicula;
-
+            $time_interval =(int)($movieDurationInMinutes / 2);
+            $interval = new DateTime("+{$time_interval}");
+      
+          
+            $interval = date_format($endTime, 'H:i:s');
 
             $endTime = date_format($endTime, 'H:i:s');
 
-
+            
             $show = new Show($date, $price);
             $show->setMovie($movie);
             $show->setStartTime($startTime);  // es el mismo valor que date pero al guardar en nuestra db solo guarda el timepo y no la fecha.
             $show->setEndTime($endTime);
             $show->setTheater($this->theaterDAO->get($theater_id));
             $show->setRoom($this->roomDAO->get($room_id));
+            $show->setMidInterval($interval);
 
 
             $checkMovieInTheaters = $this->showDAO->checkMovieInOtherTheaters($show, $theater_id);
             $checkMovieInRooms = $this->showDAO->checkMovieInOtherRooms($show, $room_id);
+            $checkShowDate = $this->showDAO->checkShowDate($show);
 
             if (empty($checkMovieInTheaters)) {
                 
                 if(empty($checkMovieInRooms)){
-                    
-                    $this->showDAO->add($show, $theater_id, $room_id);
-                    $this->getActive();
+                    if(empty($checkShowDate)){
+                        $this->showDAO->add($show, $theater_id, $room_id);
+                        $this->getActive();
+                    }else{
+
+                        echo '<script language="javascript">';
+                        echo 'alert("Movie is in the same time interval as a pre-existing show , record not inserted")';
+                        echo '</script>';
+                        require_once(VIEWS_PATH . "admin.php");
+
+                    }
 
                 }else{
                     echo '<script language="javascript">';
                     echo 'alert("Movie is in other room of the same theater on this date , record not inserted")';
                     echo '</script>';
+                    require_once(VIEWS_PATH . "admin.php");
                 }
             }else{
                 echo '<script language="javascript">';
                 echo 'alert("Movie is in other theater in the selected date , record not inserted")';
                 echo '</script>';
+                require_once(VIEWS_PATH . "admin.php");
 
             }
 
-             require_once(VIEWS_PATH . "admin.php");
+           
+
+
         } else {
             echo "ERROR";
         }

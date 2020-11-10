@@ -242,11 +242,13 @@
             SELECT * FROM `shows` as s WHERE  
             :date = s.date AND 
             :startTime BETWEEN s.startTime AND  s.endTime AND
+            :midInterval BETWEEN s.startTime AND s.endTime AND
             :endTime BETWEEN s.startTime AND s.endTime; ";
 
             $parameters['date'] = $show->getDate();
-            $parameters['startTime'] = $show->getStartTime(); 
-            $parameters['endTime'] = $show->getEndTime();           
+            $parameters['startTime'] = $show->getStartTime();
+            $parameters['midInterval'] = $show->getMidInterval();
+            $parameters['endTime'] =$show->getEndTime();           
             try {
 
                 $this->connection = Connection::GetInstance();
@@ -257,11 +259,10 @@
                 throw $ex;
             }
 
-            if(empty($resultSet)){
-                // si retorna vacio quiere decir que el horario y la fecha seleccionada se encuentran libres por lo que se puede insertar el show
-                return true;
+            if(!empty($resultSet)){
+                return $this->map($resultSet);
             }else{
-                return false;
+                return $resultSet;
             }
 
         }
@@ -273,8 +274,8 @@
                   
                     $query = "
                     SET FOREIGN_KEY_CHECKS=0;
-                    INSERT INTO `shows` (room_id, theater_id, movie_id, date, startTime, endTime, price) 
-                    VALUES (:room_id, :theater_id, :movie_id, :date, :startTime, :endTime, :price);
+                    INSERT INTO `shows` (room_id, theater_id, movie_id, date, startTime, endTime, price, midInterval) 
+                    VALUES (:room_id, :theater_id, :movie_id, :date, :startTime, :endTime, :price, :midInterval);
                     SET FOREIGN_KEY_CHECKS=1;";
         
                     $parameters['room_id'] = $room_id;
@@ -284,6 +285,7 @@
                     $parameters['startTime'] = $show->getStartTime();
                     $parameters['endTime'] = $show->getEndTime();
                     $parameters['price'] = $show->getPrice();
+                    $parameters['midInterval'] = $show->getMidInterval();
                 
         
                     try {

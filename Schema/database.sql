@@ -96,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `shows`(
     movie_id INTEGER(50) UNSIGNED,
     date date,
     startTime time,
+    midInterval time,
     endTime time,
     price FLOAT UNSIGNED,
 

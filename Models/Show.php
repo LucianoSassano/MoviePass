@@ -9,9 +9,11 @@
             private $date;
             private $price;
             private $startTime;
+            private $midInterval;
             private $endTime;
             private $room;
             private $theater;
+           
 
             function __construct($date="", $price="")
         {
@@ -19,10 +21,11 @@
             $this->price = $price;
             $this->movie = "";
             $this->startTime = "";
+            $this->midInterval = "";
             $this->endTime = "";
             $this->room = "";
             $this->theater = "";
-            
+        
     
         }
 
@@ -185,6 +188,27 @@
             public function setTheater($theater)
             {
                         $this->theater = $theater;
+
+                        return $this;
+            }
+
+
+            /**
+             * Get the value of midInterval
+             */ 
+            public function getMidInterval()
+            {
+                        return $this->midInterval;
+            }
+
+            /**
+             * Set the value of midInterval
+             *
+             * @return  self
+             */ 
+            public function setMidInterval($midInterval)
+            {
+                        $this->midInterval = $midInterval;
 
                         return $this;
             }

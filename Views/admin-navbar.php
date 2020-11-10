@@ -13,8 +13,14 @@
                     <a class="dropdown-item" href="<?php echo FRONT_ROOT . "theater/createView" ?>">Create a Theather</a>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo FRONT_ROOT . "show/getActive" ?>">Shows</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Shows
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="<?php echo FRONT_ROOT . "show/getActive" ?>">View available</a>
+                    <a class="dropdown-item" href="<?php echo FRONT_ROOT . "movie/getAll" ?>">Create show</a>
+                </div>
             </li>
 
             <li class="nav-item">
