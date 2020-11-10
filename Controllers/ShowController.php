@@ -84,14 +84,21 @@ class ShowController
             $endTime->modify('+15 minutes');
 
             $time_interval =(int)($movieDurationInMinutes / 2);
-            $interval = new DateTime("+{$time_interval}");
-      
           
-            $interval = date_format($endTime, 'H:i:s');
+            $time_interval = round($time_interval,0,PHP_ROUND_HALF_UP);
+         
+            $time_interval = strval($time_interval);
+           
+            $interval = new DateTime("{$time}");
+            $interval->modify("+{$time_interval} minutes");
+            $interval->modify("+8 minutes");
+            
+          
+            $interval = date_format($interval, 'H:i:s');
+         
 
             $endTime = date_format($endTime, 'H:i:s');
 
-            
             $show = new Show($date, $price);
             $show->setMovie($movie);
             $show->setStartTime($startTime);  // es el mismo valor que date pero al guardar en nuestra db solo guarda el timepo y no la fecha.
