@@ -167,7 +167,7 @@
             AND s.theater_id != :theater_id
             AND s.date = :date ";
 
-           
+           // $parameters['movie_id'] = $show->getMovie()->getId();
             $parameters['theater_id'] = $show->getTheater()->getId();
             $parameters['date'] = $show->getDate();
             

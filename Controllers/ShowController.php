@@ -120,9 +120,10 @@ class ShowController
     {
 
         if ($genre_id) {
-            $shows = $this->showDAO->getByGenre($genre_id);
-        } else {
-            $shows = $this->showDAO->getAll();
+            $shows = $this->movieDAO->getMoviesDistinctByGenre($genre_id);
+            
+        }else {
+            $shows = $this->movieDAO->getMoviesDistinct();
         }
 
         $genres = $this->genreDAO->getAll();
@@ -133,9 +134,9 @@ class ShowController
     {
 
         if ($genre_id) {
-            $shows = $this->showDAO->getByGenre($genre_id);
+            $shows = $this->movieDAO->getMoviesDistinct($genre_id);
         } else {
-            $shows = $this->showDAO->getAll();
+            $shows = $this->movieDAO->getMoviesDistinct();
         }
 
         $genres = $this->genreDAO->getAll();

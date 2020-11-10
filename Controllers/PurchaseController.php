@@ -47,7 +47,7 @@ class PurchaseController
 
       if(isset($_SESSION['loggedUser'])){
 
-        if ($_SESSION['loggedUser']['0']->getRole()->getId() == User::ADMIN_ROLE ) {
+        if ($_SESSION['loggedUser']->getRole()->getId() == User::ADMIN_ROLE ) {
             echo '<script>alert("Action not available for admin")</script>';
             require_once(VIEWS_PATH . "admin.php");
         } else {
