@@ -39,23 +39,28 @@
                 $user = $this->userDAO->getByEmail($email);
                
                 if($user){  // Si el usuario existe
-               
+                  
                     // Verificar password
                     if($user->getPassword() == $password) {
                 
                      
                         $_SESSION['loggedUser'] = $user;    // almacena el usuario en la session
-
+                       
                         if($user->getRole()->getId() == User::ADMIN_ROLE){
+                        
                             
                             
                             $movies = $this->movieDAO->getAll();
                             require_once(VIEWS_PATH . "admin.php"); // Redirecciona al sistema logueado como admin
-                        } else {
+                        }else {
                             $shows = $this->movieDAO->getMoviesDistinct();
                             $genres = $this->genreDAO->getAll();
                             require_once(VIEWS_PATH . "index.php"); // Redirecciona al sistema logueado como user
                         }
+                    }else{
+                        $errorMsg = "Usuario no encontrado";  // Esto se envia al login.php y se muestra 
+                        require_once(VIEWS_PATH . "login.php");
+
                     }
                 }else {
                     $errorMsg = "Usuario no encontrado";  // Esto se envia al login.php y se muestra 
@@ -89,6 +94,4 @@
             require_once(VIEWS_PATH . "index.php");
         }
     }
-
-
 ?>

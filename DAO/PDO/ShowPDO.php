@@ -156,24 +156,6 @@
             }
         }
 
-        /**
-         * Edit show
-         */
-        // public function edit(Show $show) {
-
-        //     $query = "";
-
-        //     $parameters[''] = $;
-
-        //     try {
-
-        //         $this->connection = Connection::GetInstance();
-        //         return $this->connection->ExecuteNonQuery($query, $parameters);
-
-        //     }catch(Exception $ex) {
-        //         throw $ex;
-        //     }
-        // }
         
         //chequea la existencia de la pelicula contenida en nustro show en todos los otros teatros en la fecha del show
         public function checkMovieInOtherTheaters($show){
@@ -185,7 +167,7 @@
             AND s.theater_id != :theater_id
             AND s.date = :date ";
 
-           // $parameters['movie_id'] = $show->getMovie()->getId();
+           
             $parameters['theater_id'] = $show->getTheater()->getId();
             $parameters['date'] = $show->getDate();
             
@@ -217,7 +199,7 @@
             $query = " 
             SELECT * FROM `shows` WHERE movie_id = '".$show->getMovie()->getId()."'
             AND theater_id = :theater_id 
-            AND room_id = :room_id
+            AND room_id != :room_id
             AND date = :date ;";
 
             $parameters['theater_id'] = $show->getTheater()->getId();
@@ -252,12 +234,14 @@
 
         
             $query = " 
-            SELECT * FROM `shows` WHERE  
-            date = :date
-            and startTime = :startTime ;";
+            SELECT * FROM `shows` as s WHERE  
+            :date = s.date AND 
+            :startTime BETWEEN s.startTime AND  s.endTime AND
+            :endTime BETWEEN s.startTime AND s.endTime; ";
 
             $parameters['date'] = $show->getDate();
-            $parameters['startTime'] = $show->getStartTime();            
+            $parameters['startTime'] = $show->getStartTime(); 
+            $parameters['endTime'] = $show->getEndTime();           
             try {
 
                 $this->connection = Connection::GetInstance();
@@ -284,10 +268,12 @@
 
 
             if($this->checkMovieInOtherTheaters($show)){
+                var_dump("entro en teatro");
                
             if($this->checkMovieInOtherRooms($show)){
-
+                var_dump("entro en room");
                 if($this->checkShowDate($show)){
+                    var_dump("entro antes de la query");
                     $query = "
                     SET FOREIGN_KEY_CHECKS=0;
                     INSERT INTO `shows` (room_id, theater_id, movie_id, date, startTime, endTime, price) 

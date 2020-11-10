@@ -112,6 +112,7 @@ class ShowController
     {
         $shows = $this->movieDAO->getMoviesDistinct();
         $genres = $this->genreDAO->getAll();
+
         require_once(VIEWS_PATH . "shows-active.php");
     }
 
