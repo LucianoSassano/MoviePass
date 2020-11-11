@@ -20,7 +20,7 @@ use Models\Ticket;
         private $userDAO;
 
         function __construct(){
-            // $this->showDAO = new ShowDAO();
+           
             $this->userDAO = new UserDAO();
         }
 
@@ -53,7 +53,7 @@ use Models\Ticket;
         public function getAllByUser($user_id){
 
             $query = "
-            SELECT * FROM `tickets` WHERE user_id = :id";
+            SELECT * FROM `tickets` WHERE user_id = :id ;";
 
             $parameters['id'] = $user_id;
 
@@ -146,15 +146,16 @@ use Models\Ticket;
         public function map($data){
 
             $data = is_array($data) ? $data : [];
+            $this->showDAO = new ShowDAO();
 
             $values = array_map(function($row){
-                $show = new Ticket($row['seat_number'], $row['cost']);
-                // $show->setShow($this->showDAO->get($row['show_id']));
-                $show->setClient($this->userDAO->get($row['user_id']));
-                $show->setDate( $row['date']);
+                $ticket = new Ticket($row['seat_number'], $row['cost']);
+                $ticket->setShow($this->showDAO->get($row['show_id']));
+                $ticket->setClient($this->userDAO->get($row['user_id']));
+                $ticket->setDate( $row['date']);
                
 
-                return $show;
+                return $ticket;
             }, $data);
 
             return count($values) > 1 ? $values : $values['0'];
@@ -165,11 +166,11 @@ use Models\Ticket;
             $data = is_array($data) ? $data : [];
 
             $values = array_map(function($row){
-                $show = new Ticket($row['seat_number'], $row['cost']);
-                $show->setDate( $row['date']);
+                $ticket = new Ticket($row['seat_number'], $row['cost']);
+                $ticket->setDate( $row['date']);
                
 
-                return $show;
+                return $ticket;
             }, $data);
 
             return $values;

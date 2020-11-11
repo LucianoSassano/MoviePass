@@ -20,8 +20,8 @@
 
         function __construct(){
             $this->movieDAO = new MovieDAO();
-            $this->ticketDAO = new TicketDAO();
-           // $this->roomDAO = new RoomDAO();
+           
+          
         }
 
         /**
@@ -126,6 +126,8 @@
         }
 
         public function getOccupiedSeats($show_id) {
+            $this->ticketDAO = new TicketDAO();
+            
             $tickets = $this->ticketDAO->getByShow($show_id);
             $seats = array();
 

@@ -3,6 +3,7 @@
  namespace Controllers;
 
  use Models\Ticket;
+ use Models\User;
  use DAO\PDO\TicketPDO as TicketDAO;
  use DAO\PDO\ShowPDO as ShowDAO;
  use DAO\PDO\UserPDO as UserDAO;
@@ -32,9 +33,28 @@
 
         public function showMyTickets(){
 
-            $user_id = $_SESSION['loggedUser']->getId();
-            $tickets = $this->ticketDAO->getAllByUser($user_id);
-            require_once(VIEWS_PATH . "my-tickets.php");
+            if(isset($_SESSION['loggedUser'])){
+                if($_SESSION['loggedUser']->getRole()->getId() == User::CLIENT_ROLE ){
+                    $user_id = $_SESSION['loggedUser']->getId();
+                    $tickets = $this->ticketDAO->getAllByUser($user_id);
+                  
+                    require_once(VIEWS_PATH . "my-tickets.php");
+
+                }else if($_SESSION['loggedUser']->getRole()->getId() == User::ADMIN_ROLE ){
+
+                    echo '<script language="javascript">';
+                    echo 'alert("Action not available for admin!")';
+                    echo '</script>';
+                    require_once(VIEWS_PATH . "admin.php");
+
+                }
+            
+            }else{
+                echo '<script language="javascript">';
+                echo 'alert("You must login first!")';
+                echo '</script>';
+                require_once(VIEWS_PATH . "index.php");
+            }
         }
 
 
