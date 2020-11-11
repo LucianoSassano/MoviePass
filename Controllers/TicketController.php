@@ -57,6 +57,13 @@
             }
         }
 
+        public function soldTickets($theater_id, $date1, $date2){
+
+            $tickets = $this->ticketDAO->getAllByTheater($theater_id, $date1, $date2);
+            var_dump($tickets);
+
+        }
+
 
 
 

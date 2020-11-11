@@ -3,16 +3,19 @@
 namespace Controllers;
 
 use DAO\PDO\MoviePDO as MovieDAO;
+use DAO\PDO\TheaterPDO as TheaterDAO;
 
 class AdminController
 {
 
     private $movieDAO;
+    private $theaterDAO;
   
 
     function __construct()
     {
         $this->movieDAO = new MovieDAO();
+        $this->theaterDAO = new TheaterDAO;
        
     }
 
@@ -25,6 +28,7 @@ class AdminController
 
     function viewAnalytics(){
         
+        $theaters = $this->theaterDAO->getAll();
         require_once(VIEWS_PATH . "admin-analytics.php");
     }
     

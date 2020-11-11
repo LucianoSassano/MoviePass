@@ -132,9 +132,14 @@ use Models\Ticket;
             AND t.date BETWEEN :date1 AND :date2; 
             ;";
 
+            $parameters['theater_id'] = $theater_id;
+            $parameters['date1'] = $date1;
+            $parameters['date2'] = $date2;
+
+
             try {
                 $this->connection = Connection::GetInstance();
-                $resultSet = $this->connection->Execute($query);
+                $resultSet = $this->connection->Execute($query,$parameters);
             }catch (Exception $ex) {
                 throw $ex;
             }

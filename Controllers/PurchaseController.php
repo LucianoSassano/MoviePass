@@ -143,59 +143,73 @@ class PurchaseController
     public function confirm($show_id, $seats, $total, $ccc , $ccn)
     {
       
-        
-        $show = $this->showDAO->get($show_id);
-
-        $user = $this->userDAO->get($_SESSION['loggedUser']->getId());
-
-
-        $ticketList = array();
-
-
-        $seatError = false;
 
         $creditCard = 0;
        
         if($this->ValidCreditcard($ccn ,$ccc)){
-            $creditCard = $ccn;
-        }else{
-            
-            echo '<script language="javascript">';
-            echo 'alert("Invalid Credit Card Data, transaction aborted")';
-            echo '</script>';
-            
-            require_once(VIEWS_PATH . "index.php");
-        }
-       
-        
-      
 
-        if (!$seatError) {
+            $creditCard = $ccn;
+             
+        $show = $this->showDAO->get($show_id);
+
+        $user = $this->userDAO->get($_SESSION['loggedUser']->getId());
+
+        $total = 0;
+
+        $ticketList = array();
+
+        $seatsOccupied = $this->showDAO->getOccupiedSeats($show_id);
+
+        $seatError = false;
+
+        foreach($seats as $seat){
+            if(in_array($seat, $seatsOccupied)){
+                $seatError = true;
+            } else {
+                $total += $show->getPrice();
+                $ticket = new Ticket($seat, $show->getPrice());
+                $ticket->setShow($show);
+                $ticket->setClient($user);
+                array_push($ticketList, $ticket);
+            }
+        }
+
+        if(!$seatError){
             $theater = $this->theaterDAO->getbyMovie($show->getMovie()->getId());
 
-            $purchase = new Purchase(
-                $user->getEmail(),
-                $theater['0'],
-                (new DateTime('now'))->format('Y-m-d H:i:s'),
-                $ticketList,
-                $total
-            );
-
-
+            $purchase = new Purchase($user->getEmail(), 
+                                    $theater['0'], 
+                                    (new DateTime('now'))->format('Y-m-d H:i:s'),
+                                    $ticketList, 
+                                    $total);
+            
+            
             $rows = $this->purchaseDAO->add($purchase);
-
-            if ($rows) {
+            
+            if($rows){
                 $msg = "Purchase successfully created !";
                 Helper::sendMail($purchase);
             } else {
                 $msg = "An error ocurred";
             }
-        } else {
+        }else {
             $msg = "Seats already occupied !";
         }
-
+        
 
         require_once(VIEWS_PATH . "purchase.php");
+        }else{
+            
+            echo '<script language="javascript">';
+            echo 'alert("Invalid Credit Card Data, transaction aborted")';
+            echo '</script>';
+            $shows = $this->movieDAO->getMoviesDistinct();
+            $genres = $this->genreDAO->getAll();
+            require_once(VIEWS_PATH . "index.php");
+        }
+       
+
+      
 
     }
 
