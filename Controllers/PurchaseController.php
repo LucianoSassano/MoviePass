@@ -170,6 +170,7 @@ class PurchaseController
                 $ticket = new Ticket($seat, $show->getPrice());
                 $ticket->setShow($show);
                 $ticket->setClient($user);
+                $ticket->setDate((new DateTime('now'))->format('Y-m-d H:i:s'));
                 array_push($ticketList, $ticket);
             }
         }

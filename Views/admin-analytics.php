@@ -40,10 +40,15 @@
         <br>
         </form>
 
-        <?php if (isset($sold) && isset($tickets)) { ?>
+        <?php if (isset($sold) && isset($money)) { ?>
 
-            <label>Cantidad de entradas vendidas / cantidad de entradas disponibles</label>
-            <div> <?php echo $sold ?> / <?php echo $tickets ?> <div>
+            <label>Cantidad de entradas vendidas</label>
+            <div> <?php echo $sold ?> <div>
+                <hr>
+                <label>Ganancias totals en pesos</label>
+            <div> <?php echo $money ?> <div>
+                
+                
                 <?php } ?>
                 <hr>
 

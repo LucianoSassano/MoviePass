@@ -7,12 +7,14 @@
  use DAO\PDO\TicketPDO as TicketDAO;
  use DAO\PDO\ShowPDO as ShowDAO;
  use DAO\PDO\UserPDO as UserDAO;
+ use DAO\PDO\TheaterPDO as TheaterDAO;
 
     class TicketController{
 
         private $ticketDAO;
         private $showDAO;
         private $userDAO;
+        private $theaterDAO;
 
         function __construct()
         {
@@ -59,8 +61,16 @@
 
         public function soldTickets($theater_id, $date1, $date2){
 
-            $tickets = $this->ticketDAO->getAllByTheater($theater_id, $date1, $date2);
-            var_dump($tickets);
+            $ticketsFromDb = $this->ticketDAO->getAllByTheater($theater_id, $date1, $date2);
+            $sold = count($ticketsFromDb);
+            $money = 0;
+            foreach($ticketsFromDb as $ticket){
+                $money += $ticket->getCost();
+            }
+            $this->theaterDAO = new TheaterDAO();
+            $theaters = $this->theaterDAO->getAll();
+            
+            require_once(VIEWS_PATH . "admin-analytics.php");
 
         }
 
