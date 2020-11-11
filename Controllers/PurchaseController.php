@@ -16,6 +16,7 @@ use DAO\PDO\MoviePDO as MovieDAO;
 use DAO\PDO\GenrePDO as GenreDAO;
 
 use DateTime;
+use DateTimeZone;
 use Utils\Helper\Helper;
 
 
@@ -44,6 +45,7 @@ class PurchaseController
 
     public function seats($room_id, $show_id)
     {
+
 
       if(isset($_SESSION['loggedUser'])){
 
@@ -142,7 +144,7 @@ class PurchaseController
 
     public function confirm($show_id, $seats, $total, $ccc , $ccn)
     {
-      
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
 
         $creditCard = 0;
        
@@ -180,7 +182,7 @@ class PurchaseController
 
             $purchase = new Purchase($user->getEmail(), 
                                     $theater['0'], 
-                                    (new DateTime('now'))->format('Y-m-d H:i:s'),
+                                    (new DateTime('now',new DateTimeZone('America/Argentina/Buenos_Aires')))->format('Y-m-d H:i:s'),
                                     $ticketList, 
                                     $total);
             

@@ -42,7 +42,7 @@
             $helper = $fb->getRedirectLoginHelper();
 
             // URL de redireccion al login de fb
-            //$loginUrl = $helper->getLoginUrl("http://localhost/MoviePass/fb-Login.php");
+          
             if(!$signUpMode){
                 $loginUrl = $helper->getLoginUrl("http://localhost/MoviePass/Login/FacebookLogin");
                 // URL a la que el usuario accede para loguear desde facebook
@@ -66,7 +66,7 @@
             $accessToken = $helper->getAccessToken();
 
             $user = null;
-            //Si tengo el token, accedo al usuario y ejecuto lo que quiera
+           
             if($accessToken != null){
                 try{
                     $response = $fb->get('/me?fields=id,email', $accessToken);
