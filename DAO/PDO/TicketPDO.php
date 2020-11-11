@@ -118,6 +118,37 @@ use Models\Ticket;
             }
         }
 
+
+         /**
+         * Get all tickets that belongs to a theater between two specific dates
+         */
+        public function getAllByTheater($theater_id, $date1, $date2) {
+
+            $query = "
+            SELECT * FROM `tickets` as t 
+            INNER JOIN shows as s
+            ON t.show_id = s.show_id
+            WHERE s.theater_id = :theater_id
+            AND t.date BETWEEN :date1 AND :date2; 
+            ;";
+
+            try {
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query);
+            }catch (Exception $ex) {
+                throw $ex;
+            }
+
+            if(!empty($resultSet)){
+                return $this->map($resultSet);
+            }else {
+                return false;
+            }
+        }
+
+
+
+
         public function add(Ticket $ticket, $purchase_id){
 
             $query = "

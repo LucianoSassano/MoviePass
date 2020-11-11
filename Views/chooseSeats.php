@@ -7,10 +7,9 @@
 
             <div class="row">
                 <div class="col-12">
-                    <!-- <h2>Show id: <?php echo $show_id ?></h2> -->
                     <h1>Back Area</h1>
                     <hr>
-                    <form action="<?php echo FRONT_ROOT . "purchase/confirm" ?>" method="POST">
+                    <form action="<?php echo FRONT_ROOT . "purchase/reservation" ?>" method="POST">
                         <input type="hidden" value="<?php echo $show_id ?>" name="show_id">
                         <?php if (isset($room)) { ?>
 

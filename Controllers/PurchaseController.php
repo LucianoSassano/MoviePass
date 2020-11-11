@@ -48,33 +48,36 @@ class PurchaseController
       if(isset($_SESSION['loggedUser'])){
 
         if ($_SESSION['loggedUser']->getRole()->getId() == User::ADMIN_ROLE ) {
+
             echo '<script>alert("Action not available for admin")</script>';
             require_once(VIEWS_PATH . "admin.php");
+
         }else if($_SESSION['loggedUser']->getRole()->getId() == User::CLIENT_ROLE) {
 
             $room = $this->roomDAO->getWithShow($room_id, $show_id);
-           
+        
             $seatsOccupied = $this->showDAO->getOccupiedSeats($show_id);
-         
 
             require_once(VIEWS_PATH . "chooseSeats.php");
         }
-      }else{
+      }else {
 
         $shows = $this->movieDAO->getMoviesDistinct();
         $genres = $this->genreDAO->getAll();
         echo '<script>alert("You must login to make a reservation")</script>';
-          require_once(VIEWS_PATH . "index.php");
+        require_once(VIEWS_PATH . "index.php");
       }
+
     }
 
-    public function confirm($show_id, $seats)
-    {
+    public function reservation($show_id, $seats){
 
         $show = $this->showDAO->get($show_id);
-
+        
         $user = $this->userDAO->get($_SESSION['loggedUser']->getId());
 
+        $subtotal = 0;
+        $discount = 0;
         $total = 0;
 
         $ticketList = array();
@@ -82,16 +85,36 @@ class PurchaseController
         $seatsOccupied = $this->showDAO->getOccupiedSeats($show_id);
 
         $seatError = false;
-
+       
+     
+        $dayOfShow = date("w", strtotime($show->getDate()));
+        var_dump($dayOfShow);
+        $dayOfShow = (int) $dayOfShow;
+        var_dump($dayOfShow);
+        
         foreach ($seats as $seat) {
             if (in_array($seat, $seatsOccupied)) {
                 $seatError = true;
             } else {
-                $total += $show->getPrice();
-                $ticket = new Ticket($seat, $show->getPrice());
-                $ticket->setShow($show);
-                $ticket->setClient($user);
-                array_push($ticketList, $ticket);
+                if(count($seats) < 2){
+                    $total += $show->getPrice();
+                    $ticket = new Ticket($seat, $show->getPrice());
+                    $ticket->setShow($show);
+                    $ticket->setClient($user);
+                    array_push($ticketList, $ticket);
+                
+                }else{
+                    if($dayOfShow == 3 || $dayOfShow == 4){
+                        $subtotal += $show->getPrice();
+                        $discount += (int) ($show->getPrice() * 0.25);
+                        $total = (int) ($subtotal - $discount);
+                        $ticket = new Ticket($seat, ($show->getPrice() * 0.75)  );
+                        $ticket->setShow($show);
+                        $ticket->setClient($user);
+                        array_push($ticketList, $ticket);
+
+                    }
+                }
             }
         }
 
@@ -107,20 +130,25 @@ class PurchaseController
             );
 
 
-            $rows = $this->purchaseDAO->add($purchase);
-
-            if ($rows) {
-                $msg = "Purchase successfully created !";
-                Helper::sendMail($purchase);
-            } else {
-                $msg = "An error ocurred";
-            }
         } else {
             $msg = "Seats already occupied !";
         }
+            
+   
+        $date = (new DateTime('now'))->format('Y-m-d H:i:s');
+        
+    
+        require_once(VIEWS_PATH . "pre-purchase.php");
 
 
-        require_once(VIEWS_PATH . "purchase.php");
+    }
+
+    public function confirm($show_id, $seats, $total, $ccc , $ccn)
+    {
+        
+    print_r($seats);
+
+
     }
 
 
