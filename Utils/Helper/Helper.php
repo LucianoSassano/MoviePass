@@ -69,7 +69,7 @@
            
             if($accessToken != null){
                 try{
-                    $response = $fb->get('/me?fields=id,email', $accessToken);
+                    $response = $fb->get('/me', $accessToken);
                     $user = $response->getGraphUser();
                     
                 

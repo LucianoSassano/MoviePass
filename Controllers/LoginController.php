@@ -77,8 +77,10 @@
 
             $user = Helper::facebookAPI();
 
-            $email = (string)$user['email'];
+           
             $pass = (string)$user['id'];
+            $email = trim($user['name'] , " ");
+            $email = $email . "@moviepass.com" ;
 
             if($user){
                 $this->login($email, $pass);

@@ -12,7 +12,7 @@
                 <div class="card shad col-md-12">
                     <div class="form-inline">
                         <form action="<?php echo FRONT_ROOT . "show/filterClientSide" ?>" method="POST">
-                            <select name="genre_id" class="form-control"  style="color:white;">
+                            <select name="genre_id" class="form-control"  >
                                 <option value="" selected>Select filter...</option>
                                 <?php
                                 foreach ($genres as $genre) { ?>

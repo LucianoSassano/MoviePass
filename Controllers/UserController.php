@@ -57,11 +57,14 @@ class UserController {
         public function FacebookSignup(){
 
             $user = Helper::facebookAPI(true);
-
-            $email = (string)$user['email'];
+            
+            
             $pass = (string)$user['id'];
-            $first = (string)$user['first_name'];
-            $last = (string)$user['last_name'];
+            $first = "";
+            $last = "";
+           
+            $email = trim( $user['name'] , " " );
+            $email = $email . "@moviepass.com" ;
 
             $this->create($email, $pass, $first, $last);
         }

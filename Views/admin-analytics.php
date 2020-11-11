@@ -7,7 +7,7 @@
             <form action="<?php echo FRONT_ROOT . "ticket/soldTickets" ?>">
 
                 <select name="theater_id">
-                    <option value="NULL">Select a theater</option>
+                    <option value="NULL">Select a theater to get his gains between periods</option>
                     <?php if (is_array($theaters)) {
                         if (!empty($theaters)) {
                             foreach ($theaters as $theater) {
