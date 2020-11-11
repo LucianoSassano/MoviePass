@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 0px;">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
@@ -33,9 +33,9 @@
 
         </ul>
 
-        <form class="form-inline my-2 my-lg-0" action="<?php echo FRONT_ROOT . "movie/searchMovie" ?>" method="POST" >
+        <form class="form-group form-inline my-2 my-lg-0" action="<?php echo FRONT_ROOT . "movie/searchMovie" ?>" method="POST" >
             <input name="movie_name" class="form-control mr-sm-2" type="search" placeholder="Search a Movie" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-primary btn-icon btn-round my-2 my-sm-0" type="submit"><i class="now-ui-icons ui-1_zoom-bold"></i></button>
         </form>
         <form class="form-inline my-2 my-lg-3">
             <ul class="navbar-nav mr-auto">

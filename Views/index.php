@@ -7,17 +7,22 @@
 
             <h1>Now Playing</h1>
             <hr>
-            <div class="form-group">
-                <form action="<?php echo FRONT_ROOT . "show/filterClientSide" ?>" method="POST">
-                    <select name="genre_id">
-                        <option value="" selected>Select filter...</option>
-                        <?php
-                        foreach ($genres as $genre) { ?>
-                            <option value="<?php echo $genre->getId(); ?>"><?php echo $genre->getName(); ?></option>
-                        <?php } ?>
-                    </select>
-                    <button class="btn btn-danger" type="submit">Filtrar</button>
-                </form>
+            
+            <div class="row d-flex justify-content-end">
+                <div class="card shad col-md-12">
+                    <div class="form-inline">
+                        <form action="<?php echo FRONT_ROOT . "show/filterClientSide" ?>" method="POST">
+                            <select name="genre_id" class="form-control"  style="color:white;">
+                                <option value="" selected>Select filter...</option>
+                                <?php
+                                foreach ($genres as $genre) { ?>
+                                    <option value="<?php echo $genre->getId(); ?>"><?php echo $genre->getName(); ?></option>
+                                <?php } ?>
+                            </select>
+                            <button class="btn btn-danger btn-round" type="submit">Filtrar</button>
+                        </form>
+                    </div>
+                </div>
             </div>
 
             <div class="card-columns">

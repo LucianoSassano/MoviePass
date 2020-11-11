@@ -52,7 +52,7 @@
 
 }
 
-.home-shows .container {
+ .home-shows .container {
     color: white;
     text-shadow: 2px 2px 2px black; 
     display: flex;
@@ -61,7 +61,7 @@
     justify-content: center;
     
 }
-
+/*
 .home-shows .container .card-body
 {
     display: flex;
@@ -70,6 +70,27 @@
     align-items: center;
     justify-content: center;
     
+} */
+
+.home-shows .card{
+    background-color: #262423;
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.8),0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 30px;
+}
+
+.home-shows .card-round {
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.8),0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 30px;
+    background-color: #262423;
+}
+
+.home-shows .card-round hr {
+    border-color: #adadad;
+}
+
+.home-shows img{
+    /* width: 25vw; */
+    border-radius: 30px;
 }
 
 
@@ -276,10 +297,6 @@
     flex-direction: column;
 }
 
-.activeMovies .container .card{
-    margin-top: 10vh;
-    
-}
 
 /*--------------End of activeMovies View---------------- */
 
@@ -287,12 +304,22 @@
 /*--------------Shows View---------------- */
 
 .show .card{
-    width: 25vw;
-    margin-top: 5vh;
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.8),0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 30px;
+}
+
+.card-round {
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.8),0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 30px;
+    background-color: #262423;
+}
+
+.card-round hr {
+    border-color: #adadad;
 }
 
 
-
+/*
 .show div .form-row{
     display: flex;
     justify-content: center;
@@ -306,13 +333,20 @@
 .show button{
     margin-left: 16.6vw;
     
-}
+} */
 
 
 .show img{
-    width: 25vw;
-   
+    /* width: 25vw; */
+    border-radius: 30px;
+}
 
+.bord {
+    border-radius: 30px;
+}
+
+.shad {
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.5),0 6px 20px 0 rgba(0,0,0,0.19) !important;
 }
 
 
@@ -330,13 +364,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
 }
 
 .theaters .card{
-    margin: 3vh;
-    align-items: center;
-    justify-content: center;
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.8),0 6px 20px 0 rgba(0,0,0,0.19) !important;
+    
 }
 
 /*--------------End of Theaters View---------------- */
@@ -390,11 +423,11 @@
 
 .shows-active{
 
-    height: 100vh;
+    /* height: 100vh; */
     background-image: linear-gradient(to right top, #845ec2, #806ecc, #7e7cd4, #7d8adb, #7f97e1, #8e99e3, #9c9ae5, #a99ce6, #c590dc, #df83ca, #f377b0, #ff6f91);
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover; /* Resize the background image to cover the entire container */
+    /* background-position: center; Center the image
+    background-repeat: no-repeat; Do not repeat the image
+    background-size: cover; Resize the background image to cover the entire container */
 
 }
 
@@ -408,6 +441,11 @@
     
 }
 
+/* .shows-active .container .card {
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.8),0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 30px;
+}
+
 .shows-active .container .card-body
 {
     height: 100%;
@@ -417,7 +455,7 @@
     align-items: center;
     justify-content: center;
     
-}
+} */
 
 
 
@@ -444,6 +482,7 @@
 }
 
 /*--------------End of chooseSeats View---------------- */
+
 
 
 

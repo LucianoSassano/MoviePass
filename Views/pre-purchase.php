@@ -23,9 +23,9 @@
                         <p>Tickets: </p>
                         <?php foreach ($purchase->getTickets() as $ticket) { ?>
 
-                            <small>Seat: <?php echo $ticket->getSeat_number() ?></small>
+                            <p>Seat: <?php echo $ticket->getSeat_number() ?></p>
                             <br>
-                            <small>Price: <?php echo $ticket->getCost() ?></small>
+                            <p>Price: <?php echo $ticket->getCost() ?></p>
                             <br>
 
                             <hr>
@@ -38,7 +38,7 @@
             </div>
             <div class="col-6">
                 <div class="card">
-                    <div class="card-header">Payment Method</div>
+                    <h4 class="card-header">Payment Method</h4>
                     <br>
 
                     <div class="form-group">

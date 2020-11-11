@@ -11,7 +11,7 @@
     
         <div class="card">
             <div class="card-header">
-                <p class="alert"> <?php echo $msg ?> </p>
+                <p class="alert" style="color: black;"> <?php echo $msg ?> </p>
             </div>
             <?php if(!$seatError){ ?> 
             <div class="card-body">

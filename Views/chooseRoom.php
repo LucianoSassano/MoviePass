@@ -2,48 +2,73 @@
 
 <body style="background-color:#3E5CB2">
     <?php require_once(VIEWS_PATH . "admin-navbar.php") ?>
-    <div class="theaterMod">
-        <div class="container mt-3">
-            
-            <h2>Choose the room</h2>
-            <hr>
+    <div class="theaters">
+        <div class="container mt-4">
+            <div class="row mt-3 d-flex justify-content-center">
+                <div class="col-md-6">
+                    <div class="card btn-round " >
+                        <div class="card-header">
+                            <div class="float-right">
+                                <form action="<?php echo FRONT_ROOT . "room/createView" ?>" method="POST">
+                                    <input type="number" name="theater_id" value=<?php echo $theater->getId() ?> hidden>
+                                    <button type="submit" class="btn btn-info btn-round mt-2 mb-3">Add a room</button>
+                                </form>
+                            </div>
+                            <h3 class="mt-1" style=" margin-bottom: 0px;">Choose the room</h3>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <form action="<?php echo FRONT_ROOT . "show/create" ?>" method="POST">
                 <input type="number" name="movieId" value="<?php echo $movie_id; ?>" hidden>
                 <input type="number" name="theater_id" value=<?php echo $theater->getId() ?> hidden>
-            <?php 
-            if(is_array($theater->getRooms())){
-                if(!empty($theater->getRooms())){
-                    foreach($theater->getRooms() as $room){ ?>
-                        <div class="lead">
-                            <div class="float-right">
-                                <button type="submit" name="roomId" value="<?php echo $room->getRoom_id(); ?>" class="btn btn-dark">Select</button>
+                <?php 
+                if(is_array($theater->getRooms())){
+                    if(!empty($theater->getRooms())){
+                        foreach($theater->getRooms() as $room){ ?>
+                        <div class="row mt-3 d-flex justify-content-center">
+                            <div class="col-md-6">
+                                <div class="card btn-round " >
+                                <div class="float-right">
+                                    <button type="submit" name="roomId" value="<?php echo $room->getRoom_id(); ?>" class="btn btn-primary btn-round">Select</button>
+                                </div>
+                                <div class="card-header mt-2">
+                                    <h5># <strong> <?php echo $room->getRoom_id() . " " . $room->getName() ?> </strong></h6>
+                                </div>
+                                
+                                
+                                <p>Capacity:  <strong><?php echo $room->getCapacity(); ?> </strong></p>
+                                </div>
                             </div>
-                            <p>Id de sala:<strong> <?php echo $room->getRoom_id() ?> </strong></p>
-                            <p>Name: <strong class="text-bold"> <?php echo $room->getName(); ?> </strong></p>
-                            <p>Capacity:  <strong><?php echo $room->getCapacity(); ?> </strong></p>
-                            
-                            
-                            <hr>
                         </div>
-                    <?php }?>
-                <?php }else {echo "No rooms here ...";} 
-            } else {?>
-                <div class="lead">
+                        <?php }?>
+                    <?php }else {echo "No rooms here ...";} 
+                } else {?>
+                    <div class="row mt-3 d-flex justify-content-center">
+                        <div class="col-md-6">
+                            <div class="card btn-round " >
                             <div class="float-right">
-                                <button type="submit" name="roomId" value="<?php echo $theater->getRooms()->getRoom_id(); ?>" class="btn btn-dark">Select</button>
+                                <button type="submit" name="roomId" value="<?php echo $theater->getRooms()->getRoom_id(); ?>" class="btn btn-primary btn-round">Select</button>
                             </div>
-                            <p>Id de sala:<strong> <?php echo $theater->getRooms()->getRoom_id() ?> </strong></p>
-                            <p>Name: <strong class="text-bold"> <?php echo $theater->getRooms()->getName(); ?> </strong></p>
+                            <div class="card-header mt-2">
+                                <h5># <strong> <?php echo $theater->getRooms()->getRoom_id() . " " .  $theater->getRooms()->getName() ?> </strong></h6>
+                            </div>
+                            
+                            
                             <p>Capacity:  <strong><?php echo $theater->getRooms()->getCapacity(); ?> </strong></p>
+                            </div>
                         </div>
-            <?php 
-            }
-            ?>
+                    </div>
+                <?php 
+                }
+                ?>
             </form>
-            <form action="<?php echo FRONT_ROOT . "room/createView" ?>" method="POST">
-                <input type="number" name="theater_id" value=<?php echo $theater->getId() ?> hidden>
-                <button type="submit" class="btn btn-primary mt-2 mb-3">Add a room</button>
-            </form>
+
+
+            
         </div>
     </div>
 
