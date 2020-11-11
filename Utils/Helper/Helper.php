@@ -33,8 +33,8 @@
 
             // Creacion de la app
             $fb = new \Facebook\Facebook([
-                'app_id' => '3079459188747276',
-                'app_secret' => '788d5c6d6ed5b9f8105698cddbf7cbc3',
+                'app_id' => '277428766994193',
+                'app_secret' => 'b34ca93f24d9dbebd5a961164ae46bf8',
                 'default_graph_version' => 'v8.0',
                 //'default_access_token' => '', // optional
             ]);
@@ -69,12 +69,10 @@
             //Si tengo el token, accedo al usuario y ejecuto lo que quiera
             if($accessToken != null){
                 try{
-                    $response = $fb->get('/me?fields=id,email,first_name,last_name', $accessToken);
+                    $response = $fb->get('/me?fields=id,email', $accessToken);
                     $user = $response->getGraphUser();
                     
-                    // $_SESSION['user-facebook'] = $user;
-
-
+                
                 } catch(\Facebook\Exceptions\FacebookResponseException $e) {
                     echo 'Graph returned an error: ' . $e->getMessage();
                     exit;

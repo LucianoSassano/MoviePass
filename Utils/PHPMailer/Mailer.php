@@ -67,8 +67,8 @@
             
                 // Content
                 $mail->isHTML(true);                                  // Set email format to HTML
-                $mail->Subject = 'Gracias por realizar su compra en MoviePass';
-                $mail->Body    = '<br>Datos de su compra: <br><br><br>'.$msg;
+                $mail->Subject = 'Thanks for using MoviePass';
+                $mail->Body    = '<br>Purchase info: <br><br><br>'.$msg;
             
             
                 $mail->send();
