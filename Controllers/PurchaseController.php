@@ -50,9 +50,12 @@ class PurchaseController
         if ($_SESSION['loggedUser']->getRole()->getId() == User::ADMIN_ROLE ) {
             echo '<script>alert("Action not available for admin")</script>';
             require_once(VIEWS_PATH . "admin.php");
-        } else {
+        }else if($_SESSION['loggedUser']->getRole()->getId() == User::CLIENT_ROLE) {
+
             $room = $this->roomDAO->getWithShow($room_id, $show_id);
+           
             $seatsOccupied = $this->showDAO->getOccupiedSeats($show_id);
+         
 
             require_once(VIEWS_PATH . "chooseSeats.php");
         }
@@ -96,7 +99,7 @@ class PurchaseController
             $theater = $this->theaterDAO->getbyMovie($show->getMovie()->getId());
 
             $purchase = new Purchase(
-                $user['0']->getEmail(),
+                $user->getEmail(),
                 $theater['0'],
                 (new DateTime('now'))->format('Y-m-d H:i:s'),
                 $ticketList,

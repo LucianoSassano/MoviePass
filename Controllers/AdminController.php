@@ -24,7 +24,7 @@ class AdminController
     }
 
     function viewAnalytics(){
-
+        
         require_once(VIEWS_PATH . "admin-analytics.php");
     }
     

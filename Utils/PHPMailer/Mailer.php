@@ -27,12 +27,21 @@
                 $mail->Username   = 'moviepassmessageservice@gmail.com';                     // SMTP username
                 $mail->Password   = 'moviepass123';                               // SMTP password
                 $mail->SMTPSecure =  'tls'; //PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+                $mail->SMTPOptions = array(
+                    'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                    )
+                    );
                 $mail->Port       = 587;                                    // TCP port to connect to
             
                 //Recipients
                 $mail->setFrom('moviepassmessageservice@gmail.com', 'Movie Pass Support');      // Mail del que envia el msj
                 
                 $mail->addAddress($purchase->getUserEmail());   // Mail del que recibe el msj
+
+
             
                 foreach ($purchase->getTickets() as $ticket){
     

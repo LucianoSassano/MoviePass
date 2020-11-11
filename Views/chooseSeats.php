@@ -12,18 +12,21 @@
                     <hr>
                     <form action="<?php echo FRONT_ROOT . "purchase/confirm" ?>" method="POST">
                         <input type="hidden" value="<?php echo $show_id ?>" name="show_id">
-                        <?php
-                        for ($i = 1; $i <= $room->getCapacity(); $i++) {
-                        ?>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" <?php if (in_array($i, $seatsOccupied)) {
-                                                                    echo 'disabled';
-                                                                } ?> value="<?php echo $i ?>" name="seats[]" type="checkbox" id="<?php echo $i ?>">
-                                <label class="form-check-label" for="<?php echo $i ?>"><?php echo $i ?></label>
-                            </div>
-                        <?php
-                        }
-                        ?>
+                        <?php if (isset($room)) { ?>
+
+                            <?php 
+                            for ($i = 1; $i <= $room->getCapacity(); $i++) {
+                            ?>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php if (in_array($i, $seatsOccupied)) {
+                                                                        echo 'disabled';
+                                                                    } ?> value="<?php echo $i ?>" name="seats[]" type="checkbox" id="<?php echo $i ?>">
+                                    <label class="form-check-label" for="<?php echo $i ?>"><?php echo $i ?></label>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                        <?php } ?>
                         <button class="btn btn-warning"> Select </button>
                     </form>
                     <h1>Screen Area</h1>

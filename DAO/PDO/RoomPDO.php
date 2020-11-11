@@ -113,11 +113,19 @@
                 throw $ex;
             }
 
-            // sprint_r($resultSet['0']);
-            $room = new Room($resultSet['0']['name'], $resultSet['0']['capacity']);
-            $room->setRoom_id($resultSet['0']['room_id']);
-            $room->setShows($this->showDAO->get($show_id));
+
+            if(!empty($resultSet)){
+
+                $room = new Room($resultSet['0']['name'], $resultSet['0']['capacity']);
+                $room->setRoom_id($resultSet['0']['room_id']);
+                $room->setShows($this->showDAO->get($show_id));
+                
+            }else {
+                return false;
+            }
             
+            
+           
             return $room;
         }
 

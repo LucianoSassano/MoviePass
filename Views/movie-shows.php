@@ -63,7 +63,6 @@
                                                 <button type="submit" class="btn btn-warning" data-toggle="tooltip" data-placement="right" title="Click to make a reservation">
                                                    Reserve
                                                 </button>
-                                                <a class="btn btn-danger">Delete</a>
 
                                             </form>
                                         </p>

@@ -29,17 +29,21 @@ class MovieController{
         public function getShows($movie_id) {
             $theatersDAO = new TheaterDAO();
 
-            if($_SESSION['loggedUser']->getRole()->getId() == User::ADMIN_ROLE){
+            if(isset($_SESSION['loggedUser'])){
+                
+                if($_SESSION['loggedUser']->getRole()->getId() == User::ADMIN_ROLE){
 
-                $theaters = $theatersDAO->getByMovie($movie_id);
-                $movie = $this->movieDAO->get($movie_id);
-                require_once(VIEWS_PATH . "admin-movie-shows.php");
+                    $theaters = $theatersDAO->getByMovie($movie_id);
+                    $movie = $this->movieDAO->get($movie_id);
+                    require_once(VIEWS_PATH . "admin-movie-shows.php");
+    
+                }else if($_SESSION['loggedUser']->getRole()->getId() == User::CLIENT_ROLE){
+    
+                    $theaters = $theatersDAO->getByMovie($movie_id);
+                    $movie = $this->movieDAO->get($movie_id);
+                    require_once(VIEWS_PATH . "movie-shows.php");
+                }
 
-            }else if($_SESSION['loggedUser']->getRole()->getId() == User::CLIENT_ROLE){
-
-                $theaters = $theatersDAO->getByMovie($movie_id);
-                $movie = $this->movieDAO->get($movie_id);
-                require_once(VIEWS_PATH . "movie-shows.php");
             }else{
 
                 $theaters = $theatersDAO->getByMovie($movie_id);
