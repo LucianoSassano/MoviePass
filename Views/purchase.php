@@ -16,18 +16,11 @@
             <?php if(!$seatError){ ?> 
             <div class="card-body">
                 <p>Email: <?php echo $purchase->getUserEmail() ?></p>
-                <p>Date: <?php echo $purchase->getDate() ?></p>
+                <p>Transaction Date: <?php echo $purchase->getDate() ?></p>
+                <p>Payed with: <?php echo $creditCard ?> </p>
                 <p>Total: <?php echo $purchase->getTotalCost() ?></p>
                 <hr>
-                <p>Tickets: </p>
-                <?php foreach($purchase->getTickets() as $ticket){ ?>
-                    
-                    <small>Price: <?php echo $ticket->getCost() ?></small>
-                    <br>
-                    <small>Seat: <?php echo $ticket->getSeat_number() ?></small>
-                    <hr>
-                    <br>
-                <?php } ?>
+             
             </div>
                 <?php }?>
         </div>

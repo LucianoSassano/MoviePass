@@ -73,7 +73,6 @@ class PurchaseController
     public function reservation($show_id, $seats){
 
         $show = $this->showDAO->get($show_id);
-        
         $user = $this->userDAO->get($_SESSION['loggedUser']->getId());
 
         $subtotal = 0;
@@ -86,11 +85,9 @@ class PurchaseController
 
         $seatError = false;
        
-     
         $dayOfShow = date("w", strtotime($show->getDate()));
-        var_dump($dayOfShow);
+      
         $dayOfShow = (int) $dayOfShow;
-        var_dump($dayOfShow);
         
         foreach ($seats as $seat) {
             if (in_array($seat, $seatsOccupied)) {
@@ -145,9 +142,60 @@ class PurchaseController
 
     public function confirm($show_id, $seats, $total, $ccc , $ccn)
     {
+      
         
-    print_r($seats);
+        $show = $this->showDAO->get($show_id);
 
+        $user = $this->userDAO->get($_SESSION['loggedUser']->getId());
+
+
+        $ticketList = array();
+
+
+        $seatError = false;
+
+        $creditCard = 0;
+       
+        if($this->ValidCreditcard($ccn ,$ccc)){
+            $creditCard = $ccn;
+        }else{
+            
+            echo '<script language="javascript">';
+            echo 'alert("Invalid Credit Card Data, transaction aborted")';
+            echo '</script>';
+            
+            require_once(VIEWS_PATH . "index.php");
+        }
+       
+        
+      
+
+        if (!$seatError) {
+            $theater = $this->theaterDAO->getbyMovie($show->getMovie()->getId());
+
+            $purchase = new Purchase(
+                $user->getEmail(),
+                $theater['0'],
+                (new DateTime('now'))->format('Y-m-d H:i:s'),
+                $ticketList,
+                $total
+            );
+
+
+            $rows = $this->purchaseDAO->add($purchase);
+
+            if ($rows) {
+                $msg = "Purchase successfully created !";
+                Helper::sendMail($purchase);
+            } else {
+                $msg = "An error ocurred";
+            }
+        } else {
+            $msg = "Seats already occupied !";
+        }
+
+
+        require_once(VIEWS_PATH . "purchase.php");
 
     }
 
