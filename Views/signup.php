@@ -25,13 +25,16 @@
     <?php } ?>
 
     <div class="container">
+            
+        <div class="row d-flex justify-content-center">
+            
+            <form class="signup-form bord" action="<?php echo FRONT_ROOT . "user/create" ?>" method="POST">
             <div class="mt-3">
                 <?php \Utils\Helper\Helper::facebookAPI(true); ?>
             </div>
-        <div class="row d-flex justify-content-center">
-            <form class="signup-form bord" action="<?php echo FRONT_ROOT . "user/create" ?>" method="POST">
             
                 <div class="form-group">
+                    
                     <label for="exampleInputEmail1">Email</label>
                     <br>
                     <input type="email" class="form-control" name="email" aria-describedby="emailHelp">
