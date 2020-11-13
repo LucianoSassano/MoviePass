@@ -1,8 +1,8 @@
 <?php require_once(VIEWS_PATH . "header.php") ?>
 
-<body style="background-color:#3E5CB2">
+<body class="show-date-selection">
     <?php require_once(VIEWS_PATH . "admin-navbar.php") ?>
-    <div class="room-creation">
+    <div >
         <div class="container mt-3">
             <h2>Confirm new show</h2>
             <hr>

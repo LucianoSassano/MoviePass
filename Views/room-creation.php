@@ -1,6 +1,6 @@
 <?php require_once(VIEWS_PATH . "header.php") ?>
 
-<body style="background-color:#3E5CB2">
+<body >
     <?php require_once(VIEWS_PATH . "admin-navbar.php") ?>
     <div class="theaters">
         <div class="container mt-4">

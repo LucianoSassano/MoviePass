@@ -1,6 +1,6 @@
 <?php require_once(VIEWS_PATH . "header.php") ?>
 
-<body>
+<body class="analytics">
     <?php require_once(VIEWS_PATH . "admin-navbar.php") ?>
     <div class="container">
         <div class="form-group">
@@ -13,7 +13,7 @@
                             foreach ($theaters as $theater) {
                     ?>
 
-                                <option  value="<?php echo $theater->getId() ?>"> <?php echo $theater->getName() ?> </option>
+                                <option value="<?php echo $theater->getId() ?>"> <?php echo $theater->getName() ?> </option>
 
 
                     <?php }
@@ -44,17 +44,17 @@
 
             <label>Cantidad de entradas vendidas</label>
             <div> <?php echo $sold ?> <div>
-                <hr>
-                <label>Ganancias totals en pesos</label>
-            <div> <?php echo $money ?> <div>
-                
-                
-                <?php } ?>
-                <hr>
+                    <hr>
+                    <label>Ganancias totals en pesos</label>
+                    <div> <?php echo $money ?> <div>
+
+
+                        <?php } ?>
+                        <hr>
 
 
 
-                </div>
+                        </div>
 
 </body>
 

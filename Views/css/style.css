@@ -282,6 +282,7 @@
 
 .activeMovies{
     
+    height: 100%;
     background-image: linear-gradient(to right top, #051937, #102b65, #323a93, #6146c0, #984be9);
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
@@ -423,11 +424,11 @@
 
 .shows-active{
 
-    /* height: 100vh; */
+    height: 100vh; 
     background-image: linear-gradient(to right top, #845ec2, #806ecc, #7e7cd4, #7d8adb, #7f97e1, #8e99e3, #9c9ae5, #a99ce6, #c590dc, #df83ca, #f377b0, #ff6f91);
-    /* background-position: center; Center the image
-    background-repeat: no-repeat; Do not repeat the image
-    background-size: cover; Resize the background image to cover the entire container */
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover;
 
 }
 
@@ -483,6 +484,36 @@
 
 /*--------------End of chooseSeats View---------------- */
 
+/*--------------Start of Analytics View---------------- */
 
+.analytics{
+
+    height: 100vh;
+    background-image: url("https://images.unsplash.com/photo-1563603357963-439f524bd662?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1949&q=80");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+
+}
+
+
+
+/*--------------End of Analytics View------------------ */
+
+
+/*--------------Start of Show date creation View--------*/
+
+.show-date-selection{
+
+    height: 100vh;
+
+    background-image: linear-gradient(to right top, #e85dda, #cd5bc1, #b258a9, #985491, #7f4f7a);
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+
+}
+
+/*--------------End of Show date creation View--------*/
 
 
