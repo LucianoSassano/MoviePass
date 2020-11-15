@@ -40,6 +40,7 @@
                     $user_id = $_SESSION['loggedUser']->getId();
                     $tickets = $this->ticketDAO->getAllByUser($user_id);
                   
+                  
                     require_once(VIEWS_PATH . "my-tickets.php");
 
                 }else if($_SESSION['loggedUser']->getRole()->getId() == User::ADMIN_ROLE ){
@@ -60,13 +61,18 @@
         }
 
         public function soldTickets($theater_id, $date1, $date2){
-
+       
             $ticketsFromDb = $this->ticketDAO->getAllByTheater($theater_id, $date1, $date2);
-            $sold = count($ticketsFromDb);
+     
             $money = 0;
-            foreach($ticketsFromDb as $ticket){
-                $money += $ticket->getCost();
+            if($ticketsFromDb != false){
+                $sold = count($ticketsFromDb);
+                foreach($ticketsFromDb as $ticket){
+                    $money += $ticket->getCost();
+                }
             }
+           
+          
             $this->theaterDAO = new TheaterDAO();
             $theaters = $this->theaterDAO->getAll();
             
@@ -78,7 +84,5 @@
 
 
     }
-
-
 
 ?>

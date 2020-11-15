@@ -263,10 +263,10 @@
             }
 
             if(!empty($resultSet)){
-                var_dump($resultSet);
+            
                 return $this->map($resultSet);
             }else{
-                var_dump($resultSet);
+               
                 $resultSet = array();
                 return $resultSet;
             }

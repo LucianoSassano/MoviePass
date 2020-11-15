@@ -112,6 +112,15 @@ class PurchaseController
                         $ticket->setClient($user);
                         array_push($ticketList, $ticket);
 
+                    }else{
+                        $subtotal += $show->getPrice();
+                        $discount = 0;
+                        $total = (int) ($subtotal - $discount);
+                        $ticket = new Ticket($seat, $show->getPrice()  );
+                        $ticket->setShow($show);
+                        $ticket->setClient($user);
+                        array_push($ticketList, $ticket);
+
                     }
                 }
             }
