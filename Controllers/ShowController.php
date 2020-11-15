@@ -115,9 +115,10 @@ class ShowController
             if (empty($checkMovieInTheaters)) {
                 
                 if(empty($checkMovieInRooms)){
-                    if(empty($checkShowDate)){
+                    if( empty($checkShowDate)){
                         $this->showDAO->add($show, $theater_id, $room_id);
                         $this->getActive();
+
                     }else{
 
                         echo '<script language="javascript">';

@@ -242,15 +242,16 @@
         
             $query = " 
             SELECT * FROM `shows` as s WHERE  
-            :date = s.date AND 
-            :startTime BETWEEN s.startTime AND  s.endTime AND
-            :midInterval BETWEEN s.startTime AND s.endTime AND
-            :endTime BETWEEN s.startTime AND s.endTime; ";
+            s.date = :date AND 
+            s.room_id = :room_id AND
+            (:startTime BETWEEN s.startTime AND  s.endTime OR :midInterval BETWEEN s.startTime AND  s.endTime OR :endTime BETWEEN s.startTime AND  s.endTime ); ";
 
             $parameters['date'] = $show->getDate();
             $parameters['startTime'] = $show->getStartTime();
             $parameters['midInterval'] = $show->getMidInterval();
-            $parameters['endTime'] =$show->getEndTime();           
+            $parameters['endTime'] =$show->getEndTime();
+            $parameters['room_id'] = $show->getRoom()->getRoom_Id();
+        
             try {
 
                 $this->connection = Connection::GetInstance();
@@ -262,8 +263,11 @@
             }
 
             if(!empty($resultSet)){
+                var_dump($resultSet);
                 return $this->map($resultSet);
             }else{
+                var_dump($resultSet);
+                $resultSet = array();
                 return $resultSet;
             }
 
