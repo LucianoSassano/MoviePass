@@ -26,10 +26,16 @@ class AdminController
         require_once(VIEWS_PATH . "admin.php");
     }
 
-    function viewAnalytics(){
+    function profitAnalytics(){
         
         $theaters = $this->theaterDAO->getAll();
         require_once(VIEWS_PATH . "admin-analytics.php");
+    }
+
+    function ticketsAnalytics(){
+        
+        $theaters = $this->theaterDAO->getAll();
+        require_once(VIEWS_PATH . "tickets-analytics.php");
     }
     
 }

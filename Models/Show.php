@@ -132,25 +132,7 @@
                         return $this;
             }
 
-            /**
-             * Get the value of room
-             */ 
-            public function getRoom()
-            {
-                        return $this->room;
-            }
-
-            /**
-             * Set the value of room
-             *
-             * @return  self
-             */ 
-            public function setRoom($room)
-            {
-                        $this->room = $room;
-
-                        return $this;
-            }
+          
 
             /**
              * Get the value of startTime
@@ -209,6 +191,26 @@
             public function setMidInterval($midInterval)
             {
                         $this->midInterval = $midInterval;
+
+                        return $this;
+            }
+
+            /**
+             * Get the value of room
+             */ 
+            public function getRoom()
+            {
+                        return $this->room;
+            }
+
+            /**
+             * Set the value of room
+             *
+             * @return  self
+             */ 
+            public function setRoom($room)
+            {
+                        $this->room = $room;
 
                         return $this;
             }

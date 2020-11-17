@@ -7,7 +7,7 @@
             <div class="row d-flex justify-content-around">
                 
                 <div class="col-md-5">
-                    <div class="card card-round mb-3" style=" font-color:white;">
+                    <div class="card card-round mb-3" >
                         <img src="<?php echo "https://image.tmdb.org/t/p/w500/" . $movie->getPoster_path(); ?>" class="card-img-top" alt="...">
                         <div class="card-body">
 

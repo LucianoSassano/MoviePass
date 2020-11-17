@@ -80,6 +80,32 @@
 
         }
 
+        public function historicTicketSales($theater_id){
+       
+            $ticketsFromDb = $this->ticketDAO->getSoldAndRemanent($theater_id);
+     
+           
+            if($ticketsFromDb != false){
+                $sold = count($ticketsFromDb);
+               
+            }
+            
+           $seats = 0;
+           $shows = $this->showDAO->getByTheater($theater_id);
+            
+           foreach($shows as $show){
+               $seats += $show->getRoom()->getCapacity();
+               $seats = $seats - $sold;
+           }
+        
+          
+            $this->theaterDAO = new TheaterDAO();
+            $theaters = $this->theaterDAO->getAll();
+            
+            require_once(VIEWS_PATH . "tickets-analytics.php");
+
+        }
+
 
 
 

@@ -20,6 +20,7 @@
 
         function __construct(){
             $this->movieDAO = new MovieDAO();
+            $this->roomDAO = new RoomDAO();
            
           
         }
@@ -92,6 +93,31 @@
 
             if(!empty($resultSet)){
                 return $this->mapUnique($resultSet);
+            }else {
+                return false;
+            }
+
+        }
+
+        public function getByTheater($theater_id){
+
+            
+            $query = "
+            SELECT * FROM shows as s 
+            WHERE :theater_id = s.theater_id ;";
+
+            $parameters['theater_id'] = $theater_id;
+
+            try {
+
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query, $parameters);
+            }catch(Exception $ex) {
+                throw $ex;
+            }
+
+            if(!empty($resultSet)){
+                return $this->map($resultSet);
             }else {
                 return false;
             }
@@ -319,6 +345,8 @@
                 $show->setStartTime($row['startTime']);
                 $show->setEndTime($row['endTime']);
                 $show->setMovie($this->movieDAO->get($row['movie_id']));
+                $show->setRoom($this->roomDAO->getNoShows($row['room_id']));
+                
                 
 
                 return $show;

@@ -151,6 +151,34 @@ use Models\Ticket;
             }
         }
 
+     
+        public function getSoldAndRemanent($theater_id) {
+
+            $query = "
+            SELECT * FROM `tickets` as t 
+            INNER JOIN shows as s
+            ON t.show_id = s.show_id
+            WHERE s.theater_id = :theater_id 
+            ;";
+
+            $parameters['theater_id'] = $theater_id;
+   
+
+
+            try {
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query,$parameters);
+            }catch (Exception $ex) {
+                throw $ex;
+            }
+
+            if(!empty($resultSet)){
+                return $this->map($resultSet);
+            }else {
+                return false;
+            }
+        }
+
 
 
 

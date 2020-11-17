@@ -16,7 +16,7 @@
         private $showDAO;
 
         function __construct() {
-            $this->showDAO = new ShowDAO();
+          
         }
 
         /**
@@ -38,6 +38,31 @@
 
             if(!empty($resultSet)){
                 return $this->map($resultSet);
+            }else {
+                return false;
+            }
+
+        }
+
+          /**
+         * Get by id
+         */
+        public function getNoShows($id) {
+
+            $query = "SELECT * FROM rooms WHERE room_id = :id";
+
+            $parameters['id'] = $id;
+
+            try {
+
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query, $parameters);
+            }catch(Exception $ex) {
+                throw $ex;
+            }
+
+            if(!empty($resultSet)){
+                return $this->mapNoShows($resultSet);
             }else {
                 return false;
             }
@@ -94,6 +119,7 @@
         }
 
         public function getWithShow($room_id, $show_id){
+            $this->showDAO = new ShowDAO();
 
             $query = "
             select r.room_id, r.capacity, r.name 
@@ -204,6 +230,23 @@
                 $room = new Room($row['name'], $row['capacity']);
                 $room->setRoom_id($row['room_id']);
                 $room->setShows($this->showDAO->getByRoom($row['room_id']));
+                return $room;
+            }, $data);
+
+            return count($values) > 1 ? $values : $values['0'];
+        }
+        /**
+         * Map model
+         */
+        public function mapNoShows($data){
+            $data = is_array($data) ? $data : [];
+
+          
+
+            $values = array_map(function($row){
+                $room = new Room($row['name'], $row['capacity']);
+                $room->setRoom_id($row['room_id']);
+            
                 return $room;
             }, $data);
 
