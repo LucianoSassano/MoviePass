@@ -11,7 +11,7 @@ require_once(VIEWS_PATH . "header.php");
             <div class="row d-flex justify-content-around">
                 
                     <div class="col-md-5 d-flex justify-content-end">
-                        <div class="card mb-3" style="">
+                        <div class="card mb-3" >
                             <img src="<?php echo "https://image.tmdb.org/t/p/w500/" . $movie->getPoster_path(); ?>" class="card-img-top" alt="...">
                             
                         </div>

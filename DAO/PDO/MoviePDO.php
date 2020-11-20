@@ -103,6 +103,41 @@
             }
         }
 
+         /**
+         * Get unique movies in shows
+         */
+        public function getMoviesDistinctSingleTheater($theater_id) {
+
+            $query = "
+            SELECT DISTINCT m.movie_id, m.title, m.overview, m.poster_path, m.language, m.adult, m.vote_average, m.duration
+            FROM theaters as t 
+            INNER JOIN rooms as r 
+            ON t.theater_id = r.theater_id 
+            INNER JOIN shows as s 
+            ON r.room_id = s.room_id 
+            INNER JOIN movies as m 
+            ON s.movie_id = m.movie_id 
+            WHERE s.theater_id = :theater_id;";
+
+            $parameters['theater_id'] = $theater_id;
+
+            try {
+
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query,$parameters);
+
+            }catch(Exception $ex) {
+                throw $ex;
+            }
+
+            if(!empty($resultSet)){
+              
+                return $this->map($resultSet);
+            }else {
+                return false;
+            }
+        }
+
         public function getMoviesDistinctByGenre($genre_id) {
 
             $query = "

@@ -33,7 +33,7 @@ class MovieController{
                 
                 if($_SESSION['loggedUser']->getRole()->getId() == User::ADMIN_ROLE){
 
-                    $theaters = $theatersDAO->getByMovie($movie_id);
+                    $theaters =$theatersDAO->getByMovie($movie_id);
                     $movie = $this->movieDAO->get($movie_id);
                     require_once(VIEWS_PATH . "admin-movie-shows.php");
     
@@ -54,6 +54,7 @@ class MovieController{
 
             }
         }
+
 
 
         public function getAll() {

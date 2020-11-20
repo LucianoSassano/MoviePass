@@ -33,7 +33,8 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="<?php echo FRONT_ROOT . "admin/profitAnalytics" ?>">Profits</a>
-                    <a class="dropdown-item" href="<?php echo FRONT_ROOT . "admin/ticketsAnalytics" ?>">Tickets sold</a>
+                    <a class="dropdown-item" href="<?php echo FRONT_ROOT . "admin/ticketsAnalytics" ?>">Historical ticket sale</a>
+                    <a class="dropdown-item" href="<?php echo FRONT_ROOT . "admin/showAnalytics" ?>">Tickets sold by show</a>
                 </div>
             </li>
 

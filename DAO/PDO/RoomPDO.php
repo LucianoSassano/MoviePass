@@ -176,25 +176,6 @@
             }
         }
 
-        /**
-         * Edit room
-         */
-        // public function edit(Room $room) {
-
-        //     $query = "";
-
-        //     $parameters[''] = $;
-
-        //     try {
-
-        //         $this->connection = Connection::GetInstance();
-        //         return $this->connection->ExecuteNonQuery($query, $parameters);
-
-        //     }catch(Exception $ex) {
-        //         throw $ex;
-        //     }
-        // }
-
 
         /**
          * Add new user

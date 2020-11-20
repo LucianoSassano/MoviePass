@@ -47,6 +47,36 @@
             }
 
         }
+        public function getByMovieSinlgeTheater($movie_id, $theater_id) {
+
+            $query = " select distinct t.theater_id , t.name , t.address 
+            from theaters as t 
+            inner join rooms as r 
+            on t.theater_id = r.theater_id 
+            inner join shows as s 
+            on r.room_id = s.room_id 
+            where movie_id = :movie_id and
+            where theater_id = :theater_id ;";
+
+            $parameters['movie_id'] = $movie_id;
+            $parameters['theater_id'] = $theater_id;
+
+            try {
+
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query, $parameters);
+
+            }catch(Exception $ex) {
+                throw $ex;
+            }
+
+            if(!empty($resultSet)){
+                return $this->mapByMovie($resultSet, $movie_id);
+            }else {
+                return false;
+            }
+
+        }
 
         public function getByMovie($movie_id) {
 
@@ -215,12 +245,12 @@
 
             $values = array_map(function($row){
                 $theater = new Theater($row['theater_id'], $row['name'], $row['address']);
-                // $theater->setRooms($this->roomDAO->getByTheaterAndMovie($row['theater_id'], $movie_id));
+
                 return $theater;
             }, $data);
 
             foreach($values as $theater){
-                // print_r($theater);
+            
                 $theater->setRooms($this->roomDAO->getByTheaterAndMovie($theater->getId(), $movie_id));
             }
 
