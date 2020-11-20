@@ -5,6 +5,8 @@ namespace Controllers;
 use DAO\PDO\MoviePDO as MovieDAO;
 use DAO\PDO\TheaterPDO as TheaterDAO;
 use DAO\PDO\GenrePDO as GenreDAO;
+use DAO\PDO\TicketPDO as TicketDAO;
+use DAO\PDO\RoomPDO as RoomDAO;
 
 class AdminController
 {
@@ -12,12 +14,16 @@ class AdminController
     private $movieDAO;
     private $theaterDAO;
     private $genreDAO;
+    private $ticketDAO;
+    private $roomDAO;
 
     function __construct()
     {
         $this->movieDAO = new MovieDAO();
         $this->theaterDAO = new TheaterDAO;
         $this->genreDAO = new GenreDAO();
+        $this->ticketDAO = new TicketDAO();
+        $this->roomDAO = new RoomDAO();
        
     }
 
@@ -66,6 +72,49 @@ class AdminController
     
         
         require_once(VIEWS_PATH . "movie-selection-analytics.php");
+    }
+
+
+    function viewStatistics($show_id, $room_id, $movie_id ){
+
+        $show_id = (int)$show_id;
+
+        $room_id = (int)$room_id;
+
+        $movie_id = (int)$movie_id;
+
+        
+    
+        $tickets = 0;
+        $soldTickets = 0;
+        $roomCapacity = 0;
+
+        $soldTickets = $this->ticketDAO->getSoldByShow($show_id);
+       
+        $roomCapacity = $this->roomDAO->get($room_id)->getCapacity();
+
+        $movie = $this->movieDAO->get($movie_id);
+    
+        
+        
+       
+        if($soldTickets == false){
+            $tickets = 0;
+        }else{
+
+            foreach($soldTickets as $sold){
+                $tickets += 1;
+            }
+
+        }
+
+        $seats = $roomCapacity - $tickets;
+        
+
+        require_once(VIEWS_PATH . "singleShow-analytics.php");
+
+
+        
     }
     
 }

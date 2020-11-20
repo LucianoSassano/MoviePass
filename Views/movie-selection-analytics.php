@@ -70,11 +70,12 @@
                                                     ?>
                                                         <hr>
                                                         <div class="card-body">
-                                                            <form action="<?php echo FRONT_ROOT . "purchase/seats" ?>" method="POST" class="float-right">
+                                                            <form action="<?php echo FRONT_ROOT . "admin/viewStatistics" ?>" method="POST" class="float-right">
                                                                 <input name="show_id" value="<?php echo $show->getId() ?>" hidden>
                                                                 <input name="room_id" value="<?php echo $room->getRoom_id() ?>" hidden>
+                                                                <input name="movie_id" value="<?php echo $movie->getId() ?>" hidden>
                                                                 <button type="submit" class="btn btn-primary btn-round" data-toggle="tooltip" data-placement="right" title="Click to make a reservation">
-                                                                    Reserve
+                                                                    View Statistics
                                                                 </button>
 
                                                             </form>

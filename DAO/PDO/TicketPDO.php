@@ -96,6 +96,28 @@ use Models\Ticket;
             }
         }
 
+        public function getSoldByShow($show_id){
+
+            $query = "
+            SELECT * FROM tickets where show_id = :show_id ;";
+
+            $parameters['show_id'] = $show_id;
+
+            try {
+
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query, $parameters);
+            }catch(Exception $ex) {
+                throw $ex;
+            }
+
+            if(!empty($resultSet)){
+                return $this->map($resultSet);
+            }else {
+                return false;
+            }
+        }
+
         /**
          * Get all tickets
          */
@@ -150,6 +172,8 @@ use Models\Ticket;
                 return false;
             }
         }
+
+    
 
      
         public function getSoldAndRemanent($theater_id) {
