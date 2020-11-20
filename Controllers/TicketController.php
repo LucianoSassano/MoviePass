@@ -20,7 +20,8 @@
         {
             $this->ticketDAO = new TicketDAO();
             $this->showDAO = new ShowDAO();
-            $this->userDAO = NEW UserDAO();
+            $this->userDAO = new UserDAO();
+            $this->theaterDAO = new TheaterDAO();
             
         }
 
@@ -39,11 +40,13 @@
                 if($_SESSION['loggedUser']->getRole()->getId() == User::CLIENT_ROLE ){
                     $user_id = $_SESSION['loggedUser']->getId();
                     $tickets = $this->ticketDAO->getAllByUser($user_id);
-                  
-                  
+                    $theaters = $this->theaterDAO->getAll();
+            
+                              
                     require_once(VIEWS_PATH . "my-tickets.php");
 
                 }else if($_SESSION['loggedUser']->getRole()->getId() == User::ADMIN_ROLE ){
+                    
 
                     echo '<script language="javascript">';
                     echo 'alert("Action not available for admin!")';

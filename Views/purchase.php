@@ -18,7 +18,7 @@
                 <p>Email: <?php echo $purchase->getUserEmail() ?></p>
                 <p>Transaction Date: <?php echo $purchase->getDate() ?></p>
                 <p>Payed with: <?php echo $creditCard ?> </p>
-                <p>Total: <?php echo $purchase->getTotalCost() ?></p>
+                <p>Total: $<?php echo $purchase->getTotalCost() ?></p>
                 <hr>
              
             </div>

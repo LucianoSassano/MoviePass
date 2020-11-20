@@ -6,7 +6,7 @@
     use \Exception;
     use DAO\Connection;
     use DAO\PDO\ShowPDO as ShowDAO;
-
+    
     use Models\Room;
 
     class RoomPDO
@@ -118,8 +118,10 @@
             }
         }
 
-        public function getWithShow($room_id, $show_id){
-            $this->showDAO = new ShowDAO();
+        public function getWithShow($show_id, $room_id){
+           
+            
+            $showDAO = new ShowDAO();
 
             $query = "
             select r.room_id, r.capacity, r.name 
@@ -144,10 +146,11 @@
 
                 $room = new Room($resultSet['0']['name'], $resultSet['0']['capacity']);
                 $room->setRoom_id($resultSet['0']['room_id']);
-                $room->setShows($this->showDAO->get($show_id));
+                $room->setShows($showDAO->get($show_id));
                 
             }else {
-                return false;
+             
+                return $resultSet;
             }
             
             

@@ -43,9 +43,10 @@ class PurchaseController
         $this->genreDAO = new GenreDAO();
     }
 
-    public function seats($room_id, $show_id)
+    public function seats($show_id, $room_id, $theater_id)
     {
-
+        
+        
 
       if(isset($_SESSION['loggedUser'])){
 
@@ -56,9 +57,11 @@ class PurchaseController
 
         }else if($_SESSION['loggedUser']->getRole()->getId() == User::CLIENT_ROLE) {
 
-            $room = $this->roomDAO->getWithShow($room_id, $show_id);
+            $room = $this->roomDAO->getWithShow($show_id, $room_id);
         
             $seatsOccupied = $this->showDAO->getOccupiedSeats($show_id);
+            
+            $theater_id = (int)$theater_id;
 
             require_once(VIEWS_PATH . "chooseSeats.php");
         }
@@ -72,10 +75,12 @@ class PurchaseController
 
     }
 
-    public function reservation($show_id, $seats){
+    public function reservation($show_id, $seats, $theater_id){
 
         $show = $this->showDAO->get($show_id);
         $user = $this->userDAO->get($_SESSION['loggedUser']->getId());
+        
+     
 
         $subtotal = 0;
         $discount = 0;
@@ -127,16 +132,16 @@ class PurchaseController
         }
 
         if (!$seatError) {
-            $theater = $this->theaterDAO->getbyMovie($show->getMovie()->getId());
+            $theater = $this->theaterDAO->get($theater_id);
 
             $purchase = new Purchase(
                 $user->getEmail(),
-                $theater['0'],
+                $theater,
                 (new DateTime('now'))->format('Y-m-d H:i:s'),
                 $ticketList,
                 $total
             );
-
+           
 
         } else {
             $msg = "Seats already occupied !";
@@ -145,13 +150,14 @@ class PurchaseController
    
         $date = (new DateTime('now'))->format('Y-m-d H:i:s');
         
+        $theater_id = (int)$theater_id;
     
         require_once(VIEWS_PATH . "pre-purchase.php");
 
 
     }
 
-    public function confirm($show_id, $seats, $total, $ccc , $ccn)
+    public function confirm($show_id, $seats, $total, $ccc , $ccn, $theater_id)
     {
         date_default_timezone_set('America/Argentina/Buenos_Aires');
 
@@ -187,10 +193,11 @@ class PurchaseController
         }
 
         if(!$seatError){
-            $theater = $this->theaterDAO->getbyMovie($show->getMovie()->getId());
+            $theater = $this->theaterDAO->get($theater_id);
+          
 
             $purchase = new Purchase($user->getEmail(), 
-                                    $theater['0'], 
+                                    $theater, 
                                     (new DateTime('now',new DateTimeZone('America/Argentina/Buenos_Aires')))->format('Y-m-d H:i:s'),
                                     $ticketList, 
                                     $total);

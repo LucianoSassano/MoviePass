@@ -65,7 +65,8 @@
                                         <div class="card-body">
                                         <form action="<?php echo FRONT_ROOT . "purchase/seats" ?>"  method="POST" class="float-right">
                                             <input name="show_id" value="<?php echo $show->getId() ?>" hidden>
-                                            <input name="room_id" value="<?php echo $room->getRoom_id() ?>" hidden> 
+                                            <input name="room_id" value="<?php echo $room->getRoom_id() ?>" hidden>
+                                            <input name="theater_id" value="<?php echo $theater->getId() ?>" hidden> 
                                             <button type="submit" class="btn btn-primary btn-round" data-toggle="tooltip" data-placement="right" title="Click to make a reservation">
                                                 Reserve
                                             </button>

@@ -51,10 +51,15 @@
 
                     Helper::generateQR($data);
             
-                    $msg.="<h5><span> Theater: </span>" . $purchase->getTheater()->getName() . "</h5>
-                    <h5><span> Fecha: </span> " . $ticket->getDate() . " </h5>
-                    <h5><span> Seat: </span> ".  $ticket->getSeat_number() ." </h5>
-                    <h5><span> Price: $</span> ".  $ticket->getCost() ." </h5> <br><br>";
+                    $msg.="
+                    <h3> Movie Pass Ticket </h3>
+                    <h5><span> Movie: </span>" . $ticket->getShow()->getMovie()->getTitle() . "</h5>
+                    <h5><span> Theater: </span>" . $purchase->getTheater()->getName() . "</h5>
+                    <h5><span> Ticket emission date: </span> " . $ticket->getDate() . " </h5>
+                    <h5><span> Seat Number: </span> ".  $ticket->getSeat_number() ." </h5>
+                    <h5><span> Ticket Price: $</span> ".  $ticket->getCost() ." </h5> <br><br>
+                    <hr>
+                    ";
 
               
                     $mail->addAttachment(ROOT."Utils\QR\assets\\".$ticket->getSeat_number().".png", "Seat ". $ticket->getSeat_number());

@@ -22,6 +22,7 @@
                     <hr>
                     <form action="<?php echo FRONT_ROOT . "purchase/reservation" ?>" method="POST">
                         <input type="hidden" value="<?php echo $show_id ?>" name="show_id">
+                 
                         <?php if (isset($room)) { ?>
 
                             <?php 
@@ -37,6 +38,8 @@
                             }
                             ?>
                         <?php } ?>
+                        <input type="number" name="theater_id" value="<?php echo $theater_id ?>" hidden> 
+                    
                         <button class="btn btn-warning"> Select </button>
                     </form>
                     <h1>Screen Area</h1>

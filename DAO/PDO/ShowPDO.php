@@ -8,7 +8,7 @@
     use DAO\PDO\MoviePDO as MovieDAO;
     use DAO\PDO\RoomPDO as RoomDAO;
     use DAO\PDO\TicketPDO as TicketDAO;
-
+    
     use Models\Show;
 
     class ShowPDO
@@ -17,11 +17,13 @@
         private $movieDAO;
         private $roomDAO;
         private $ticketDAO;
+      
 
         function __construct(){
+
             $this->movieDAO = new MovieDAO();
             $this->roomDAO = new RoomDAO();
-           
+      
           
         }
 
@@ -344,6 +346,7 @@
                 $show->setId($row['show_id']);
                 $show->setStartTime($row['startTime']);
                 $show->setEndTime($row['endTime']);
+ 
                 $show->setMovie($this->movieDAO->get($row['movie_id']));
                 $show->setRoom($this->roomDAO->getNoShows($row['room_id']));
                 

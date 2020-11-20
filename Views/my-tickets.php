@@ -12,10 +12,20 @@
 
                         <hr style="background-color:blanchedalmond">
                         <h3><?php echo $ticket->getShow()->getMovie()->getTitle() ?></h3>
+                        <?php foreach ($theaters as $theater) { ?>
+                            <?php foreach ($theater->getRooms() as $room) { ?>
+                                <?php
+
+                                if (strcmp($room->getName(),$ticket->getShow()->getRoom()->getName()) == 0) { ?>
+                                    <p>Theater: <?php echo $theater->getName() ?></p>
+                                <?php } ?>
+                            <?php } ?>
+
+                        <?php } ?>
                         <p>Show date: <?php echo $ticket->getShow()->getDate() ?></p>
                         <p>Seat Number: <?php echo $ticket->getSeat_number() ?></p>
-                        <p>Price: <?php echo $ticket->getCost() ?></p>
-                        <p>Ticket emitted: <?php echo $ticket->getDate() ?></p>
+                        <p>Price: $ <?php echo $ticket->getCost() ?></p>
+                        <p>Ticket emission date: <?php echo $ticket->getDate() ?></p>
 
                         <hr>
 

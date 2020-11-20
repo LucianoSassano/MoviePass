@@ -62,6 +62,8 @@
                             <br>
                             <small>Your personal infromation is confidential an will never we shared</small>
                             <hr>
+                            
+                            <input type="number" name="theater_id" value="<?php echo $theater_id ?>" hidden>
                             <button type="submit" class="btn btn-primary">Confirm Reservation</button>
                       
 
