@@ -182,7 +182,7 @@ use Models\Ticket;
             SELECT * FROM `tickets` as t 
             INNER JOIN shows as s
             ON t.show_id = s.show_id
-            WHERE s.theater_id = :theater_id 
+            WHERE :theater_id = s.theater_id 
             ;";
 
             $parameters['theater_id'] = $theater_id;

@@ -83,7 +83,7 @@
         public function historicTicketSales($theater_id){
        
             $ticketsFromDb = $this->ticketDAO->getSoldAndRemanent($theater_id);
-     
+           
            
             if($ticketsFromDb != false){
                 $sold = count($ticketsFromDb);
@@ -95,10 +95,10 @@
             
            foreach($shows as $show){
                $seats += $show->getRoom()->getCapacity();
-               $seats = $seats - $sold;
+               
            }
         
-          
+           $seats = $seats - $sold;
             $this->theaterDAO = new TheaterDAO();
             $theaters = $this->theaterDAO->getAll();
             

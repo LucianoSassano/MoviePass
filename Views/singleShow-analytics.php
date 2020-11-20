@@ -1,6 +1,6 @@
 <?php require_once(VIEWS_PATH . "header.php") ?>
 
-<body  class="analytics">
+<body  class="analyticsSingle">
     <?php require_once(VIEWS_PATH . "admin-navbar.php") ?>
     <div class="container mt-4">
         <div class="row ">
